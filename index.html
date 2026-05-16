@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Core Soul Blueprint: a handcrafted synthesis of natal chart, Human Design, Gene Keys, and numerology delivered as a precision PDF report made for one person only.">
+  <title>Core Soul Blueprint — Your Celestial Architecture, Decoded</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --c-pearl:        oklch(97.5% 0.006 72);
+      --c-pearl-2:      oklch(94.5% 0.011 76);
+      --c-pearl-3:      oklch(91%   0.016 74);
+      --c-ink:          oklch(17%   0.022 280);
+      --c-ink-muted:    oklch(43%   0.016 280);
+      --c-rose-gold:    oklch(67%   0.12  28);
+      --c-rose-pale:    oklch(91%   0.04  28);
+      --c-violet:       oklch(56%   0.18  296);
+      --c-violet-pale:  oklch(93%   0.035 296);
+      --c-gold:         oklch(69%   0.108 83);
+      --c-gold-pale:    oklch(91%   0.05  83);
+      --c-rule:         oklch(87%   0.012 76);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--c-pearl);
+      color: var(--c-ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(15px, 1.4vw + 7px, 17px);
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── TYPOGRAPHY ── */
+
+    h1, h2, h3 {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.03em;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: 0.015em;
+    }
+
+    h2 {
+      font-size: clamp(1.55rem, 2.8vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-size: clamp(1rem, 1.7vw, 1.3rem);
+      font-weight: 600;
+      letter-spacing: 0.07em;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    p + p { margin-top: 1em; }
+
+    /* ── BUTTONS ── */
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.7rem 1.75rem;
+      background: var(--c-rose-gold);
+      color: var(--c-pearl);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: opacity 0.2s ease-out, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.86;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.7rem 1.75rem;
+      border: 1px solid var(--c-ink-muted);
+      color: var(--c-ink);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: opacity 0.2s ease-out, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-ghost:hover { opacity: 0.65; transform: translateY(-1px); }
+
+    /* ── NAV ── */
+
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem clamp(1.5rem, 6vw, 5rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: oklch(97.5% 0.006 72 / 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--c-rule);
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+
+    .hero {
+      min-height: 100svh;
+      padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem) clamp(3rem, 5vw, 5rem);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem 4rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-rose-gold);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero h1 { margin-bottom: 1.4rem; }
+
+    .hero-lead {
+      font-size: clamp(1rem, 1.4vw, 1.12rem);
+      color: var(--c-ink-muted);
+      max-width: 52ch;
+      line-height: 1.68;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-note {
+      font-size: 0.77rem;
+      color: var(--c-ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .zodiac-svg {
+      width: min(500px, 88vw);
+      height: min(500px, 88vw);
+    }
+
+    /* ── PULL QUOTE ── */
+
+    .quote-band {
+      background: var(--c-violet);
+      color: var(--c-pearl);
+      padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 12vw, 14rem);
+      text-align: center;
+    }
+
+    .quote-band blockquote {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.15rem, 2.2vw, 1.85rem);
+      font-weight: 400;
+      line-height: 1.55;
+      letter-spacing: 0.04em;
+      max-width: 68ch;
+      margin: 0 auto;
+    }
+
+    .quote-band cite {
+      display: block;
+      margin-top: 1.6rem;
+      font-family: 'Jost', sans-serif;
+      font-style: normal;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: oklch(90% 0.04 296);
+    }
+
+    /* ── SYSTEMS ── */
+
+    .systems {
+      padding: clamp(4rem, 8vw, 8rem) 0;
+    }
+
+    .systems-header {
+      padding: 0 clamp(1.5rem, 6vw, 5rem);
+      margin-bottom: 3.5rem;
+      max-width: 900px;
+    }
+
+    .systems-header h2 { margin-bottom: 0.85rem; }
+
+    .systems-header p {
+      color: var(--c-ink-muted);
+      max-width: 62ch;
+    }
+
+    .system-item {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr 3rem;
+      align-items: center;
+      gap: 0 3rem;
+      padding: 2.8rem clamp(1.5rem, 6vw, 5rem);
+      border-top: 1px solid var(--c-rule);
+      transition: background 0.35s ease-out;
+      cursor: default;
+    }
+
+    .system-item:last-child { border-bottom: 1px solid var(--c-rule); }
+
+    .system-item:hover { background: var(--c-pearl-2); }
+
+    .system-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--c-gold-pale);
+      line-height: 1;
+      text-align: right;
+      user-select: none;
+    }
+
+    .system-body h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .system-body p {
+      color: var(--c-ink-muted);
+      max-width: 66ch;
+      font-size: 0.95rem;
+    }
+
+    .system-mark {
+      font-size: 2rem;
+      color: var(--c-gold-pale);
+      text-align: center;
+      user-select: none;
+      line-height: 1;
+    }
+
+    /* ── CONTENTS ── */
+
+    .contents {
+      background: var(--c-pearl-2);
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3rem 6rem;
+      align-items: start;
+    }
+
+    .contents-text h2 { margin-bottom: 1.2rem; }
+
+    .contents-text p {
+      color: var(--c-ink-muted);
+      margin-bottom: 2rem;
+    }
+
+    .contents-list {
+      list-style: none;
+      counter-reset: item;
+    }
+
+    .contents-list li {
+      counter-increment: item;
+      display: grid;
+      grid-template-columns: 2.4rem 1fr;
+      gap: 0 0.75rem;
+      padding: 0.9rem 0;
+      border-top: 1px solid var(--c-rule);
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .contents-list li:last-child { border-bottom: 1px solid var(--c-rule); }
+
+    .contents-list li::before {
+      content: counter(item, decimal-leading-zero);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--c-rose-gold);
+      padding-top: 0.22rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── PROCESS ── */
+
+    .process {
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem);
+    }
+
+    .process h2 { margin-bottom: 3.5rem; }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem 4rem;
+    }
+
+    .step-num {
+      font-family: 'Cinzel', serif;
+      font-size: 3.8rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--c-gold-pale);
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+
+    .step h3 { margin-bottom: 0.6rem; }
+
+    .step p {
+      color: var(--c-ink-muted);
+      font-size: 0.93rem;
+    }
+
+    /* ── FOR WHOM ── */
+
+    .for-whom {
+      background: var(--c-violet-pale);
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem);
+    }
+
+    .for-whom-inner { max-width: 72ch; }
+
+    .for-whom h2 { margin-bottom: 1.4rem; }
+
+    .for-whom p { color: var(--c-ink-muted); }
+
+    .for-whom p + p { margin-top: 1.1em; }
+
+    /* ── ORDER ── */
+
+    .order {
+      background: var(--c-rose-gold);
+      color: var(--c-pearl);
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 6vw, 5rem);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem 5rem;
+      align-items: center;
+    }
+
+    .order h2 {
+      font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+      margin-bottom: 1rem;
+    }
+
+    .order-desc {
+      max-width: 55ch;
+      opacity: 0.88;
+    }
+
+    .order-desc + .order-desc { margin-top: 0.75em; font-size: 0.85rem; opacity: 0.72; }
+
+    .order-panel {
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .price {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .price-note {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.72;
+      margin-bottom: 1.6rem;
+    }
+
+    .btn-order {
+      display: block;
+      padding: 0.9rem 2.2rem;
+      background: var(--c-pearl);
+      color: var(--c-rose-gold);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-align: center;
+      transition: opacity 0.2s ease-out, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-order:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    /* ── ABOUT ── */
+
+    .about {
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem 5rem;
+      align-items: center;
+    }
+
+    .about h2 { margin-bottom: 1.2rem; }
+
+    .about p { color: var(--c-ink-muted); }
+
+    .about-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ── FOOTER ── */
+
+    .footer {
+      border-top: 1px solid var(--c-rule);
+      padding: 1.8rem clamp(1.5rem, 6vw, 5rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--c-ink-muted);
+      letter-spacing: 0.07em;
+    }
+
+    .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-ink);
+    }
+
+    /* ── SCROLL REVEALS ── */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity  0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.32s; }
+    .reveal-d4 { transition-delay: 0.44s; }
+
+    /* ── WHEEL ANIMATIONS ── */
+
+    @keyframes spin-cw  { to { transform: rotate(360deg);  } }
+    @keyframes spin-ccw { to { transform: rotate(-360deg); } }
+
+    .ring-outer {
+      transform-origin: 300px 300px;
+      animation: spin-cw 120s linear infinite;
+    }
+
+    .ring-inner {
+      transform-origin: 300px 300px;
+      animation: spin-ccw 80s linear infinite;
+    }
+
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-text { order: 2; }
+      .hero-visual { order: 1; justify-content: center; }
+
+      .hero-lead { max-width: none; }
+      .hero-cta  { justify-content: center; }
+
+      .system-item {
+        grid-template-columns: 3.5rem 1fr;
+        gap: 0 1.5rem;
+      }
+
+      .system-mark { display: none; }
+
+      .contents {
+        grid-template-columns: 1fr;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .order {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .order-desc { max-width: none; }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .about-visual { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-logo { font-size: 0.72rem; }
+
+      .quote-band {
+        padding-left: clamp(1.5rem, 5vw, 3rem);
+        padding-right: clamp(1.5rem, 5vw, 3rem);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ring-outer, .ring-inner { animation: none; }
+      .reveal { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Site navigation">
+    <span class="nav-logo">Core Soul Blueprint</span>
+    <a href="#order" class="btn-primary">Request Your Blueprint</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Personalised Celestial Analysis</p>
+      <h1>Your soul wrote this before you were born.</h1>
+      <p class="hero-lead">A precision synthesis of natal chart, Human Design, Gene Keys, and numerology. Handcrafted for one person. Delivered as a PDF report.</p>
+      <div class="hero-cta">
+        <a href="#order" class="btn-primary">Request Your Blueprint</a>
+        <span class="hero-note">Async delivery &middot; PDF format &middot; No live calls</span>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg id="zodiac-wheel" class="zodiac-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decorative zodiac wheel"></svg>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <div class="quote-band">
+    <blockquote>
+      You are not a general type. You are a specific convergence of forces that has never existed in exactly this configuration before.
+    </blockquote>
+    <cite>Core Soul Blueprint</cite>
+  </div>
+
+  <!-- SYSTEMS -->
+  <section class="systems" aria-labelledby="systems-heading">
+    <div class="systems-header reveal">
+      <h2 id="systems-heading">Four languages. One map.</h2>
+      <p>Each system reveals a different layer of the same truth. Used together, they stop contradicting each other and start confirming what was always there.</p>
+    </div>
+
+    <div class="system-item reveal">
+      <span class="system-num" aria-hidden="true">01</span>
+      <div class="system-body">
+        <h3>Natal Chart + Fixed Stars</h3>
+        <p>The planetary architecture at the instant of your birth, interpreted with precision. Every planet is cross-referenced with fixed star positions at a strict 1&deg; orb: the threshold most practitioners ignore entirely. Fixed stars do not generalize. They specify.</p>
+      </div>
+      <span class="system-mark" aria-hidden="true">✦</span>
+    </div>
+
+    <div class="system-item reveal reveal-d1">
+      <span class="system-num" aria-hidden="true">02</span>
+      <div class="system-body">
+        <h3>Human Design</h3>
+        <p>The blueprint of how energy moves through you. Your type, authority, profile, and defined centers reveal how you are built to make decisions, receive information, and interact with others. Not what you should do: how you are designed to operate.</p>
+      </div>
+      <span class="system-mark" aria-hidden="true">◇</span>
+    </div>
+
+    <div class="system-item reveal reveal-d2">
+      <span class="system-num" aria-hidden="true">03</span>
+      <div class="system-body">
+        <h3>Gene Keys</h3>
+        <p>The 64 archetypal sequences encoded in your genetic imprint. Where your shadow patterns have their root, where your gifts are waiting, and the precise path that connects them. Not a general reading: your specific sequence, your specific keys.</p>
+      </div>
+      <span class="system-mark" aria-hidden="true">✧</span>
+    </div>
+
+    <div class="system-item reveal reveal-d3">
+      <span class="system-num" aria-hidden="true">04</span>
+      <div class="system-body">
+        <h3>Numerology</h3>
+        <p>The numerical signature of your name and birth date. Life path, soul urge, personality number, and pinnacle cycles. Patterns that surface across years, cycles that govern timing, and the core vibration that shapes every significant chapter.</p>
+      </div>
+      <span class="system-mark" aria-hidden="true">∞</span>
+    </div>
+  </section>
+
+  <!-- CONTENTS -->
+  <div class="contents">
+    <div class="contents-text reveal">
+      <h2>What the report contains</h2>
+      <p>A structured PDF of 30 to 50 pages, built for clarity and designed for return reading. Not printed output from a generator. Every section written and synthesised by hand.</p>
+      <a href="#order" class="btn-ghost">Request yours</a>
+    </div>
+    <ol class="contents-list reveal reveal-d1" aria-label="Report contents">
+      <li>Executive summary: the three themes that define this life</li>
+      <li>Natal chart analysis with fixed star overlays (1&deg; orb)</li>
+      <li>Human Design: type, authority, profile, centers, channels</li>
+      <li>Gene Keys: Activation Sequence and Life's Work keys</li>
+      <li>Numerological signature and current cycle analysis</li>
+      <li>Cross-system synthesis: where all four systems converge</li>
+      <li>Practical orientation: how to work with what you find</li>
+    </ol>
+  </div>
+
+  <!-- PROCESS -->
+  <section class="process" aria-labelledby="process-heading">
+    <h2 id="process-heading" class="reveal">How it works</h2>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num" aria-hidden="true">01</div>
+        <h3>Submit your details</h3>
+        <p>Birth date, time, and location. Full birth name as registered. Any specific questions or areas you want the report to address.</p>
+      </div>
+      <div class="step reveal reveal-d1">
+        <div class="step-num" aria-hidden="true">02</div>
+        <h3>The report is crafted</h3>
+        <p>I work through each system and weave them into a coherent synthesis. No templates, no automated output. Delivery is within 7 to 10 days.</p>
+      </div>
+      <div class="step reveal reveal-d2">
+        <div class="step-num" aria-hidden="true">03</div>
+        <h3>Your PDF arrives</h3>
+        <p>A precision document you can read, return to, and share. No live sessions required. No follow-up calls.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR WHOM -->
+  <section class="for-whom" aria-labelledby="for-whom-heading">
+    <div class="for-whom-inner reveal">
+      <h2 id="for-whom-heading">Who this is for</h2>
+      <p>People who have already done some inner work and want a deeper map. Those who feel they arrived with a specific purpose and want to stop guessing what it is. Seekers at a crossroads who need clarity, not comfort. People who find generic horoscopes too shallow to be useful. Those who are ready to stop interpreting fragments and start reading the structure they were born with.</p>
+      <p>This is not for people who want to be told that everything is fine. It is for people who want to see clearly.</p>
+    </div>
+  </section>
+
+  <!-- ORDER -->
+  <section class="order" id="order" aria-labelledby="order-heading">
+    <div>
+      <h2 id="order-heading">Request Your Blueprint</h2>
+      <p class="order-desc">Complete the request form and your report will be crafted and delivered within 7 to 10 days. Each Blueprint is made once, for one person. There are no repeat runs of the same chart.</p>
+      <p class="order-desc">Payment is confirmed after you submit your details and I confirm availability. Capacity is limited to a small number of reports each month.</p>
+    </div>
+    <div class="order-panel">
+      <div class="price" aria-label="Price: £147">£<!-- REPLACE WITH YOUR PRICE -->147</div>
+      <div class="price-note">One report &middot; PDF delivery</div>
+      <a href="mailto:hello@coresoulblueprint.com?subject=Blueprint%20Request" class="btn-order">Begin Your Request</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" aria-labelledby="about-heading">
+    <div class="about-text reveal">
+      <h2 id="about-heading">About Ruta</h2>
+      <p>I am a Lithuanian practitioner living in England, working at the intersection of ancient esoteric knowledge and modern AI tools. I have studied astrology, Human Design, Gene Keys, and Qi Men Dun Jia for many years.</p>
+      <p>The Core Soul Blueprint is not a side project. It is one of the central things I do. I work asynchronously, with precision. No live calls. No recorded sessions. Only the report.</p>
+    </div>
+    <div class="about-visual reveal reveal-d1" aria-hidden="true">
+      <svg id="about-mandala" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span class="footer-logo">Core Soul Blueprint</span>
+    <span>&copy; 2026 Ruta. Async reports only. No live sessions.</span>
+  </footer>
+
+  <script>
+    /* ─── ZODIAC WHEEL ─── */
+    (function () {
+      const svg = document.getElementById('zodiac-wheel');
+      const ns  = 'http://www.w3.org/2000/svg';
+      const cx  = 300, cy = 300;
+
+      const GOLD        = 'oklch(69% 0.108 83)';
+      const GOLD_PALE   = 'oklch(88% 0.055 83)';
+      const GOLD_FAINT  = 'oklch(92% 0.032 83)';
+      const ROSE        = 'oklch(67% 0.12 28)';
+      const ROSE_PALE   = 'oklch(90% 0.04 28)';
+      const VIO_PALE    = 'oklch(90% 0.04 296)';
+      const VIO_FAINT   = 'oklch(94% 0.025 296)';
+
+      function el(tag, attrs, parent) {
+        const e = document.createElementNS(ns, tag);
+        for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+        if (parent) parent.appendChild(e);
+        return e;
+      }
+
+      function polar(angleDeg, r) {
+        const a = (angleDeg - 90) * Math.PI / 180;
+        return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+      }
+
+      function ring(r, stroke, width, fill, parent) {
+        return el('circle', { cx, cy, r, fill: fill || 'none', stroke, 'stroke-width': width }, parent);
+      }
+
+      function spoke(angleDeg, r1, r2, stroke, width, parent, dash) {
+        const p1 = polar(angleDeg, r1), p2 = polar(angleDeg, r2);
+        const attrs = { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, stroke, 'stroke-width': width };
+        if (dash) attrs['stroke-dasharray'] = dash;
+        return el('line', attrs, parent);
+      }
+
+      /* ── defs: radial glow ── */
+      const defs = el('defs', {}, svg);
+      const rg   = el('radialGradient', { id: 'rg-glow', cx: '50%', cy: '50%', r: '50%' }, defs);
+      el('stop', { offset: '0%',   'stop-color': 'oklch(90% 0.05 83)', 'stop-opacity': '0.28' }, rg);
+      el('stop', { offset: '100%', 'stop-color': 'oklch(97.5% 0.006 72)', 'stop-opacity': '0' }, rg);
+
+      /* glow disc */
+      el('circle', { cx, cy, r: 285, fill: 'url(#rg-glow)', stroke: 'none' }, svg);
+
+      /* ── OUTER RING (slowly rotates CW) ── */
+      const outerG = el('g', { class: 'ring-outer' }, svg);
+
+      ring(270, GOLD_PALE, 1.5, null, outerG);
+      ring(238, GOLD_PALE, 0.75, null, outerG);
+
+      /* 12 sector lines */
+      for (let i = 0; i < 12; i++) spoke(i * 30, 238, 270, GOLD_PALE, 0.75, outerG);
+
+      /* degree ticks */
+      for (let i = 0; i < 360; i += 5) {
+        const major = i % 30 === 0;
+        const mid   = i % 10 === 0 && !major;
+        const inner = major ? 256 : mid ? 260 : 262;
+        spoke(i, inner, 270, major ? GOLD : GOLD_FAINT, major ? 1 : 0.4, outerG);
+      }
+
+      /* zodiac glyphs at sector midpoints */
+      const signs = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+      for (let i = 0; i < 12; i++) {
+        const pos  = polar(i * 30 + 15, 253);
+        const text = el('text', {
+          x: pos.x, y: pos.y,
+          'text-anchor': 'middle',
+          'dominant-baseline': 'central',
+          'font-size': '15',
+          fill: ROSE,
+          'font-family': 'serif',
+        }, outerG);
+        text.textContent = signs[i];
+      }
+
+      /* ── MIDDLE RING (static) ── */
+      ring(220, GOLD_FAINT, 1,    null, svg);
+      ring(184, GOLD_FAINT, 0.6,  null, svg);
+
+      /* 12 house dividers in middle ring */
+      for (let i = 0; i < 12; i++) spoke(i * 30, 184, 220, GOLD_FAINT, 0.5, svg);
+
+      /* cross-diameter dashes (aspect web) */
+      for (let i = 0; i < 6; i++) {
+        const p1 = polar(i * 30, 184), p2 = polar(i * 30 + 180, 184);
+        el('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
+                     stroke: GOLD_FAINT, 'stroke-width': 0.3, 'stroke-dasharray': '3 4' }, svg);
+      }
+
+      /* ── INNER RING (slowly rotates CCW) ── */
+      const innerG = el('g', { class: 'ring-inner' }, svg);
+
+      ring(158, VIO_PALE, 1,   null, innerG);
+      ring(118, VIO_FAINT, 0.6, null, innerG);
+
+      /* 8-fold spokes */
+      for (let i = 0; i < 8; i++) spoke(i * 45, 118, 158, VIO_PALE, 0.6, innerG);
+
+      /* 8-pointed star polygon */
+      const starPts = [];
+      for (let i = 0; i < 8; i++) {
+        const p1 = polar(i * 45,      118);
+        const p2 = polar(i * 45 + 22.5, 80);
+        starPts.push(`${p1.x},${p1.y}`, `${p2.x},${p2.y}`);
+      }
+      el('polygon', { points: starPts.join(' '), fill: 'none', stroke: VIO_FAINT, 'stroke-width': 0.5 }, innerG);
+
+      /* ── CENTER (static) ── */
+      ring(66, ROSE_PALE, 1,   null, svg);
+      ring(44, ROSE_PALE, 0.5, null, svg);
+
+      /* 6-spoke center mandala */
+      for (let i = 0; i < 6; i++) spoke(i * 60, 0, 44, ROSE_PALE, 0.6, svg);
+
+      /* center dot */
+      el('circle', { cx, cy, r: 5,  fill: ROSE,      stroke: 'none' }, svg);
+      el('circle', { cx, cy, r: 10, fill: 'none',    stroke: ROSE_PALE, 'stroke-width': 0.75 }, svg);
+    })();
+
+    /* ─── ABOUT MANDALA ─── */
+    (function () {
+      const svg = document.getElementById('about-mandala');
+      const ns  = 'http://www.w3.org/2000/svg';
+      const cx  = 150, cy = 150;
+
+      function el(tag, attrs) {
+        const e = document.createElementNS(ns, tag);
+        for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+        svg.appendChild(e);
+        return e;
+      }
+
+      function polar(deg, r) {
+        const a = (deg - 90) * Math.PI / 180;
+        return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+      }
+
+      const rings = [
+        { r: 135, stroke: 'oklch(90% 0.05 83)',  w: 1   },
+        { r: 108, stroke: 'oklch(90% 0.04 296)', w: 0.6 },
+        { r:  80, stroke: 'oklch(90% 0.05 83)',  w: 0.8 },
+        { r:  52, stroke: 'oklch(90% 0.04 296)', w: 0.5 },
+        { r:  26, stroke: 'oklch(90% 0.05 83)',  w: 0.5 },
+      ];
+
+      for (const { r, stroke, w } of rings) {
+        el('circle', { cx, cy, r, fill: 'none', stroke, 'stroke-width': w });
+      }
+
+      /* cross hairs */
+      for (let i = 0; i < 4; i++) {
+        const a = i * 45;
+        const p1 = polar(a, 135), p2 = polar(a + 180, 135);
+        el('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
+                     stroke: 'oklch(90% 0.05 83)', 'stroke-width': 0.4 });
+      }
+
+      /* 12-spoke outer web */
+      for (let i = 0; i < 12; i++) {
+        const a = i * 30;
+        const p1 = polar(a, 52), p2 = polar(a, 135);
+        el('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
+                     stroke: 'oklch(92% 0.03 83)', 'stroke-width': 0.3 });
+      }
+
+      /* center accent */
+      el('circle', { cx, cy, r: 5, fill: 'oklch(67% 0.12 28)', stroke: 'none' });
+    })();
+
+    /* ─── SCROLL REVEAL ─── */
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
