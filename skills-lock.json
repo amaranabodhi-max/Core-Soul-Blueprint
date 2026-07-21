@@ -6,6 +6,12 @@
       "sourceType": "github",
       "skillPath": "skill/SKILL.md",
       "computedHash": "ada9c434d56c794352ccd5c7a6901e5ebb4b7f3b7fe42e8c17c2c4b96c3735c8"
+    },
+    "video-eyes": {
+      "source": "mamamoz/c8c71f65bb9dff8a723518d46ee56365",
+      "sourceType": "gist",
+      "skillPath": "SKILL.md",
+      "computedHash": "34165c47ad1d11c980ce57d7b9869d41ecbe5ba12ceba402f6efc09e81d428b3"
     }
   }
 }
