@@ -7,6 +7,12 @@
       "skillPath": "ian-xiaohei-illustrations/SKILL.md",
       "computedHash": "0345947cf4ffbbaa3190d7d676e0a35821daae349be036555050a51eb71f5b55"
     },
+    "ian-xiaohei-scenes": {
+      "source": "helloianneo/ian-xiaohei-scenes",
+      "sourceType": "github",
+      "skillPath": "ian-xiaohei-scenes/SKILL.md",
+      "computedHash": "c80e43376a160c05b7f923d6e2e61d4dcd710235be92e57df1f336a37b64d452"
+    },
     "impeccable": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
