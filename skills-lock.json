@@ -30,6 +30,12 @@
       "sourceType": "gist",
       "skillPath": "SKILL.md",
       "computedHash": "34165c47ad1d11c980ce57d7b9869d41ecbe5ba12ceba402f6efc09e81d428b3"
+    },
+    "visual-ip-illustrations": {
+      "source": "yangchuansheng/visual-ip-illustrations",
+      "sourceType": "github",
+      "skillPath": "skills/visual-ip-illustrations/SKILL.md",
+      "computedHash": "04b1da4ce7030095215cebe9244ac5739291504d6e3b19f6b92c28c7109e18dc"
     }
   }
 }
