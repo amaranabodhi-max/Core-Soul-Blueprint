@@ -13,6 +13,12 @@
       "skillPath": "skill/SKILL.md",
       "computedHash": "ada9c434d56c794352ccd5c7a6901e5ebb4b7f3b7fe42e8c17c2c4b96c3735c8"
     },
+    "reading-guide": {
+      "source": "chingswy/Skill-Research-Figure",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/reading-guide/SKILL.md",
+      "computedHash": "5b734d40ea9bd96b9a1fc35d4d937548151bd9d0baae9135daa92a86d0ab4e62"
+    },
     "video-eyes": {
       "source": "mamamoz/c8c71f65bb9dff8a723518d46ee56365",
       "sourceType": "gist",
