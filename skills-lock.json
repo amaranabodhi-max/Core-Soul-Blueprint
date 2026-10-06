@@ -12,6 +12,12 @@
       "sourceType": "gist",
       "skillPath": "SKILL.md",
       "computedHash": "34165c47ad1d11c980ce57d7b9869d41ecbe5ba12ceba402f6efc09e81d428b3"
+    },
+    "voice-dna": {
+      "source": "rusanovproject-dotcom/voice-dna",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "2566d19d86a75c46e40b4d90de43a32092ed49042040793c5fd92e6142e3dbed"
     }
   }
 }
