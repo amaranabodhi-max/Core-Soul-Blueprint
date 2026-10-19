@@ -72,3 +72,6 @@ The single source of truth for every Veyra agent. If an agent file says somethin
 
 ## Publishing
 No agent publishes, schedules or posts anything. Ruta reviews and presses "publish" by hand.
+
+## Saving
+All new files are saved and merged straight into the main branch `claude/install-design-skill-GjQEI`: commit and push directly to it, no separate PR. Never force-push; if the push is rejected, fetch and merge first.
