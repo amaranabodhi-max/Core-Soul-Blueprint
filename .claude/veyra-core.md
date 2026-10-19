@@ -77,7 +77,7 @@ The universe of the series. A grimoire kept by a **nameless herbalist witch**. E
 1. **Herbarium** — invented plants (like *Dusklantern*, page №01) and, now and then, real witches' herbs. **Legends and lore only:** no recipes, no doses, no preparation, no healing claims.
 2. **Sigils** — Ruta's own seals (*Sorael*, *Barchiel*, *Tabor* and others). Each page gives the name, its meaning inside the story, and an animation of the symbol lighting up line by line. Meanings come from Ruta only; anything not given by her is `[CHECK]`.
 3. **Star Pages** — fixed stars (like *Algol*), read through Bernadette Brady. Positions and orbs follow the **Facts** rules: conjunction ≤1° by default, parans only as a labelled extra layer.
-4. **The Witch** — the recurring heroine. Warm light, candles, an old book, dry herbs hanging. **One face in every video:** generate from a single fixed character reference and never redesign her. She stays nameless.
+4. **The Witch** — the recurring heroine. Warm light, candles, an old book, dry herbs hanging. **One face in every video:** generate from a single fixed character reference and never redesign her. She stays nameless. Canon and locked identity block: `content/characters/the-witch.md`.
 
 ### Rhythm
 | Day | Page |
@@ -85,7 +85,7 @@ The universe of the series. A grimoire kept by a **nameless herbalist witch**. E
 | Monday | Herbarium (plant) |
 | Wednesday | Sigils (seal) |
 | Friday | Star Pages (star) |
-| Once a week | Carousel (any rubric) |
+| Saturday | Carousel (any rubric) |
 
 ### Page style
 - Old parchment, **Latin headings** (e.g. *Herbarium*, *Sigilla*, *Stellae Fixae*) in Cinzel, gold ink and gilding, candlelight.
