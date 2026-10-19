@@ -60,6 +60,7 @@ The single source of truth for every Veyra agent. If an agent file says somethin
 **Safe zone on 9:16 (one rule for everyone):** no text in the **top 15%** or the **bottom 20%**; **10% side margins**.
 
 ## Facts
+- **Fixed-star method.** Primary: conjunction by ecliptic longitude, tropical zodiac, orb strictly ≤1°. This is the default in all public content. Secondary: parans (Brady), when a star rises, culminates, sets or anti-culminates together with a planet. Parans need birth date, time and place, are used as an extra layer, and are always labelled "paran" when cited.
 - Never invent astrological data: star positions, orbs, gates, Gene Keys, numbers, Qi Men elements.
 - Anything not verified from the given data is marked `[CHECK]`.
 
