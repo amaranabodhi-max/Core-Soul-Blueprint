@@ -61,6 +61,13 @@ The single source of truth for every Veyra agent. If an agent file says somethin
 
 ## Facts
 - **Fixed-star method.** Primary: conjunction by ecliptic longitude, tropical zodiac, orb strictly ≤1°. This is the default in all public content. Secondary: parans (Brady), when a star rises, culminates, sets or anti-culminates together with a planet. Parans need birth date, time and place, are used as an extra layer, and are always labelled "paran" when cited.
+- **Stars: index first.** For any fixed star, open `references/fixed-stars-index.md` before anything else (J2000 longitude and latitude, Ptolemaic nature, key themes, Robson 1923 page). Ruta's copy of the book (American Federation of Astrologers edition, PDF) is kept privately and is **not** in this repo; page numbers in the index refer to that PDF. Never quote Robson at length; paraphrase and cite the page.
+- **Ruta's verification sources**, in this order:
+  1. **Zeus** — the main source. Its value wins on any disagreement.
+  2. **astro.com** (Astrodienst) — cross-check.
+  3. **geocult.ru** — cross-check.
+- **Orb strictly 1°.** Nothing outside 1° is called a conjunction, in any content or report.
+- **Verified before content.** A star goes into content only after its position has been checked against these sources. Until then it stays marked `[CHECK]` and is not published.
 - Never invent astrological data: star positions, orbs, gates, Gene Keys, numbers, Qi Men elements.
 - Anything not verified from the given data is marked `[CHECK]`.
 
