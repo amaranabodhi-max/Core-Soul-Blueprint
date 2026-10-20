@@ -22,7 +22,7 @@
 Вставлять **дословно** в каждый промпт с ней. Ни слова не менять, не сокращать, не переводить.
 
 ```
-IDENTITY: a woman in her mid-to-late twenties with light skin and faint freckles across her nose and cheeks, a soft oval face, defined natural brows, warm brown eyes, a gentle closed-lip half-smile, rosy lips, natural minimal makeup; long voluminous loose-curled chestnut-brown hair with warm caramel-honey highlights, a soft centre part, slightly tousled, falling below her chest over both shoulders; wearing an oversized chunky-knit charcoal-grey V-neck cardigan sweater with loose, slightly long sleeves.
+IDENTITY: a woman in her mid-to-late twenties with light skin and faint freckles across her nose and cheeks, a soft oval face, defined natural brows, hazel-green eyes, a gentle closed-lip half-smile, rosy lips, natural minimal makeup; long voluminous loose-curled chestnut-brown hair with warm caramel-honey highlights, a soft centre part, slightly tousled, falling below her chest over both shoulders; wearing an oversized chunky-knit charcoal-grey V-neck button-front cardigan with front pockets and loose, slightly long sleeves, worn over bare skin with nothing visible in the neckline.
 ```
 
 Для кадров, где видна фигура ниже свитера, добавлять сразу после IDENTITY дословно:
@@ -34,14 +34,14 @@ OUTFIT: dark brown leggings, slouchy grey knit socks bunched over the leggings, 
 Короткая версия (только для платформ с жёстким лимитом длины, например поле motion-промпта в Seedance, когда лицо уже задано картинкой):
 
 ```
-the same freckled woman with long chestnut-caramel wavy hair in the oversized charcoal-grey chunky knit sweater from the reference image
+the same freckled woman with long chestnut-caramel wavy hair in the oversized charcoal-grey chunky knit button cardigan from the reference image
 ```
 
 ### Never change (запрещено менять)
-- Лицо: овал, веснушки на носу и щеках, брови, карие глаза, мягкая полуулыбка с закрытыми губами.
+- Лицо: овал, веснушки на носу и щеках, брови, орехово-зелёные глаза (по `witch-portrait.jpg`), мягкая полуулыбка с закрытыми губами.
 - Цвет кожи (светлый), возраст (середина/конец 20-х). Не старить, не омолаживать до подростка.
 - Волосы: длина ниже груди, объём, свободные волны, каштан с карамельно-медовыми прядями, пробор примерно по центру. Не стричь, не выпрямлять, не перекрашивать, не собирать в пучок.
-- Свитер: оверсайз, крупная вязка, угольно-серый, V-вырез / кардиган. Без смены цвета.
+- Кардиган: оверсайз, крупная вязка, угольно-серый, V-вырез, пуговицы спереди, карманы. Без смены цвета.
 - Макияж минимальный. Без стрелок, яркой помады, контуринга.
 - Свет тёплый, свечной/ламповый. Её не снимают в холодном дневном или неоновом свете.
 - Безымянность.
@@ -59,9 +59,9 @@ different face, changing facial features, heavy makeup, red lipstick, eyeliner w
 ### Гардероб
 | | Канон |
 |---|---|
-| Верх | Оверсайз свитер-кардиган крупной вязки, угольно-серый, V-вырез, свободные рукава (из заметок). |
+| Верх | Оверсайз кардиган крупной вязки, угольно-серый, V-вырез, пуговицы спереди, накладные карманы, свободные рукава (по `witch-master.jpg`). |
 | Рукава | Слегка длинные, могут наполовину закрывать ладони **[CHOICE]** (уютный жест, помогает прятать сложные руки). |
-| Под свитером | Простая кремовая (Pearl `#F4EFE6`) майка или рубашка, почти не видна в V-вырезе **[CHOICE]**. |
+| Под кардиганом | Ничего не видно: в V-вырезе открытая кожа (по `witch-portrait.jpg`). |
 | Низ | Тёмно-коричневые леггинсы. Серые вязаные носки гармошкой поверх леггинсов. Коричневые кожаные ботинки челси до щиколотки, потёртые. Канон по `witch-master.jpg`. |
 | Украшения | Нет **[CHOICE]**. Если Рута захочет одно, то тонкое золотое кольцо, всегда то же самое. |
 
@@ -233,7 +233,7 @@ Wide quiet shot at blue hour. IDENTITY: [paste locked identity block]. She has f
 
 ### Flux Kontext
 - Работать как редактор от master-картинки: загрузить master и писать **что меняется**, а не всю сцену заново:
-  `Keep the same woman: identical face, freckles, brown eyes, long chestnut-caramel wavy hair and oversized charcoal-grey chunky knit sweater. Change only the setting: she now sits at a dark wooden study table with hanging dried herbs, candles and an open old grimoire, warm candle light from the left, gold rim light in her hair.`
+  `Keep the same woman: identical face, freckles, hazel-green eyes, long chestnut-caramel wavy hair and oversized charcoal-grey chunky knit sweater. Change only the setting: she now sits at a dark wooden study table with hanging dried herbs, candles and an open old grimoire, warm candle light from the left, gold rim light in her hair.`
 - Одна правка за проход (сет, потом поза, потом свет). Несколько правок сразу размывают лицо.
 - Для длинных фотореалистичных описаний (Flux Pro / Dev без Kontext) вставлять IDENTITY + DNA полностью и добавлять `photorealistic, natural skin texture, visible freckles`.
 
@@ -267,7 +267,7 @@ Wide quiet shot at blue hour. IDENTITY: [paste locked identity block]. She has f
 
 ## 6. Проверка
 - Имени нет, нигде не названа Veyra.
-- Внешность только из заметок Руты; придуманное отмечено [CHOICE] и утверждено Рутой (рукава на ладонях, майка под свитером, руки/ногти, температура и направление света, teal-акцент, отсутствие украшений).
+- Внешность только из заметок Руты; придуманное отмечено [CHOICE] и утверждено Рутой (рукава на ладонях, руки/ногти, температура и направление света, teal-акцент, отсутствие украшений).
 - Палитра: золото ведёт, пергамент светлый тон, индиго/ночь в тенях, teal тихий акцент, фиолетовый только в иллюстрации.
 - Все сцены 9:16 с safe zone (верх 15%, низ 20%, бока 10%), текста в картинках нет.
 - Нет рецептов, доз, «ядовитой» инструкции. Заголовок наперстянки заменён на *Digitalis*, в старых кадрах размыт. [CHECK] стоит на легенде о наперстянке и на версиях параметров MJ/Seedance. Референсы `witch-master.jpg` и `witch-portrait.jpg` в репо.
