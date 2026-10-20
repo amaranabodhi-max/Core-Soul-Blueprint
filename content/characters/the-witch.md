@@ -2,12 +2,18 @@
 
 **Серия:** The Forgotten Grimoire (рубрика 4, *The Witch*)
 **Роль:** безымянная травница-ведьма, хранительница гримуара. Повторяется в каждом ролике.
-**Статус:** черновик для Руты. Ничего не сгенерировано и не опубликовано.
+**Статус:** канон. Фиксированные референсы утверждены Рутой (2026-10-20). Ничего не опубликовано.
+
+**Фиксированный референс (никогда не перерисовывать):**
+- `refs/witch-master.jpg`: лист в полный рост, анфас, профиль и спина, весь костюм.
+- `refs/witch-portrait.jpg`: портрет крупно, лицо, веснушки, волосы, вырез кардигана.
+
+Если текст этого файла расходится с этими двумя картинками, правы картинки.
 **Основа:** девушка из ролика Руты про наперстянку (foxglove), два кадра. Описание взято только из заметок Руты. Всё, что придумано сверх них, помечено **[CHOICE]**; Рута утвердила все [CHOICE] как есть (2026-10-19), это канон. Непроверенное помечено **[CHECK]**.
 
 > Язык. По `veyra-core.md` промпты на английском, пояснения для Руты на русском.
 > Имя. У неё нет имени. Не называть её Veyra, не давать ей имени ни в промптах, ни в подписях. В промптах она "the witch" или "the woman".
-> Одно лицо. По правилу рубрики: генерировать только от одного фиксированного референса и никогда её не перерисовывать.
+> Одно лицо. По правилу рубрики: генерировать только от фиксированных референсов `witch-master.jpg` и `witch-portrait.jpg` и никогда её не перерисовывать.
 
 ---
 
@@ -17,6 +23,12 @@
 
 ```
 IDENTITY: a woman in her mid-to-late twenties with light skin and faint freckles across her nose and cheeks, a soft oval face, defined natural brows, warm brown eyes, a gentle closed-lip half-smile, rosy lips, natural minimal makeup; long voluminous loose-curled chestnut-brown hair with warm caramel-honey highlights, a soft centre part, slightly tousled, falling below her chest over both shoulders; wearing an oversized chunky-knit charcoal-grey V-neck cardigan sweater with loose, slightly long sleeves.
+```
+
+Для кадров, где видна фигура ниже свитера, добавлять сразу после IDENTITY дословно:
+
+```
+OUTFIT: dark brown leggings, slouchy grey knit socks bunched over the leggings, worn brown leather ankle boots.
 ```
 
 Короткая версия (только для платформ с жёстким лимитом длины, например поле motion-промпта в Seedance, когда лицо уже задано картинкой):
@@ -50,7 +62,7 @@ different face, changing facial features, heavy makeup, red lipstick, eyeliner w
 | Верх | Оверсайз свитер-кардиган крупной вязки, угольно-серый, V-вырез, свободные рукава (из заметок). |
 | Рукава | Слегка длинные, могут наполовину закрывать ладони **[CHOICE]** (уютный жест, помогает прятать сложные руки). |
 | Под свитером | Простая кремовая (Pearl `#F4EFE6`) майка или рубашка, почти не видна в V-вырезе **[CHOICE]**. |
-| Низ (только для full-body) | Длинная мягкая юбка или свободные брюки тёмного индиго/угольного цвета **[CHOICE]**, в кадрах не было. Босиком или шерстяные носки **[CHOICE]**. |
+| Низ | Тёмно-коричневые леггинсы. Серые вязаные носки гармошкой поверх леггинсов. Коричневые кожаные ботинки челси до щиколотки, потёртые. Канон по `witch-master.jpg`. |
 | Украшения | Нет **[CHOICE]**. Если Рута захочет одно, то тонкое золотое кольцо, всегда то же самое. |
 
 ### Волосы
@@ -112,7 +124,7 @@ DNA: warm candlelit world, golden amber key light from low candles, soft gold ri
 
 ### 3.1 Reference sheet (база для всех будущих генераций)
 
-Генерировать сначала их. Лучший кадр из 3.1-B (лицо крупно) становится **master reference** (см. п. 4).
+Референсы уже утверждены: `refs/witch-master.jpg` (полный рост, анфас/профиль/спина) и `refs/witch-portrait.jpg` (лицо крупно). Промпты ниже нужны только чтобы досоздать недостающие ракурсы (руки, сидя), всегда от этих двух картинок.
 
 **A. Turnaround: front / three-quarter / profile** (16:9, чтобы три фигуры поместились)
 
@@ -122,7 +134,7 @@ Character reference sheet, three views of the same woman side by side on a plain
 
 Варианты для Midjourney: добавить `--style raw --ar 16:9`.
 
-**B. Close-up face (master reference кандидат)** 4:5
+**B. Close-up face (сверять с `witch-portrait.jpg`)** 4:5
 
 ```
 Close-up portrait, head and shoulders. IDENTITY: [paste locked identity block]. She looks softly down toward an open book just below frame, eyelids lowered, gentle closed-lip half-smile, a few loose curls falling across one cheek. Low warm candle light from the front-left lights her face at 2400K, the right side falls into soft shadow tinted indigo, a thin gold rim light outlines her hair from behind-right. 85mm portrait lens, f/1.8, eye-level, focus on the freckles and lashes, candle bokeh behind her. DNA: [paste DNA]. --ar 4:5
@@ -139,7 +151,7 @@ Macro detail shot of her hands resting on an open old grimoire, sleeves of an ov
 **D. Full body, seated at the study table** 9:16
 
 ```
-Full-body shot, seated. IDENTITY: [paste locked identity block]. Below the sweater a long soft skirt in deep indigo-charcoal, bare feet tucked beside the chair leg. She sits at a dark wooden table, one elbow on the table, reading an open grimoire, eyes lowered to the page. Behind her tall bookshelves fall into indigo shadow, bundles of dried herbs hang from a beam above, closed unlabeled amber apothecary bottles and pewter cups stand at the edge of the table, an old iron lantern and several candles light the scene. Key light from the candles on the table, front-left and low, soft shadows rising behind her to the right, gold rim light on her hair from a candle behind. 35mm lens, f/2.8, eye-level, camera slightly to the left. Her face sits between 25% and 50% of frame height; the top 15% is dim beam and herbs, the bottom 20% is dark table surface, calm and free for titles. DNA: [paste DNA]. --ar 9:16
+Full-body shot, seated. IDENTITY: [paste locked identity block]. Below the sweater dark brown leggings, slouchy grey knit socks and worn brown leather ankle boots. She sits at a dark wooden table, one elbow on the table, reading an open grimoire, eyes lowered to the page. Behind her tall bookshelves fall into indigo shadow, bundles of dried herbs hang from a beam above, closed unlabeled amber apothecary bottles and pewter cups stand at the edge of the table, an old iron lantern and several candles light the scene. Key light from the candles on the table, front-left and low, soft shadows rising behind her to the right, gold rim light on her hair from a candle behind. 35mm lens, f/2.8, eye-level, camera slightly to the left. Her face sits between 25% and 50% of frame height; the top 15% is dim beam and herbs, the bottom 20% is dark table surface, calm and free for titles. DNA: [paste DNA]. --ar 9:16
 ```
 
 ---
@@ -199,15 +211,15 @@ Wide quiet shot at blue hour. IDENTITY: [paste locked identity block]. She has f
 
 ## 4. Workflow консистентности
 
-**Главное правило:** всегда прикладывать её **master reference** (лучший кадр лица) как image reference. Плюс всегда вставлять IDENTITY дословно. Картинка держит лицо, текст держит волосы и свитер.
+**Главное правило:** всегда прикладывать фиксированный референс как image reference: `witch-portrait.jpg` для лица и крупных планов, `witch-master.jpg` для кадров, где видна фигура или костюм (можно оба сразу, если инструмент берёт несколько картинок). Плюс всегда вставлять IDENTITY дословно. Картинка держит лицо, текст держит волосы и свитер.
 
-### Шаг 0. Выбрать master reference
-1. Взять лучший кадр из твоего foxglove-видео **или** лучший результат 3.1-B. Критерии: лицо анфас или 3/4, глаза видны, веснушки читаются, волосы и свитер в кадре, тёплый свет, без размытия движения.
-2. Обрезать до головы и плеч, без текста и без бутылочек в кадре. Сохранить как `witch-master.png` (рекомендую положить в `content/characters/refs/`, в репо его пока нет, Рута пришлёт **[CHECK]**).
-3. Дополнительно собрать набор из 3–5 картинок: master, turnaround (3.1-A), руки (3.1-C), full body (3.1-D). Каждый новый удачный кадр не добавлять в референсы автоматически, иначе лицо «уплывёт». Набор обновлять только осознанно.
+### Шаг 0. Фиксированные референсы
+1. `content/characters/refs/witch-master.jpg`: полный рост, анфас, профиль, спина. Держит костюм, пропорции, волосы со спины.
+2. `content/characters/refs/witch-portrait.jpg`: лицо крупно. Держит лицо и веснушки.
+3. Дополнительно можно добавить руки (3.1-C) и сидя (3.1-D), сделанные от этих двух. Каждый новый удачный кадр не добавлять в референсы автоматически, иначе лицо «уплывёт». Набор обновлять только осознанно.
 
 ### Grok (Imagine / Aurora)
-- Загрузить `witch-master.png`, затем промпт: `Use the woman in the attached image as the exact same character. Keep her face, freckles, hair and sweater identical.` + IDENTITY + сцена + DNA.
+- Загрузить `witch-portrait.jpg` (крупные планы) или `witch-master.jpg` (фигура), затем промпт: `Use the woman in the attached image as the exact same character. Keep her face, freckles, hair and sweater identical.` + IDENTITY + сцена + DNA.
 - Для анимации описывать движение явно: `slow push-in, she turns one page, hair drifting slightly, candle flames flicker, she raises her eyes on the beat`. Одно действие на клип.
 - Если лицо поплыло, не править словами, а перегенерировать от той же master-картинки.
 
@@ -217,7 +229,7 @@ Wide quiet shot at blue hour. IDENTITY: [paste locked identity block]. She has f
 - **V6.x:** character reference: `--cref <URL witch-master> --cw 100` (лицо + волосы + одежда). `--cw 0` держит только лицо, полезно, если в редком кадре нужна другая одежда (по канону почти никогда).
 - **Стиль:** `--sref <URL лучшей сцены из 3.2> --sw 100` держит свет и палитру серии (sw 0–1000). Стиль-референс и персонаж-референс это разные картинки: в `--sref` не класть лицо, иначе смешаются.
 - Всегда `--style raw --ar 9:16`. Вес частей промпта через `::`, например `candlelit grimoire scene::2 nebula haze::0.5`.
-- Пример хвоста: `--ar 9:16 --style raw --oref https://…/witch-master.png --ow 150 --sref https://…/scene-herbarium.png --sw 120`
+- Пример хвоста: `--ar 9:16 --style raw --oref https://…/witch-master.jpg --ow 150 --sref https://…/scene-herbarium.png --sw 120`
 
 ### Flux Kontext
 - Работать как редактор от master-картинки: загрузить master и писать **что меняется**, а не всю сцену заново:
@@ -230,8 +242,8 @@ Wide quiet shot at blue hour. IDENTITY: [paste locked identity block]. She has f
 - Одно действие на шот, 3–6 с. Описывать: **начало → движение → конец**.
   Пример: `Start: she reads with eyes lowered. Motion: she slowly turns one parchment page, a curl slides over her shoulder, candle flames flicker. End: she rests her hand on the new page, half-smile. Camera: slow push-in, no shake.`
 - Описание персонажа одинаковое во всех шотах (короткая версия IDENTITY из п. 1).
-- Если доступен reference-to-video с несколькими картинками, давать master + full body **[CHECK: зависит от версии Seedance]**.
-- Hedra (если нужен lip-sync голосом из ElevenLabs): только кадр лица анфас/3/4 от master, рот виден, руки вне кадра.
+- Если доступен reference-to-video с несколькими картинками, давать `witch-portrait.jpg` + `witch-master.jpg` **[CHECK: зависит от версии Seedance]**.
+- Hedra (если нужен lip-sync голосом из ElevenLabs): только кадр лица анфас/3/4 от `witch-portrait.jpg`, рот виден, руки вне кадра.
 
 ### Общие советы
 - Генерировать пачкой в одной сессии и одним сидом (`--seed` в MJ), когда возможно.
@@ -255,9 +267,9 @@ Wide quiet shot at blue hour. IDENTITY: [paste locked identity block]. She has f
 
 ## 6. Проверка
 - Имени нет, нигде не названа Veyra.
-- Внешность только из заметок Руты; придуманное отмечено [CHOICE] и утверждено Рутой (рукава на ладонях, майка под свитером, низ и обувь для full-body, руки/ногти, температура и направление света, teal-акцент, отсутствие украшений).
+- Внешность только из заметок Руты; придуманное отмечено [CHOICE] и утверждено Рутой (рукава на ладонях, майка под свитером, руки/ногти, температура и направление света, teal-акцент, отсутствие украшений).
 - Палитра: золото ведёт, пергамент светлый тон, индиго/ночь в тенях, teal тихий акцент, фиолетовый только в иллюстрации.
 - Все сцены 9:16 с safe zone (верх 15%, низ 20%, бока 10%), текста в картинках нет.
-- Нет рецептов, доз, «ядовитой» инструкции. Заголовок наперстянки заменён на *Digitalis*, в старых кадрах размыт. [CHECK] стоит на легенде о наперстянке, на версиях параметров MJ/Seedance и на файле master reference.
+- Нет рецептов, доз, «ядовитой» инструкции. Заголовок наперстянки заменён на *Digitalis*, в старых кадрах размыт. [CHECK] стоит на легенде о наперстянке и на версиях параметров MJ/Seedance. Референсы `witch-master.jpg` и `witch-portrait.jpg` в репо.
 - Сходства с реальными людьми и чужими персонажами не закладываем: если результат похож на знаменитость, перегенерировать.
 - Ничего не опубликовано. Публикует только Рута вручную.
