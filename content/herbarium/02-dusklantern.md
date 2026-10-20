@@ -1,9 +1,9 @@
-# Herbarium of the Forgotten Witch · №01 — Dusklantern
+# Herbarium of the Forgotten Witch · №02 — Dusklantern
 
 **Канал:** @veyra982, Instagram Reels (кросс-пост TikTok / Shorts)
 **Серия:** Herbarium of the Forgotten Witch (вымысел, фольклорный тон)
 **Хронометраж:** 30 с · 9:16 · 1080×1920
-**Статус:** черновик для Руты. Ничего не сгенерировано и не опубликовано.
+**Статус:** draft (см. `INDEX.md`). Написано до `CANON.md`: хронометраж, палитра и роль Veyra здесь старые, при доработке страницы прав CANON. Ничего не сгенерировано и не опубликовано.
 
 > Язык. По `veyra-core.md` публичный текст (хук, озвучка, экран, промпты, подпись) на английском, пояснения на русском.
 > Вымысел. Растение выдуманное. Нет рецептов, доз, способов применения, медицинских обещаний. Это страница из книги несуществующей ведьмы, а не справочник.
@@ -11,7 +11,7 @@
 ## Реестр серии (чтобы не повторяться)
 | № | Растение | Идея |
 |---|---|---|
-| 01 | Dusklantern (*Lucerna vesperis*, вымышл.) | свет гаснет от удобной лжи себе, разгорается от честной фразы |
+| 02 | Dusklantern (*Lucerna vesperis*, вымышл.) | свет гаснет от удобной лжи себе, разгорается от честной фразы |
 
 ## 1. Растение
 **Dusklantern.** Низкий куст у заброшенных порогов. На ветках висят стеклянные стручки-фонарики. По записям Забытой Ведьмы, стручки тускнеют, когда рядом кто-то говорит себе удобную версию правды, и разгораются от первой честной фразы, даже тихой. Ведьма написала на полях: «Он не лечит. Он показывает, где ты притворяешься».
@@ -26,7 +26,7 @@
 | Время | Картинка | Озвучка (EN) | Текст на экране |
 |---|---|---|---|
 | 0–3 | Тёмный порог, куст со стеклянными фонариками тускнеет | "This plant dims when you lie to yourself." | DUSKLANTERN |
-| 3–8 | Старая страница гербария, чернила, засушенный стручок | "A forgotten witch drew it in the margin of her herbarium. She never named it a cure." | Herbarium of the Forgotten Witch · №01 |
+| 3–8 | Старая страница гербария, чернила, засушенный стручок | "A forgotten witch drew it in the margin of her herbarium. She never named it a cure." | Herbarium of the Forgotten Witch · №02 |
 | 8–15 | Руки подносят свечу, стручки тускнеют | "Say the easy version, I'm fine, it doesn't matter, and the glass goes grey." | the easy version = grey |
 | 15–22 | Тихий шёпот, стручки загораются золотом | "Say the true one, even in a whisper, and it lights from the root." | the true one = gold |
 | 22–27 | Пустой порог, свет мягко льётся наружу | "She wrote: it doesn't heal you. It only shows where you're pretending." | it only shows |
@@ -59,7 +59,7 @@ Dusklantern grows by forgotten thresholds, and its glass pods go grey when the e
 
 Which sentence would light yours? Tell me below, or keep it to yourself. The lantern doesn't ask.
 
-№01 of the Herbarium of the Forgotten Witch. A fictional plant from a fictional book. ✦
+№02 of the Herbarium of the Forgotten Witch. A fictional plant from a fictional book. ✦
 
 Хэштеги: #HerbariumOfTheForgottenWitch #WitchyAesthetic #FolkloreTok #MagicalPlants #CosmicOracle #Veyra
 

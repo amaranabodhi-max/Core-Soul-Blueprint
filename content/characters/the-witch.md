@@ -1,5 +1,7 @@
 # The Forgotten Grimoire · Character Sheet — The Witch
 
+> **Главный канон серии: `content/herbarium/CANON.md`.** Этот файл — детальный лист для генераций. Если он с CANON расходится, прав CANON.
+
 **Серия:** The Forgotten Grimoire (рубрика 4, *The Witch*)
 **Роль:** безымянная травница-ведьма, хранительница гримуара. Повторяется в каждом ролике.
 **Статус:** канон. Фиксированные референсы утверждены Рутой (2026-10-20). Ничего не опубликовано.
@@ -22,7 +24,7 @@
 Вставлять **дословно** в каждый промпт с ней. Ни слова не менять, не сокращать, не переводить.
 
 ```
-IDENTITY: a woman in her mid-to-late twenties with light skin and faint freckles across her nose and cheeks, a soft oval face, defined natural brows, hazel-green eyes, a gentle closed-lip half-smile, rosy lips, natural minimal makeup; long voluminous loose-curled chestnut-brown hair with warm caramel-honey highlights, a soft centre part, slightly tousled, falling below her chest over both shoulders; wearing an oversized chunky-knit charcoal-grey V-neck button-front cardigan with front pockets and loose, slightly long sleeves, worn over bare skin with nothing visible in the neckline.
+IDENTITY: a woman in her mid-to-late twenties with light skin and faint freckles across her nose and cheeks, a soft oval face, defined natural brows, hazel-green eyes, a gentle closed-lip half-smile, rosy lips, natural minimal makeup; long wild wavy chestnut hair with copper highlights, a soft centre part, slightly tousled, falling below her chest over both shoulders; wearing an oversized chunky-knit charcoal-grey V-neck button-front cardigan with front pockets and loose, slightly long sleeves, worn over bare skin with nothing visible in the neckline.
 ```
 
 Для кадров, где видна фигура ниже свитера, добавлять сразу после IDENTITY дословно:
@@ -34,13 +36,13 @@ OUTFIT: dark brown leggings, slouchy grey knit socks bunched over the leggings, 
 Короткая версия (только для платформ с жёстким лимитом длины, например поле motion-промпта в Seedance, когда лицо уже задано картинкой):
 
 ```
-the same freckled woman with long chestnut-caramel wavy hair in the oversized charcoal-grey chunky knit button cardigan from the reference image
+the same freckled woman with long wild wavy chestnut-copper hair in the oversized charcoal-grey chunky knit button cardigan from the reference image
 ```
 
 ### Never change (запрещено менять)
 - Лицо: овал, веснушки на носу и щеках, брови, орехово-зелёные глаза (по `witch-portrait.jpg`), мягкая полуулыбка с закрытыми губами.
 - Цвет кожи (светлый), возраст (середина/конец 20-х). Не старить, не омолаживать до подростка.
-- Волосы: длина ниже груди, объём, свободные волны, каштан с карамельно-медовыми прядями, пробор примерно по центру. Не стричь, не выпрямлять, не перекрашивать, не собирать в пучок.
+- Волосы: длина ниже груди, объём, свободные волны, каштан с медными прядями, пробор примерно по центру. Не стричь, не выпрямлять, не перекрашивать, не собирать в пучок. Единственное исключение: в сценах прошлого одна свободная коса (см. ниже).
 - Кардиган: оверсайз, крупная вязка, угольно-серый, V-вырез, пуговицы спереди, карманы. Без смены цвета.
 - Макияж минимальный. Без стрелок, яркой помады, контуринга.
 - Свет тёплый, свечной/ламповый. Её не снимают в холодном дневном или неоновом свете.
@@ -63,10 +65,17 @@ different face, changing facial features, heavy makeup, red lipstick, eyeliner w
 | Рукава | Слегка длинные, могут наполовину закрывать ладони **[CHOICE]** (уютный жест, помогает прятать сложные руки). |
 | Под кардиганом | Ничего не видно: в V-вырезе открытая кожа (по `witch-portrait.jpg`). |
 | Низ | Тёмно-коричневые леггинсы. Серые вязаные носки гармошкой поверх леггинсов. Коричневые кожаные ботинки челси до щиколотки, потёртые. Канон по `witch-master.jpg`. |
-| Украшения | Нет **[CHOICE]**. Если Рута захочет одно, то тонкое золотое кольцо, всегда то же самое. |
+| Украшения | Нет. Ни кольца, ни других украшений, ни в настоящем, ни в прошлом (CANON). |
+
+### Прошлое (HEROINE past, по CANON)
+Та же девушка, то же лицо и глаза. Волосы заплетены в одну свободную косу, простое льняное платье, тёплый янтарный свет. Кардигана и украшений нет. Добавлять к IDENTITY в сценах прошлого:
+
+```
+PAST: her hair in a single loose braid, wearing a plain linen dress, warm amber light; no cardigan, no jewellery.
+```
 
 ### Волосы
-Распущены всегда. Объём и лёгкий беспорядок обязательны. В движении (Grok / Seedance) волосы могут чуть колыхаться, но причёска не меняется.
+В настоящем распущены всегда. Объём и лёгкий беспорядок обязательны. В движении (Grok / Seedance) волосы могут чуть колыхаться, но причёска не меняется.
 
 ### Свет (канон)
 - Ключ: тёплый золотой свет свечи или лампы, янтарное свечение, 2200–2700 K **[CHOICE: диапазон температуры]**.
@@ -79,7 +88,7 @@ different face, changing facial features, heavy makeup, red lipstick, eyeliner w
 - **Gold ведёт:** пламя, янтарь, золото на книге (`#C9A227` / `#D4AF37`).
 - **Parchment/Pearl как светлый тон:** страницы, свет на коже, белое одеяло.
 - **Indigo/Night в тенях** и в окне с ночным небом.
-- **Teal тихий акцент:** один предмет, например стеклянная бутылочка или лента-закладка цвета `#1F8A8A` **[CHOICE]**.
+- **Teal — цвет магии растений** (CANON): свечение растения, отблеск его магии `#1F8A8A`. Не как случайный декор.
 - Приглушённый фиолетовый в ботанической иллюстрации допустим как редкий акцент (Deep violet).
 
 ### Реквизит
@@ -96,12 +105,13 @@ different face, changing facial features, heavy makeup, red lipstick, eyeliner w
 1. **Спальня (cosy bedroom).** Лежит на белом одеяле, читает гримуар, рядом лампа.
 2. **Кабинет (study).** Тёмный деревянный стол, книжные полки, пучки трав над головой, свечи, фонарь, янтарные бутылочки, оловянные кубки, травы на столе.
 3. Новые сеты допускаются, только если в них есть: тёплый свечной свет + старая книга + сушёные травы (правило рубрики).
+4. Все сеты находятся в мире серии: литовская деревня, свеча и луна (CANON). Без современных предметов; лампа только масляная.
 
 ### Что может меняться и что никогда
 | Может меняться | Никогда не меняется |
 |---|---|
 | Сет (спальня / кабинет / окно с ночным небом) | Лицо, веснушки, глаза, улыбка |
-| Поза (лежит, сидит, стоит у полки) | Волосы: длина, цвет, волна, пробор |
+| Поза (лежит, сидит, стоит у полки) | Волосы: длина, цвет, волна, пробор (коса только в прошлом) |
 | Направление взгляда: обычно опущен в книгу, изредка поднят в камеру (для обложек) | Свитер и его цвет |
 | Какая страница открыта (растение, сигил, звезда) | Тёплый свечной свет и rim light |
 | Кадр: от макро рук до общего плана | Гримуар (один и тот же объект) |
@@ -115,10 +125,12 @@ different face, changing facial features, heavy makeup, red lipstick, eyeliner w
 ### Visual DNA (общий хвост, дословно в каждый промпт серии)
 
 ```
-DNA: warm candlelit world, golden amber key light from low candles, soft gold rim light in her hair, shadows falling into deep indigo and night blue, aged parchment and pearl highlights, one quiet teal accent, dried herb bundles hanging, faint dust motes in the light, shallow depth of field with candle bokeh, painterly cinematic realism, Kodak Portra 400 skin tones, highly detailed, no text, no letters, no watermark, no logo.
+DNA: warm candlelit world, golden amber key light from low candles, soft gold rim light in her hair, shadows falling into deep indigo and night blue, aged parchment and pearl highlights, teal glow only for plant magic, dried herb bundles hanging, faint dust motes in the light, shallow depth of field with candle bokeh, painterly cinematic realism, Kodak Portra 400 skin tones, highly detailed, no text, no letters, no watermark, no logo.
 ```
 
-Сборка любого промпта: `[SHOT] + IDENTITY + [SCENE/ACTION] + [CAMERA] + DNA + [ASPECT]`.
+Для страниц Herbarium в конце всегда добавлять хвост стиля из CANON: `painterly cinematic, dark folk fairytale, Lithuanian village, soft film grain, 4K, highly detailed, vertical 9:16`.
+
+Сборка любого промпта: `[SHOT] + IDENTITY (+ PAST в прошлом) + [SCENE/ACTION] + [CAMERA] + DNA + STYLE TAIL + [ASPECT]`.
 
 ---
 
@@ -228,12 +240,12 @@ Wide quiet shot at blue hour. IDENTITY: [paste locked identity block]. She has f
 - **V7:** omni reference: `--oref <URL witch-master> --ow 100` (вес 1–1000; 100 по умолчанию; поднимать до 250–400, если лицо уходит; слишком высокий вес тянет за собой позу и фон референса).
 - **V6.x:** character reference: `--cref <URL witch-master> --cw 100` (лицо + волосы + одежда). `--cw 0` держит только лицо, полезно, если в редком кадре нужна другая одежда (по канону почти никогда).
 - **Стиль:** `--sref <URL лучшей сцены из 3.2> --sw 100` держит свет и палитру серии (sw 0–1000). Стиль-референс и персонаж-референс это разные картинки: в `--sref` не класть лицо, иначе смешаются.
-- Всегда `--style raw --ar 9:16`. Вес частей промпта через `::`, например `candlelit grimoire scene::2 nebula haze::0.5`.
+- Всегда `--style raw --ar 9:16`. Вес частей промпта через `::`, например `candlelit grimoire scene::2 moonlit mist::0.5`.
 - Пример хвоста: `--ar 9:16 --style raw --oref https://…/witch-master.jpg --ow 150 --sref https://…/scene-herbarium.png --sw 120`
 
 ### Flux Kontext
 - Работать как редактор от master-картинки: загрузить master и писать **что меняется**, а не всю сцену заново:
-  `Keep the same woman: identical face, freckles, hazel-green eyes, long chestnut-caramel wavy hair and oversized charcoal-grey chunky knit sweater. Change only the setting: she now sits at a dark wooden study table with hanging dried herbs, candles and an open old grimoire, warm candle light from the left, gold rim light in her hair.`
+  `Keep the same woman: identical face, freckles, hazel-green eyes, long wild wavy chestnut-copper hair and oversized charcoal-grey chunky knit sweater. Change only the setting: she now sits at a dark wooden study table with hanging dried herbs, candles and an open old grimoire, warm candle light from the left, gold rim light in her hair.`
 - Одна правка за проход (сет, потом поза, потом свет). Несколько правок сразу размывают лицо.
 - Для длинных фотореалистичных описаний (Flux Pro / Dev без Kontext) вставлять IDENTITY + DNA полностью и добавлять `photorealistic, natural skin texture, visible freckles`.
 
@@ -255,6 +267,8 @@ Wide quiet shot at blue hour. IDENTITY: [paste locked identity block]. She has f
 
 ## 5. Правило Herbarium и кадр с наперстянкой
 
+- **Herbarium — только вымысел (CANON).** Наперстянка настоящая, поэтому страницей Herbarium она не будет. Кадры foxglove-ролика остаются лишь первоисточником её облика.
+
 - **Решение Руты (2026-10-19):** заголовок страницы наперстянки теперь латинский: ***Digitalis***. Слово "Poison" больше не используется.
 - В двух старых кадрах foxglove-ролика заголовок "Foxglove Poison" размыт: `refs/foxglove-bedroom-digitalis-blur.jpg` и `refs/foxglove-study-digitalis-blur.jpg`. Если эти кадры идут в ролик, брать только эти версии. На видео (не на стоп-кадрах) заголовок размыть или закрыть в CapCut тем же способом. Новую надпись *Digitalis* добавляет монтаж.
 - Фольклорную подпись (например, легенды о «перчатках фей», folk's glove) проверить по источнику перед публикацией **[CHECK]**.
@@ -267,8 +281,8 @@ Wide quiet shot at blue hour. IDENTITY: [paste locked identity block]. She has f
 
 ## 6. Проверка
 - Имени нет, нигде не названа Veyra.
-- Внешность только из заметок Руты; придуманное отмечено [CHOICE] и утверждено Рутой (рукава на ладонях, руки/ногти, температура и направление света, teal-акцент, отсутствие украшений).
-- Палитра: золото ведёт, пергамент светлый тон, индиго/ночь в тенях, teal тихий акцент, фиолетовый только в иллюстрации.
+- Внешность только из заметок Руты; придуманное отмечено [CHOICE] и утверждено Рутой (рукава на ладонях, руки/ногти, температура и направление света). Украшений нет по CANON.
+- Палитра (CANON): gold–teal–indigo; teal — цвет магии растений, фиолетовый только в иллюстрации.
 - Все сцены 9:16 с safe zone (верх 15%, низ 20%, бока 10%), текста в картинках нет.
 - Нет рецептов, доз, «ядовитой» инструкции. Заголовок наперстянки заменён на *Digitalis*, в старых кадрах размыт. [CHECK] стоит на легенде о наперстянке и на версиях параметров MJ/Seedance. Референсы `witch-master.jpg` и `witch-portrait.jpg` в репо.
 - Сходства с реальными людьми и чужими персонажами не закладываем: если результат похож на знаменитость, перегенерировать.

@@ -74,10 +74,10 @@ The single source of truth for every Veyra agent. If an agent file says somethin
 The universe of the series. A grimoire kept by a **nameless herbalist witch**. Every video opens one new page of it; the viewer turns the pages with her.
 
 ### Rubrics
-1. **Herbarium** — invented plants (like *Dusklantern*, page №01) and, now and then, real witches' herbs. **Legends and lore only:** no recipes, no doses, no preparation, no healing claims. Every episode follows one arc: `content/herbarium/episode-arc.md`.
+1. **Herbarium** (*Herbarium of the Forgotten Witch*) — invented plants only, with invented "poisons": no real plants, no recipes, no doses, no preparation, no use. **Series canon: `content/herbarium/CANON.md`** (it wins over this file); registry: `content/herbarium/INDEX.md`; episode arc: `content/herbarium/episode-arc.md`.
 2. **Sigils** — Ruta's own seals (*Sorael*, *Barchiel*, *Tabor* and others). Each page gives the name, its meaning inside the story, and an animation of the symbol lighting up line by line. Meanings come from Ruta only; anything not given by her is `[CHECK]`.
 3. **Star Pages** — fixed stars (like *Algol*), read through Bernadette Brady. Positions and orbs follow the **Facts** rules: conjunction ≤1° by default, parans only as a labelled extra layer.
-4. **The Witch** — the recurring heroine. Warm light, candles, an old book, dry herbs hanging. **One face in every video:** generate from a single fixed character reference and never redesign her. She stays nameless. Canon and locked identity block: `content/characters/the-witch.md`.
+4. **The Witch** — the recurring heroine, a young nameless witch. **One face in every video:** generate from the fixed reference images and never redesign her. Canon (present and past look): `content/herbarium/CANON.md`; generation sheet: `content/characters/the-witch.md`.
 
 ### Rhythm
 | Day | Page |
@@ -89,7 +89,7 @@ The universe of the series. A grimoire kept by a **nameless herbalist witch**. E
 
 ### Page style
 - Old parchment, **Latin headings** (e.g. *Herbarium*, *Sigilla*, *Stellae Fixae*) in Cinzel, gold ink and gilding, candlelight.
-- The grimoire is a warm, candlelit world inside the Veyra palette: gold leads, parchment acts as the light tone, indigo and night appear in shadows and night skies, teal only as a quiet accent.
+- The grimoire is a warm, candlelit world inside the Veyra palette: gold leads, parchment acts as the light tone, indigo and night appear in shadows and night skies, teal is the colour of the plants' magic (see `CANON.md`).
 - Every page is numbered (*Page №01, №02…*) so the series reads as one book.
 - All brand rules still apply: English, hook ≤10 words, 6-part story formula, 9:16 safe zone.
 
