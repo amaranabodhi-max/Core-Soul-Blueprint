@@ -162,6 +162,8 @@ Macro detail shot of her hands resting on an open old grimoire, sleeves of an ov
 
 **D. Full body, seated at the study table** 9:16
 
+> Только для референса. По CANON в сценах настоящего героиня никогда не показывается в полный рост.
+
 ```
 Full-body shot, seated. IDENTITY: [paste locked identity block]. Below the sweater dark brown leggings, slouchy grey knit socks and worn brown leather ankle boots. She sits at a dark wooden table, one elbow on the table, reading an open grimoire, eyes lowered to the page. Behind her tall bookshelves fall into indigo shadow, bundles of dried herbs hang from a beam above, closed unlabeled amber apothecary bottles and pewter cups stand at the edge of the table, an old iron lantern and several candles light the scene. Key light from the candles on the table, front-left and low, soft shadows rising behind her to the right, gold rim light on her hair from a candle behind. 35mm lens, f/2.8, eye-level, camera slightly to the left. Her face sits between 25% and 50% of frame height; the top 15% is dim beam and herbs, the bottom 20% is dark table surface, calm and free for titles. DNA: [paste DNA]. --ar 9:16
 ```

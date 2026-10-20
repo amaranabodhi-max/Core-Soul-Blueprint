@@ -15,9 +15,10 @@ Fixed reference images, attached to every generation of her:
 - `content/characters/refs/witch-portrait.jpg` (face)
 - `content/characters/refs/witch-master.jpg` (full figure, front, profile, back)
 
-- **HEROINE (present):** young woman, long wild wavy chestnut hair with copper highlights, hazel-green eyes, light freckles, soft knowing half-smile, oversized charcoal knit cardigan; framed waist-up
+- **HEROINE (present):** young woman, long wild wavy chestnut hair with copper highlights, hazel-green eyes, light freckles, soft knowing half-smile, oversized charcoal knit cardigan
 - **HEROINE (past):** the same young woman, hair in a single loose braid, plain linen dress, warm amber light
 - No ring, no jewellery, in the present or the past.
+- **Framing:** in present-day scenes the heroine is never shown full length. The shot is set in each scene.
 - Detailed generation sheet (identity block, light, sets, tool workflow): `content/characters/the-witch.md`.
 
 ## Look
