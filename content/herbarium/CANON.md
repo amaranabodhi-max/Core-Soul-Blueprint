@@ -21,6 +21,11 @@ Fixed reference images, attached to every generation of her:
 - **Framing:** in present-day scenes the heroine is never shown full length. The shot is set in each scene.
 - Detailed generation sheet (identity block, light, sets, tool workflow): `content/characters/the-witch.md`.
 
+## Plant and series references
+- Every plant that has a reference image is drawn from it in every prompt, like the heroine's photos: the image is attached and the page's FLOWER anchor points to it.
+- **Hollowbell:** `content/herbarium/refs/hollowbell-ref.png` — the main image of the flower for all prompts.
+- **Series cover:** `content/herbarium/refs/herbarium-cover.png` — the sheet with four plants, for carousels and previews.
+
 ## Look
 - **Palette:** gold–teal–indigo. Warm candle gold against deep indigo shadows; teal is the colour of the plants' magic.
 - **Style tail:** `painterly cinematic, dark folk fairytale, Lithuanian village, soft film grain, 4K, highly detailed, vertical 9:16`

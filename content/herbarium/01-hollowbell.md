@@ -4,7 +4,7 @@ Vertical 9:16, 45 s. English final text. On-page text is added in CapCut (animat
 ## Anchors (use in every prompt)
 - STYLE TAIL: painterly cinematic, dark folk fairytale, Lithuanian village, soft film grain, 4K, highly detailed, vertical 9:16
 - PALETTE: warm candle gold against deep indigo shadows
-- FLOWER: a single hollow bell-shaped flower on a slender bent stem, silver rim deepening to teal and indigo inside, no stamens, faint glow at its empty heart
+- FLOWER: a single hollow bell-shaped flower on a slender bent stem, silver rim deepening to teal and indigo inside, no stamens, faint glow at its empty heart; REFERENCE IMAGE (attach to every shot with the flower): content/herbarium/refs/hollowbell-ref.png
 - HEROINE (present): young woman, long wild wavy chestnut hair with copper highlights, hazel-green eyes, light freckles, soft knowing half-smile, oversized charcoal knit cardigan
 - HEROINE (past): the same young woman, hair in a single loose braid, plain linen dress, warm amber light
 - REFERENCE IMAGES (attach to every shot with her): content/characters/refs/witch-portrait.jpg, content/characters/refs/witch-master.jpg
