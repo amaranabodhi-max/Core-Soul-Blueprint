@@ -63,6 +63,7 @@ The series becomes a printed book. Besides the video, every plant gets a book sh
 - **Every plant takes something from the witch.** This is the through-line of the book: Hollowbell takes her name, Dusklantern her voice. Each new plant takes something new (check the Takes column of `INDEX.md`).
 - **Landscapes on the sheet:** only the Lithuanian village — birches, wooden houses, gates, thresholds.
 - **Rites are poetic and impossible:** no real plants, no recipes, no doses, nothing taken by mouth.
+- **Margin notes:** at least one note on every sheet. The other inks appear only where the plant has its own story for them. Empty margin fields are allowed; never invent notes just to fill them.
 
 ### Template (end of every page file)
 ```
@@ -74,8 +75,8 @@ The series becomes a printed book. Besides the video, every plant gets a book sh
 - Gift & Poison: <gift>. <poison>.
 - Gathering — <phase or heavenly condition>: <conditions>. <short impossible rite>.
 - Takes: <what it takes from the witch>
-- Margin (brown): "<first confident entry>"
-- Margin (grey): "<doubt or failed attempt>"
-- Margin (teal): "<the heroine today, not remembering>"
+- Margin (brown): "<first confident entry>"            (at least one margin note in total;
+- Margin (grey): "<doubt or failed attempt>"           leave a line out when the plant has
+- Margin (teal): "<the heroine today, not remembering>" no story for that ink)
 - Footer: An imagined herbarium · All plants and rites are fictional
 ```

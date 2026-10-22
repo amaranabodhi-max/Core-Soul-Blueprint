@@ -25,6 +25,7 @@ Veyra (V.O.): "Hollowbell grows where the ground remembers footsteps. Healers so
 Prompt: Misty night, an old village path worn deep by footsteps leading to a wooden gate, moonrise, a few [FLOWER] along the path glowing faintly. 35mm lens, slow dolly forward, moonlight and indigo mist, [STYLE TAIL]
 
 ## 4. The past (18–30 s)
+> Archive, amber version: these prompts are the original draft. The final cut and CANON.md have a cold, blue, misty past.
 4A (18–21 s) Prompt: Warm amber flashback, [HEROINE past] kneels on the moonlit path holding a Hollowbell, tears on her cheeks; at the gate stands [TOMAS], the night visible through him. 50mm lens, slow push-in, amber against indigo, [STYLE TAIL]
 4B (21–22 s, separate shot) Prompt: [HEROINE past] suddenly turns and looks directly into the camera for a moment, as if seeing someone watching from the future. 85mm lens, static, amber light, [STYLE TAIL]
 4C (22–30 s) Girl whispers: "Tomas…" Veyra (V.O.): "She gave it his name. It took hers."
@@ -53,5 +54,7 @@ HOLLOWBELL, Oblivaria cava; folk names: Widow's Lantern, the Nameless Bell, Užm
 - Gift & Poison: Keeps a lost one's name and quiets grief. Give it another's name, and it takes yours.
 - Gathering — Blue Moon: Seek it at moonrise, when Venus rests above the western gate. Wait for dew on a path untouched by rain. Speak no name into the bell.
 - Takes: name
-- Margin (ink [CHECK]): "The pressed flower is still warm. I dare not ask whose name it keeps."
+- Margin (brown): "Don't call it until you remember."
+- Margin (grey): "The pressed flower is still warm. I dare not ask whose name it keeps." (not yet shown in grey on the current sheet image; Nayara fixes it in the next version)
+- Margin (teal): "I wrote this warning. I don't remember writing it."
 - Footer: An imagined herbarium · All plants and rites are fictional
