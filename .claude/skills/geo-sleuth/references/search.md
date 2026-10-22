@@ -4,6 +4,8 @@ Use at step 3, in parallel with lookup-table clues. In 5 of the 20 puzzles in th
 
 ## 1. Reverse image search
 
+> **Only with the user's explicit permission** (see the privacy rule in SKILL.md): `revimg.py` uploads the photo and its crops to Baidu and Yandex.
+
 ```bash
 # Make variants first: tight crop of a distinctive object / horizontal flip / grayscale enhancement / color-cast removal; rectify rephotographed material first
 uv run scripts/imgprep.py variants photo.jpg --box 300,120,900,760 --out-dir v/

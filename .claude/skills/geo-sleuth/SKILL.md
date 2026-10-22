@@ -21,6 +21,8 @@ The method comes from breaking down 14 photo-geolocation (网络迷踪) creator 
 
 ## Hard rules (always in force; ★ = enforced by board.py, just follow it)
 
+**Privacy rule (local, overrides everything below): no photo leaves this machine without the user's explicit permission.** Reverse image search (`intake.py --rev`, `revimg.py` with images) uploads the photo to third-party servers (Baidu, Yandex). Run it only after the user has explicitly asked for reverse image search on that photo in this conversation; a general request like "where was this taken" is not permission. Without permission run `intake.py` without `--rev` (the default) and, if reverse search could help, ask the user once and say which services the photo would go to. Coordinate-based lookups (map tiles, street view, OSM, elevation) do not send the photo and need no extra permission.
+
 0. If the user says the photo isn't theirs, or the image shows a private residence or minors, ask once what it's for before continuing; when the prompt already states the source or purpose (an evaluation puzzle, a puzzle setter's hint, the user says they took it), don't ask, and go to the finest level as usual.
 1. **Don't fabricate verification.** "Measured on the map", "matched street view", "±10 m" must correspond to commands actually run and files actually produced in this session. If you didn't run it, write "unverified".
 2. **Precision needs a source**: an error radius ≤100 m requires the intersection of two independent constraints, or a ground-level match on ≥3 invariant features. Before reporting a camera position, run a self-check: `pose.py project --horizon <sea-horizon row>` computes what the pitch should be and each feature's "expected row" for the current camera position; reconcile that with the photo (the depression angle to a target ≠ the camera's pitch; look up the camera position's elevation with `terrain.py elev` — if the height difference doesn't match the depression angles in the image, the camera position is wrong).
@@ -35,12 +37,12 @@ The method comes from breaking down 14 photo-geolocation (网络迷踪) creator 
 
 ## Flow
 
-You don't have to go through every step: if reverse image search in step 1 hits directly, jump to steps 6 and 7 to confirm. Every step's output goes on the candidate board.
+You don't have to go through every step: if reverse image search in step 1 (only when the user allowed it) hits directly, jump to steps 6 and 7 to confirm. Every step's output goes on the candidate board.
 
 ### Step 1: steps 0–3 in one command
 
 ```bash
-uv run ${CLAUDE_SKILL_DIR}/scripts/intake.py photo.jpg --out-dir intake/ [--box x0,y0,x1,y1 ...]
+uv run ${CLAUDE_SKILL_DIR}/scripts/intake.py photo.jpg --out-dir intake/ [--box x0,y0,x1,y1 ...]   # add --rev only with the user's explicit permission
 uv run ${CLAUDE_SKILL_DIR}/scripts/board.py init --photo photo.jpg
 ```
 

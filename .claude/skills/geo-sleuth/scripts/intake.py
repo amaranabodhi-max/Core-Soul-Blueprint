@@ -17,12 +17,14 @@ tiered vote count of image-search tags, suspected residential compound / housing
 Always open the image-search screenshots and the similar-image contact sheets; "searched, nothing found" and "not searched" are written separately in the report.
 
   intake.py photo.jpg --out-dir intake/ [--box x0,y0,x1,y1 ...] [--engines baidu,yandex] [--exclude word1,word2]
-            [--no-rev] [--no-ocr] [--max-variants 4]
+            [--rev] [--no-ocr] [--max-variants 4]
+Reverse image search is OFF by default: it uploads the photo to Baidu/Yandex. Pass --rev only after the user
+has explicitly asked for reverse image search on this photo.
 
 Examples:
-  intake.py photo.jpg --out-dir intake/
+  intake.py photo.jpg --out-dir intake/                                                            # metadata, edge crops, OCR; nothing uploaded
+  intake.py photo.jpg --out-dir intake/ --rev                                                      # also reverse image search (uploads the photo; only with the user's permission)
   intake.py photo.jpg --out-dir intake/ --box 300,120,900,760 --exclude 网络迷踪,<creator name>   # in blind tests, exclude walkthrough posts (网络迷踪 = photo geolocation)
-  intake.py photo.jpg --out-dir intake/ --no-rev                                                   # only metadata, edge crops, OCR (under 30 seconds)
 """
 from __future__ import annotations
 
@@ -135,11 +137,13 @@ def main() -> None:
     ap.add_argument("--box", action="append", help="x0,y0,x1,y1: tight-crop variant, repeatable")
     ap.add_argument("--engines", default="baidu,yandex")
     ap.add_argument("--exclude", help="words to exclude from reverse image search results (for blind tests)")
-    ap.add_argument("--no-rev", action="store_true")
+    ap.add_argument("--rev", action="store_true", help="run reverse image search (uploads the photo to the engines); off by default")
+    ap.add_argument("--no-rev", action="store_true", help="accepted for compatibility; reverse search is already off unless --rev")
     ap.add_argument("--no-ocr", action="store_true")
     ap.add_argument("--max-variants", type=int, default=4, help="max number of variants each engine searches (besides the original)")
     ap.add_argument("--proxy", default=os.environ.get("GEO_PROXY"), help=PROXY_HELP)
     args = ap.parse_args()
+    args.no_rev = args.no_rev or not args.rev
 
     photo = Path(args.photo).resolve()
     out = args.out_dir
@@ -267,7 +271,7 @@ def main() -> None:
         L.append("No text read" + (f" (OCR {status.get('ocr')})" if status.get("ocr") != "ok" else ". Maybe there really is no text, or it's too small: zoom in by hand with imgprep.py zoom and look again"))
     L += ["", "## Reverse image search", ""]
     if args.no_rev:
-        L.append("Not done (--no-rev). This is not \"searched, nothing found\".")
+        L.append("Not done (reverse search is off by default; it needs --rev and the user's explicit permission). This is not \"searched, nothing found\".")
     else:
         for eng in args.engines.split(","):
             st = status.get(f"rev-{eng}", "not run")

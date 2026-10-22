@@ -1,0 +1,4 @@
+# geo-sleuth caches and working files (may contain personal photos)
+.geo-cache/
+__pycache__/
+*.pyc

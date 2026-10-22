@@ -125,7 +125,7 @@ class NetworkTests(unittest.TestCase):
                 if any(str(part).endswith("revimg.py") for part in cmd):
                     return run(cmd, **kwargs)
                 return original([sys.executable, *cmd[2:]], **kwargs)
-            with patch.object(intake, "_run", side_effect=local_or_search), patch.object(sys, "argv", ["intake.py", str(photo), "--out-dir", str(root / "out"), "--no-ocr", "--max-variants", "1", "--proxy", "direct"]):
+            with patch.object(intake, "_run", side_effect=local_or_search), patch.object(sys, "argv", ["intake.py", str(photo), "--out-dir", str(root / "out"), "--no-ocr", "--rev", "--max-variants", "1", "--proxy", "direct"]):
                 intake.main()
             self.assertEqual(len(commands), 2)
             for cmd in commands:
