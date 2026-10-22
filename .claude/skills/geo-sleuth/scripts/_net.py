@@ -5,6 +5,16 @@ import os
 import subprocess
 
 PROXY_HELP = "proxy URL or 'direct'"
+CN_HELP = "allow mainland-China services (Baidu panoramas, Baidu Maps, 360 Maps); off unless this flag or GEO_ALLOW_CN=1"
+
+
+def cn_allowed() -> bool:
+    """Mainland-China services are never contacted unless the user opted in with --allow-cn (which sets GEO_ALLOW_CN=1)."""
+    return os.environ.get("GEO_ALLOW_CN", "").strip() == "1"
+
+
+def allow_cn() -> None:
+    os.environ["GEO_ALLOW_CN"] = "1"
 
 
 def resolve_proxy(proxy: str | None = None) -> str | None:

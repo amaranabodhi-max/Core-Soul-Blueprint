@@ -1,6 +1,6 @@
 ---
 name: geo-sleuth
-description: Geolocate or chronolocate a photo with tool-verified reasoning (where was this taken / when was it taken / photo geolocation / geo-guessing). Given one or more photos, intake.py does metadata, OCR and reverse image search (Baidu/Yandex) in one command; clues and candidates go on a candidate board (board.py) that ranks them and gives the next step; clues.py looks up calling codes, driving side, plates and area codes from region packs; for satellite and street view the machine ranks first and you look only at the top few (CLIP in sat_scan.py, DINOv2+SIFT in match.py); plus sun and shadow math, OSM Overpass and DEM skylines. Every conclusion is checked against real data; output is coordinates + error radius, evidence images and tiered confidence. Use when the user shares a photo and asks where was this taken / geolocate this / when was this taken / 这是哪 / 在哪拍的 / 帮我定位这张照片 / 网络迷踪 / 图寻 / 几点拍的.
+description: Geolocate or chronolocate a photo with tool-verified reasoning (where was this taken / when was it taken / photo geolocation / geo-guessing). Given one or more photos, intake.py does metadata, edge crops and OCR locally in one command (no automatic reverse image search; the photo is never uploaded); clues and candidates go on a candidate board (board.py) that ranks them and gives the next step; clues.py looks up calling codes, driving side, plates and area codes from region packs; for satellite and street view the machine ranks first and you look only at the top few (CLIP in sat_scan.py, DINOv2+SIFT in match.py); plus sun and shadow math, OSM Overpass and DEM skylines. Every conclusion is checked against real data; output is coordinates + error radius, evidence images and tiered confidence. Use when the user shares a photo and asks where was this taken / geolocate this / when was this taken / 这是哪 / 在哪拍的 / 帮我定位这张照片 / 网络迷踪 / 图寻 / 几点拍的.
 ---
 
 # geo-sleuth (v2)
@@ -21,7 +21,10 @@ The method comes from breaking down 14 photo-geolocation (网络迷踪) creator 
 
 ## Hard rules (always in force; ★ = enforced by board.py, just follow it)
 
-**Privacy rule (local, overrides everything below): no photo leaves this machine without the user's explicit permission.** Reverse image search (`intake.py --rev`, `revimg.py` with images) uploads the photo to third-party servers (Baidu, Yandex). Run it only after the user has explicitly asked for reverse image search on that photo in this conversation; a general request like "where was this taken" is not permission. Without permission run `intake.py` without `--rev` (the default) and, if reverse search could help, ask the user once and say which services the photo would go to. Coordinate-based lookups (map tiles, street view, OSM, elevation) do not send the photo and need no extra permission.
+**Privacy rules (local, override everything below):**
+- **The photo never leaves this machine.** This install has no automatic reverse image search (Baidu and Yandex were removed). Never upload the photo or its crops anywhere, including through a browser tool. If a near-duplicate search could break the case, say so once and suggest the user check the photo in Google Lens themselves and paste back what they find.
+- **Never save photos, crops or reports inside a repository: the repository is public.** Work in `/tmp/geo-sleuth/<case>/`: `mkdir -p /tmp/geo-sleuth/<case> && cd /tmp/geo-sleuth/<case>` before running any script, so `board.json`, `evidence.jpg`, `.geo-cache/` and every `--out` file land there. `intake.py` defaults to `/tmp/geo-sleuth/<photo name>/`. Never `git add` anything from a case folder.
+- **Mainland-China services are off** (Baidu panoramas, Baidu Maps, 360 Maps): `baidu_pano.py` and `poi.py --sources so,sug` need `--allow-cn`, which you pass only for a photo already placed in mainland China and only after the user agrees. Lookups by coordinates or place names (Google satellite tiles and Street View, Esri, OSM Overpass in Germany/Austria, Nominatim, AWS elevation tiles) do not send the photo, but they do reveal the area being checked.
 
 0. If the user says the photo isn't theirs, or the image shows a private residence or minors, ask once what it's for before continuing; when the prompt already states the source or purpose (an evaluation puzzle, a puzzle setter's hint, the user says they took it), don't ask, and go to the finest level as usual.
 1. **Don't fabricate verification.** "Measured on the map", "matched street view", "±10 m" must correspond to commands actually run and files actually produced in this session. If you didn't run it, write "unverified".
@@ -37,23 +40,24 @@ The method comes from breaking down 14 photo-geolocation (网络迷踪) creator 
 
 ## Flow
 
-You don't have to go through every step: if reverse image search in step 1 (only when the user allowed it) hits directly, jump to steps 6 and 7 to confirm. Every step's output goes on the candidate board.
+You don't have to go through every step: if the user's own Google Lens check or the text in the photo gives a direct hit, jump to steps 6 and 7 to confirm. Every step's output goes on the candidate board.
 
 ### Step 1: steps 0–3 in one command
 
 ```bash
-uv run ${CLAUDE_SKILL_DIR}/scripts/intake.py photo.jpg --out-dir intake/ [--box x0,y0,x1,y1 ...]   # add --rev only with the user's explicit permission
+mkdir -p /tmp/geo-sleuth/<case> && cd /tmp/geo-sleuth/<case>          # never inside the repository
+uv run ${CLAUDE_SKILL_DIR}/scripts/intake.py photo.jpg --out-dir intake/ [--box x0,y0,x1,y1 ...]
 uv run ${CLAUDE_SKILL_DIR}/scripts/board.py init --photo photo.jpg
 ```
 
-`intake.py` usually takes 1–2 minutes, longer on the first run because it installs dependencies: give the command a generous timeout (10+ minutes) or run it in the background. If a command timeout interrupts it, the reverse-image-search subprocesses may still be writing into `rev/`, but `intake.md` won't be generated; don't treat it as finished.
+`intake.py` usually takes 1–2 minutes, longer on the first run because it installs dependencies: give the command a generous timeout (10+ minutes) or run it in the background. If a command timeout interrupts it, `intake.md` won't be generated; don't treat it as finished.
 
-`intake.md` contains: metadata, OCR text (lines read from upscaled/tiled passes are marked pass=up/tile and are hypotheses), Baidu similar images (source-site counts + numbered contact sheet), reverse-image-search labels with tiered vote counts, likely residential compound/development names, the list of edge crops, and failed items. Then you do four things:
+`intake.md` contains: metadata, OCR text (lines read from upscaled/tiled passes are marked pass=up/tile and are hypotheses), the list of edge crops, and failed items. Then you do four things:
 
 - **Look at the image**: go through every crop in `edges/` (four edges, four corners); run through the checklist in `references/observe.md`; log each clue with `board.py clue "<text>" --kind <kind> --status observed|read|inferred|computed --file <zoomed crop>`. Be honest about status: text you read is read; "the building is probably 8 floors", "the road goes uphill" are inferred.
 - When a computed result actually tests an earlier clue, link it with `clue "<result>" --kind <kind> --status computed --file <output> --resolves K1` (repeat `--resolves` for multiple clues). An unrelated computation does not resolve a pending infrastructure clue; this link records the test, not support for a location.
 - **Lookup tables**: calling codes, driving side, overseas territories are global; plates, area codes and other country tables come from region packs → `clues.py lookup <kind> <value> [--country <cc>]` (without `--country`, every pack is searched and matches from several countries are all returned). For those that resolve to an admin division, use `board.py apply --kind plate --value <plate prefix> --file <zoomed crop>` directly (adds candidates and evidence automatically; the other candidates at the same level are only down-weighted, not excluded).
-- **Reverse-image-search results**: first open `rev/<name>_baidu_similar.jpg` (the top-left tile is the query image) and look for near-duplicates of the same object or the same scene; if there are any, go by number to `similar[i].from` in the JSON to see the source page; compound, development or hotel names in the labels → `poi.py "<name>" --city <city> --out pois.json` to get coordinates; for same-name hits (several campuses, several branches) put them all on the board with `board.py add --from pois.json --level area`, then check; always open the screenshots, and once a post hits, look through the rest of its photo set. Choose where to search by object type (`references/search.md`).
+- **Names from text or from the user's own Lens check**: compound, development, shop or hotel names → `poi.py "<name>" --city <city> --out pois.json` to get coordinates; for same-name hits (several campuses, several branches) put them all on the board with `board.py add --from pois.json --level area`, then check. Choose where to search by object type (`references/search.md`).
 - **Hints and metadata**: log each as an inferred clue and state how credible it is; IP location only says where the person was when posting, and the posting time is not the capture time.
 - **Country-specific material**: while the country is still open, check `references/clues/global.md` (clues that separate countries). Country-specific clues, tables, preferred services and tips are in region packs (`regions/<cc>/`). Once a country is a candidate, run `regions.py show <cc>`: it prints the pack's lookups, services and a one-line index of its clue entries with line numbers; read only the entries you need. When the country is settled, `board.py country <cc>` and stop consulting `global.md`. `regions.py list` shows which packs exist; with no pack, use the global tools.
 
@@ -83,7 +87,7 @@ The coarse environmental-location rules still apply: terrain before river width 
 | Two or three kinds of infrastructure in one frame | `osm.py near --report`; crossings of two linear types `osm.py intersect` (bends are only annotated, not removed) | `corridors.md` |
 | Linear infrastructure + unrecognized mountains, no text | Compute horizons from elevation along the infrastructure and filter a whole region → score skyline + distance to infrastructure numerically → overlay the top 3–5 → fix the camera position from evenly spaced structures: `terrain.py scan --lines … --out hits.json --clusters-out clusters.json` → `terrain.py ridge photo.jpg --x0 … --x1 … --out ridge.json` → `terrain.py fit --hits hits.json --ridge ridge.json [--line … --line-dist …] --sheet top.jpg --photo photo.jpg` (for the fine search switch to `--at lat,lon --radius 800 --grid 100 --zoom 13`) → `imgprep.py piers photo.jpg --rows … --out cols.json --sheet piers.jpg` → `geo.py spacing --cols … --line … --span … --center lat,lon --ridge ridge.json` | `corridors.md` 4.3, `geometry.md` 7.4 / 7.7 |
 | Clear street layout, no anchor | `osm.py street-scan` to filter intersections → `tiles.py sheet` → street view | `corridors.md` |
-| No near-duplicates from reverse image search, no text, only a set of scene elements (road spec + adjacent features + landform) | **Don't hand-pick spots first**: write the scene as one English query and let CLIP rank with `sat_scan.py grid --bbox <coastal strip/corridor> --zoom 17 --cell 360 --query … --neg …`; look only at the top 20–30 thumbnails; `grid` beats `points` because OSM features like `amenity=parking` may be incomplete | `search.md` |
+| No near-duplicate known, no text, only a set of scene elements (road spec + adjacent features + landform) | **Don't hand-pick spots first**: write the scene as one English query and let CLIP rank with `sat_scan.py grid --bbox <coastal strip/corridor> --zoom 17 --cell 360 --query … --neg …`; look only at the top 20–30 thumbnails; `grid` beats `points` because OSM features like `amenity=parking` may be incomplete | `search.md` |
 | ≥4 points of known location in the frame (window views, looking down; also level shots of distant towers, bridges, piers — fix the height) | `pose.py solve` solves camera position, heading and height; when several candidate positions all fit, score them one by one with `pose.py check --cands`; only robust Δchi2 > 9 may go to `board.py exclude --computed` | `geometry.md` section 10 |
 | Want to exclude by "there's no X in the frame" | `geo.py frame` first computes whether X should be inside the frame, large enough and not occluded; only what it says can exclude goes to `board.py exclude --computed` | `geometry.md` section 11 |
 | An unnamed building of a recognizable class, search region narrowed | Enumerate with `osm.py find` → nearby views facing each building with `gsv.py targets` → rank with `match.py`; use bounded batches | `search.md` section 6 |
@@ -107,7 +111,7 @@ uv run ${CLAUDE_SKILL_DIR}/scripts/sat_scan.py points --points big.json --preset
 ### Step 5: confirmation — street view is ranked first too
 
 ```bash
-uv run ${CLAUDE_SKILL_DIR}/scripts/baidu_pano.py scan <lat,lon> --radius 300 --out panos.json                     # the street-view script the region card names (CN: baidu_pano.py); otherwise gsv.py
+uv run ${CLAUDE_SKILL_DIR}/scripts/baidu_pano.py scan <lat,lon> --radius 300 --out panos.json --allow-cn         # mainland China only, with the user's consent; everywhere else gsv.py
 uv run ${CLAUDE_SKILL_DIR}/scripts/match.py rank --query photo.jpg --panos panos.json --toward <landmark lat,lon> --spread 15 --refine sift --top 10 --out m.json --sheet m.jpg
 uv run ${CLAUDE_SKILL_DIR}/scripts/match.py rank --query photo.jpg --items around.index.json --render gsv --spread-headings -30,0,30 --out m.json --sheet m.jpg
 ```
@@ -152,7 +156,7 @@ Use English for tool messages, report headings and generated labels. Preserve so
 
 ## Budget and stopping conditions
 
-- `intake.py` counts as one call; if reverse image search with 3 different keyword sets finds nothing, stop and go back to the checklist for other clues.
+- `intake.py` counts as one call; if keyword search with 3 different keyword sets finds nothing, stop and go back to the checklist for other clues.
 - **While candidates still can't be separated, don't scan any point one by one** (when `board.py next` says "can't separate", do the discriminating tests first); if they still can't be separated after the cheap tests, scan in the order it gives, the first 3 pages of each candidate's built-up area first.
 - Scanning and confirmation always rank first: look at the top 30 cells from `sat_scan.py` and the top 10 images from `match.py`; widen only when all of the top ones are wrong, instead of paging through.
 - Run `osm.py coverage` before enumerating candidates with OSM: districts with sparse data get silently excluded; switch to `sat_scan.py grid` and say so in the conclusion.
@@ -165,7 +169,7 @@ Use English for tool messages, report headings and generated labels. Preserve so
 
 - Python 3.10+, `uv`, and `curl`. Always use `uv run ${CLAUDE_SKILL_DIR}/scripts/xxx.py`; each script declares its dependencies. `scripts/` in references is relative to this skill directory.
 - On first setup or after a runtime failure, run `uv run ${CLAUDE_SKILL_DIR}/scripts/doctor.py`; add `--network` to check service reachability. Read the English checks and fixes before starting an expensive scan. It uploads no photos and does not load ML models.
-- Reverse image search uses local Google Chrome, with automatic fallback to Playwright Chromium (`uvx playwright install chromium`). If neither starts, use `intake.py --no-rev` and report the skipped search. OCR prefers Apple Vision on macOS and uses RapidOCR elsewhere or as a fallback.
+- No browser is needed: there is no automatic reverse image search. OCR prefers Apple Vision on macOS and uses RapidOCR elsewhere or as a fallback.
 - `match.py` and `sat_scan.py` install ML dependencies and download model weights on first use. Allow extra time and disk space.
-- Cache goes to `.geo-cache/` in the current directory; the candidate board is `board.json` in the current directory. Script list and data sources: `references/data-sources.md`.
+- Cache goes to `.geo-cache/` in the current directory; the candidate board is `board.json` in the current directory; so the current directory must be the case folder under `/tmp/geo-sleuth/`, never the repository. Script list and data sources: `references/data-sources.md`.
 - macOS has no `timeout` command; in zsh `$var` doesn't word-split, so use `bash -c` or `${=var}` in loops. A province-wide Overpass query can take several minutes; run it in the background.

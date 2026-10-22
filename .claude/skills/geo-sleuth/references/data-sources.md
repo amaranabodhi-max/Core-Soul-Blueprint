@@ -7,18 +7,17 @@
 | `doctor.py` | Environment checks, browser launch, optional endpoint probes; English fixes and JSON output |
 | `exif.py` | GPS, capture time, equivalent focal length, camera heading |
 | `imgprep.py` | zoom (enlarge to read text) / edges (four edges, four corners) / variants (image-search variants) / grid (split into tiles) / `piers` (brightness profile along a given row to find pixel columns of evenly spaced structures; outputs a check image) |
-| `revimg.py` | Baidu image search + Yandex reverse image search; `--query` Chinese keyword search (Bing China, Baidu/Sogou Images) |
 | `geo.py` | Coordinate conversion, bearing and distance, camera geometry (`range --hfov a:b` distance range), `line` alignment line, `intersect` sight-line intersection, `frame` computes the frame and occlusion before excluding, `spacing` pixel columns of evenly spaced structures × known polyline → solve for camera position (optionally scored jointly with the skyline) |
-| `poi.py` | Place names, residential compound names, housing development names, shop names → candidate coordinates; `--region <cc>` picks the pack's sources (CN: 360 Maps + OSM Nominatim + Baidu suggestions), otherwise OSM; lists every same-name point |
+| `poi.py` | Place names, residential compound names, housing development names, shop names → candidate coordinates; `--region <cc>` picks the pack's sources, otherwise OSM Nominatim; the CN sources 360 Maps and Baidu suggestions run only with `--allow-cn`; lists every same-name point |
 | `sun.py` | Sun position, shadow-length ratio, `locate` location band, `when` time, `street` street orientation, `facing` heading from lit faces, `dish` satellite dish |
 | `osm.py` | Overpass: find / near (co-occurrence) / crossings (line-to-point) / route (route corridor) / intersect (crossings of two kinds of lines; bends are only labeled, `--rank-near` ranks) / street-scan (street-view geometry template) / geom (export geometry) |
 | `tiles.py` | Satellite tile mosaic, `mark` plots points + overlays GeoJSON lines + field-of-view wedge, `sheet` numbered thumbnails of candidate points |
-| `baidu_pano.py` | Baidu panoramas: near / info / scan / render / sheet (`--headings` to look around from one point, `--road` `--spread`) / sample (street view sampling of candidate cities) |
+| `baidu_pano.py` | Disabled unless `--allow-cn` (mainland China only, with the user's consent). Baidu panoramas: near / info / scan / render / sheet (`--headings` to look around from one point, `--road` `--spread`) / sample (street view sampling of candidate cities) |
 | `gsv.py` | Google Street View (outside China): near / render / sheet / `targets` (panoramas around each target point, rendered facing it, for `match.py --items`), no key, official coverage only |
 | `pose.py` | Solve camera position from multiple points: lat/lon, height, heading, pitch, roll, field of view + error radius + per-point check; `check` scores discrete candidate camera positions; `project` projects map points back onto the photo |
 | `terrain.py` | Elevation: view (synthesized mountain view; `--overlay` overlays the skyline on the photo, `--roll`) / profile (skyline) / elev / `ridge` reads ridgeline pixel points from the photo / `scan` filters a whole region along infrastructure lines for "flat nearby + mountain present" points and clusters them / `fit` batch skyline scoring of candidate camera positions (optional infrastructure-distance constraint; outputs overlays of the top N) |
 | `evidence.py` | Evidence image: satellite image + camera-position wedge + comparison panels |
-| `intake.py` | Steps 0–3 in one command: exif + edge crops + variants + OCR; with `--rev` (user permission only) also Baidu/Yandex reverse image search; outputs intake.md (tiered vote count, possible place names) |
+| `intake.py` | Steps 0–3 in one command: exif + edge crops + variants + OCR, all local; outputs intake.md into `/tmp/geo-sleuth/<photo name>/` by default |
 | `ocr.py` | Reads text in the photo (Apple Vision, falls back to RapidOCR): full image + zoomed + tiles, merged; text read only after zooming is marked in `pass` |
 | `clues.py` | Lookup tables: country calling codes, driving side, overseas territories (`data/`); plates, area codes, admin hierarchy and other country tables from region packs (`--country`) |
 | `regions.py` | Region packs: `list`, `show <cc>` (lookups, services, tips, clue index with line numbers), `lint` (pack contract) |
@@ -56,7 +55,7 @@ In China the same point differs by several hundred meters between WGS84 and GCJ-
 
 ## Street view and ground-level imagery
 
-### Baidu panoramas (main source in China)
+### Baidu panoramas (main source in China; needs `--allow-cn`)
 
 The endpoints are all at `https://mapsv0.bdimg.com/`, need no key, and must be accessed directly:
 
@@ -83,10 +82,7 @@ The endpoints are all at `https://mapsv0.bdimg.com/`, need no key, and must be a
 
 | Source | Good at | How to use |
 |---|---|---|
-| Baidu image search | Chinese web pages, Weibo, Baijiahao, e-commerce, scenic areas; gives "图中可能是…" ("the image may show…") | `revimg.py` |
-| Yandex Images | Buildings, street view, foreign content; gives tags and source sites | `revimg.py` |
-| Google Lens | Recognizing "what this is" (species, car models, statues, attractions), often stronger than Baidu and Yandex | Requests from a server's egress IP get challenged for verification; when you have a browser-control tool, use it in the user's browser; the AI Overview will confidently report a place name based on similar images |
-| Bing China, Baidu Images, Sogou Images | Chinese-keyword web and image search | `revimg.py --query`; Baidu web search pops up a verification challenge, not used |
+| Google Lens | Recognizing "what this is" (species, car models, statues, attractions) | Manual only: the user runs it in their own browser; this skill never uploads the photo |
 | Douyin, Xiaohongshu, Weibo | Influencer check-in spots, scenic areas' official accounts, same-city content | Web search or user assistance |
 | Development photo albums on real-estate sites (Anjuke, Fang.com, Loupan.com, etc.) | New housing developments, commercial complexes; albums include signboards | Web search the development name |
 | Travel review sites (Tripadvisor, Ctrip) | User photos of statues, parks, attractions | Web search |
@@ -97,9 +93,9 @@ The endpoints are all at `https://mapsv0.bdimg.com/`, need no key, and must be a
 
 | Source | Notes |
 |---|---|
-| 360 Maps search `restapi.map.so.com/newapi` | No key; good coverage of residential compounds, housing developments, shops and organizations, with address and district; coordinates are GCJ-02 (`poi.py` already converts to WGS84); without a city it returns a list of cities nationwide that have same-name results |
+| 360 Maps search `restapi.map.so.com/newapi` (needs `--allow-cn`) | No key; good coverage of residential compounds, housing developments, shops and organizations, with address and district; coordinates are GCJ-02 (`poi.py` already converts to WGS84); without a city it returns a list of cities nationwide that have same-name results |
 | OpenStreetMap Nominatim | Named residential compounds, parks, roads; WGS84 |
-| Baidu Maps search suggestions `map.baidu.com/su` | No key; only "city + district + name", no coordinates |
+| Baidu Maps search suggestions `map.baidu.com/su` (needs `--allow-cn`) | No key; only "city + district + name", no coordinates |
 | Baidu Maps place search, Tencent and Amap APIs | Baidu needs a captcha, Tencent and Amap need keys; not used |
 
 ## Place name → coordinates (outside China)

@@ -9,9 +9,9 @@ Reverse image search often returns "the photo may be XX花园 (XX Garden)" or "X
 The same name often exists dozens of times across China; the script lists the same-name points in every region, and other clues in the photo pick among them.
 
 Sources:
-  so    360 Maps search: good coverage of residential compounds, housing developments, shops and organizations, with address; raw coordinates are GCJ-02, converted to WGS84
+  so    (needs --allow-cn) 360 Maps search: good coverage of residential compounds, housing developments, shops and organizations, with address; raw coordinates are GCJ-02, converted to WGS84
   osm   OpenStreetMap Nominatim: named compounds, parks, roads; coordinates WGS84
-  sug   Baidu Maps search suggestions: only "city + district + name", no coordinates; use it to see which districts in China have this name
+  sug   (needs --allow-cn) Baidu Maps search suggestions: only "city + district + name", no coordinates; use it to see which districts in China have this name
 
 Examples:
   poi.py "<compound name>" --city <city>                 # all same-name points in the city, outputs {name: [lat, lon]}
@@ -26,7 +26,7 @@ Baidu Maps web place search requires a CAPTCHA, so the script doesn't use it; th
 from __future__ import annotations
 
 import argparse
-from _net import curl_args, PROXY_HELP
+from _net import CN_HELP, allow_cn, cn_allowed, curl_args, PROXY_HELP
 import json
 import os
 import re
@@ -121,6 +121,7 @@ def main() -> None:
     ap.add_argument("--country", help="Nominatim country code (default: the region pack's; without one, no restriction)")
     ap.add_argument("--proxy", default=os.environ.get("GEO_PROXY"), help=PROXY_HELP)
     ap.add_argument("--out", type=Path, help="write {name: [lat, lon]} (WGS84) for tiles.py mark / sheet")
+    ap.add_argument("--allow-cn", action="store_true", help=CN_HELP)
     args = ap.parse_args(_neg_coords(sys.argv[1:]))
     svc = {}
     if args.region:
@@ -138,7 +139,12 @@ def main() -> None:
     args.sources = args.sources or svc.get("sources") or (by_script or {}).get("sources") or "osm"
     args.country = args.country if args.country is not None else svc.get("country", "")
 
+    if args.allow_cn:
+        allow_cn()
     src = set(args.sources.split(","))
+    if not cn_allowed() and src & {"so", "sug"}:
+        print("360 Maps / Baidu suggestions skipped (mainland-China services are off; --allow-cn enables them)", file=sys.stderr)
+        src = (src - {"so", "sug"}) or {"osm"}
     rows: list[dict] = []
     if "so" in src:
         so_rows, cities = search_so(args.keyword, args.city, args.limit, args.proxy)
@@ -170,7 +176,7 @@ def main() -> None:
         pts[label] = r["wgs"]
         print(f"  {label}  {r['wgs'][0]},{r['wgs'][1]}  [{r['src']}] {r['type']}  {r['address'][:60]}")
     if not uniq:
-        print("  None. Try another spelling (drop the \"小区/花园\" (compound/garden) suffix, add the district name), or use revimg.py --query to search the web for an address")
+        print("  None. Try another spelling (drop the \"小区/花园\" (compound/garden) suffix, add the district name), or search the web for an address")
     if args.out:
         args.out.write_text(json.dumps(pts, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"-> {args.out}")

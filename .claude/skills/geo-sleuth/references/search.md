@@ -1,53 +1,39 @@
-# Search: reverse image search, keyword image search, social media search
+# Search: near-duplicate search, keyword image search, social media search
 
-Use at step 3, in parallel with lookup-table clues. In 5 of the 20 puzzles in the videos this step was the breakthrough, yet it costs the least.
+Use at step 3, in parallel with lookup-table clues. In 5 of the 20 puzzles in the videos a near-duplicate photo was the breakthrough.
 
-## 1. Reverse image search
+## 1. Reverse image search (manual, by the user only)
 
-> **Only with the user's explicit permission** (see the privacy rule in SKILL.md): `revimg.py` uploads the photo and its crops to Baidu and Yandex.
+This install never uploads the photo: there is no `revimg.py`, and you must not upload the photo through a browser tool either. When a near-duplicate could break the case (a statue, a distinctive building, a stock-looking view), prepare a tight crop and suggest **the user** check it in Google Lens in their own browser:
 
 ```bash
-# Make variants first: tight crop of a distinctive object / horizontal flip / grayscale enhancement / color-cast removal; rectify rephotographed material first
+# Make variants for the user to try: tight crop of a distinctive object / horizontal flip / grayscale / color-cast removal; rectify rephotographed material first
 uv run scripts/imgprep.py variants photo.jpg --box 300,120,900,760 --out-dir v/
 uv run scripts/imgprep.py variants photo.jpg --persp 312,140,880,95,905,770,290,720 --box ... --out-dir v/
-# Baidu image search + Yandex; each image gets a result screenshot and JSON
-uv run scripts/revimg.py photo.jpg v/*.jpg --out-dir rev/
 ```
 
-**Always open the result screenshots and look**: extracted text is only an aid; the scenes in similar images and the titles of source posts matter more. Baidu's similar images are also saved as a numbered contact sheet `<name>_baidu_similar.jpg` (the top-left cell is the query image; number i corresponds to the source page of JSON `similar[i]`). Look at it first: for near-duplicate photos of the same object or scene, the source page (Dianping, Douyin, Xiaohongshu) often gives the shop name or location tag directly.
+What the user pastes back is a hint, logged as an inferred clue. In Lens results keep two blocks apart:
+- "Exact matches / pages that include this image": provenance evidence; usable.
+- "AI Overview": forces a place name out of similar-looking photos; a different crop can yield two places a dozen km apart. Only a candidate; verify it at steps 6 and 7.
 
-**How to use place-name labels**: Baidu image search's "图中可能是…" ("the image may show…"), Yandex labels and the Lens AI overview are all candidates; count votes separately by level:
-- City level: count which city each crop and each engine named. The same city named by two different crops is more credible than "two contradictory specific places"; specific places that don't agree don't cancel the city they jointly point to.
-- Place level: when a label is the name of a residential compound, housing development, hotel or organization, get its coordinates with `poi.py` and check; this often gets you to the area in one step:
+When a pasted result names a compound, hotel or organization, get its coordinates with `poi.py` and check:
 
 ```bash
-uv run scripts/poi.py "<compound name>" --city <city> --region <cc> --out pois.json   # every same-name point in the city (sources from the region pack, WGS84)
-uv run scripts/poi.py "<compound name>" --region <cc>                                  # no city: which cities in the country have a same-name point
+uv run scripts/poi.py "<name>" --city <city> --region <cc> --out pois.json   # every same-name point in the city (WGS84)
 uv run scripts/tiles.py sheet --points pois.json --zoom 18 --out pois_sheet.jpg
 ```
 
-- When a label is the specific name of a common facility such as a school or residential compound, first open the "图片来源" ("image source") thumbnails to see whether it's the same place (one call): names on images of playgrounds or housing are mostly assembled by voting over similar images; if it isn't the same place, downgrade it to weak and don't bother getting coordinates.
-- **Facility-type words** in generic labels ("grain drying complex", "cement plant", "greenhouse") are useful: use them to look up where that industry is concentrated, for category inference and candidate areas.
-- When the label is generic ("blocks of housing", "city street", "school playground"), treat it only as weak evidence; if the whole image + one tight crop, one round in each of two engines, give only generic labels, stop; don't keep trying variants.
-
-| Situation | What to do | Source |
+| Situation | Suggest to the user | Source |
 |---|---|---|
-| The whole image finds nothing | Box only the most distinctive object (statue, building, ornament); remove the sky and background buildings | v010-5, v010-6 |
-| Stock photos may have been taken from the other side | Flip horizontally and search again | v010-5 (hit only after flipping) |
+| The whole image finds nothing | Crop only the most distinctive object (statue, building, ornament); remove the sky and background buildings | v010-5, v010-6 |
+| Stock photos may have been taken from the other side | Flip horizontally and search again | v010-5 |
 | Rephotographed material, oblique shots | Perspective-rectify, remove glare | v004 |
 | Old photos with a yellow or purple cast | Remove the color cast or convert to grayscale | v010-6 |
-| One engine has no results | Switch engines: Baidu is best for Chinese web pages, Weibo, Baijiahao and scenic-area content; Yandex fills in building and street scenes and foreign content | v009 (Yandex found nothing, Baidu hit) |
-| The search UI language biases results | Google Lens with a Chinese UI favors similar buildings on Chinese sites; for foreign scenes switch to English or the local language | v004 |
-
-**Google Lens**: from the server's egress it demands a CAPTCHA, so the script doesn't do it. If you have a browser tool (such as Claude in Chrome, which uses the user's own browser), use it directly: Google Images home → search by image → upload. In tests it is often stronger than Baidu and Yandex, but keep its two result blocks apart:
-- "Exact matches / pages that include this image": provenance evidence; usable.
-- "AI Overview": forces a place name out of similar-looking photos; a different crop of the same image can yield two places a dozen or so km apart. Treat it only as a candidate; it must be verified back at steps 6 and 7.
-
-Without a browser tool, when Baidu and Yandex both have no results and the frame shows a foreign landmark or object, ask the user to try Lens once in their own browser.
+| The search UI language biases results | Switch Lens to English or the local language | v004 |
 
 ### Keyword search in the local language
 
-Write queries in the local language as well as English. `revimg.py --query "<words>"` runs keyword search on Chinese engines only (Bing China, Baidu Images, Sogou Images); elsewhere use your general web and image search tools. Region packs describe which local engines and platforms work and how to phrase queries (`regions.py show <cc>`).
+Write queries in the local language as well as English, using your general web search tools (text only: never attach the photo). Region packs describe which local engines and platforms work and how to phrase queries (`regions.py show <cc>`).
 
 ### After a hit
 
@@ -69,7 +55,7 @@ Region packs add local platforms per object type (`regions.py show <cc>`).
 | Ordinary streets and residential areas | Image search adds little; prioritize geometry and infrastructure; when even the city isn't fixed, sample one page of arterial-road street view per candidate city and compare municipal fixtures (the street-view script the region pack names) | — |
 | Sub-brand stores of chain brands (truck service, refurbishment, specialty stores) | **Search opening press releases first** ("开业 / inaugura / abre / opens + sub-brand + state or city"; 开业 = opens), trade media often give the street address; treat the official store locator only as a candidate pool: it doesn't tag sub-brands, and its coordinates may be off by several km | blind test |
 | Nameless facilities found on satellite imagery (plants, warehouses, farms, mines) | Search the web and news for the facility-type word in the local language + nearby place names, and compare the accompanying photos with the facade; once you find the name, search images another round | v013 |
-| Vehicle livery (bus, taxi, school bus) | `revimg.py --query "<city> <color description> bus"` in the local language, and read route signs and company names from the result images; first resolve any place name you read to a district with `poi.py` before using it; don't treat a vehicle from district A as a clue for district B | v014 |
+| Vehicle livery (bus, taxi, school bus) | web search for "<city> <color description> bus" in the local language, and read route signs and company names from the result images; first resolve any place name you read to a district with `poi.py` before using it; don't treat a vehicle from district A as a clue for district B | v014 |
 
 ## 3. Descriptive keyword image search
 

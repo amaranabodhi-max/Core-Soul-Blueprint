@@ -35,7 +35,7 @@ Without a registration, cruising altitude, heading and common airways (which rou
 
 1. Identify the river (width, color, landforms on both banks) → list similar river sections → exclude by orientation and bank terrain → line-to-point (bridges, dams, ferries) → go through the candidate table one by one. Steps and commands are in `corridors.md` section 5.
 2. For the **only man-made object** in the frame (a regular, light-colored patch on a ridge, a row of colored roofs, a tunnel portal), first describe its shape and position; don't label it "ordinary village" and discard it. It's often the anchor:
-   - Crop it and search on short-video platforms and Baidu image search (v010-2 hit the scenic area's official account)
+   - Crop it and suggest the user check it in Google Lens, and search short-video platforms by keywords (v010-2 hit the scenic area's official account)
    - After locating it, check its name and size against map POIs + local news (v008)
 3. Once the anchor is fixed, find a tangent line like "ridge — feature edge" in the photo and draw the same line on satellite imagery; the camera position is on that line (v010-2).
 

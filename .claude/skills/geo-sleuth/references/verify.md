@@ -56,11 +56,11 @@ If any item fails, exclude, or downgrade and write down why.
 
 ### Finding a storefront along a road
 
-When you know the road name (address from a news article, the street given by reverse image search) but not the street number:
+When you know the road name (address from a news article, the street from the user's own Lens check) but not the street number:
 
 ```bash
 uv run scripts/osm.py along --bbox <s,w,n,e> --line '["highway"]["name"~"<road name fragment>"]' --step 120 --out pts.json
-uv run scripts/gsv.py sheet --points pts.json --headings 30,90 --out road.jpg   # in China use baidu_pano.py instead
+uv run scripts/gsv.py sheet --points pts.json --headings 30,90 --out road.jpg   # mainland China only: baidu_pano.py --allow-cn, with the user's consent
 ```
 
 - Spacing ≤150 m: a storefront is only visible within a very narrow angle; at 400 m spacing you can easily miss every single one.

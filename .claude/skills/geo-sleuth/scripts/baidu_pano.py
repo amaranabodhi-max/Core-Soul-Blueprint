@@ -23,7 +23,7 @@ Examples:
 from __future__ import annotations
 
 import argparse
-from _net import fetch_bytes, PROXY_HELP
+from _net import CN_HELP, allow_cn, cn_allowed, fetch_bytes, PROXY_HELP
 import io
 import json
 import math
@@ -42,6 +42,8 @@ API = "https://mapsv0.bdimg.com/"
 
 
 def _get(url: str, timeout: int = 20, proxy: str | None = None) -> bytes:
+    if not cn_allowed():
+        raise RuntimeError('Baidu panoramas are disabled; pass --allow-cn (or set GEO_ALLOW_CN=1) only for mainland-China photos')
     return fetch_bytes(url, proxy, timeout)
 
 
@@ -208,6 +210,7 @@ def _neg_coords(argv: list[str]) -> list[str]:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--proxy", help=PROXY_HELP)
+    ap.add_argument("--allow-cn", action="store_true", help=CN_HELP)
     ap.add_argument("--cache", type=Path, default=Path(".geo-cache/pano"))
     sub = ap.add_subparsers(dest="cmd", required=True)
 
@@ -259,7 +262,12 @@ def main() -> None:
 
     for parser in (n, i, s, r, sh, sp):
         parser.add_argument("--proxy", default=argparse.SUPPRESS, help=PROXY_HELP)
+        parser.add_argument("--allow-cn", action="store_true", default=argparse.SUPPRESS, help=CN_HELP)
     args = ap.parse_args(_neg_coords(sys.argv[1:]))
+    if args.allow_cn:
+        allow_cn()
+    if not cn_allowed():
+        sys.exit("baidu_pano.py is disabled: Baidu is a mainland-China service. Pass --allow-cn only for a mainland-China photo, with the user's consent.")
     if args.cmd == "sample":
         bb = tuple(map(float, args.bbox.split(",")))
         items = sample(bb, args.n, args.spread, args.seed, [k for k in args.skip.split(",") if k],

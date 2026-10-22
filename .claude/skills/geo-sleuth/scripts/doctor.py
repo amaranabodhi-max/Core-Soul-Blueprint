@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.10"
-# dependencies = ["playwright"]
+# dependencies = []
 # ///
 """Check geo-sleuth setup without uploading photos or downloading ML models.
 
-  uv run scripts/doctor.py                   local tools, data, browser, writable directory
+  uv run scripts/doctor.py                   local tools, data, writable directory
   uv run scripts/doctor.py --network         also probe public service endpoints
   uv run scripts/doctor.py --json            machine-readable results on stdout
 
-uv may install this script's Playwright dependency on first use. Network probes only
-check reachability, not image uploads, API stability, coverage, or model inference.
+Network probes only
+check reachability, not API stability, coverage, or model inference.
 Exit codes: 0 = no failed checks (warnings may remain); 1 = at least one failed check.
 """
 from __future__ import annotations
 
 import argparse
-import asyncio
 import json
 import os
 import platform
@@ -27,14 +26,10 @@ import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from _browser import launch_browser
-from _net import PROXY_HELP, curl_args, resolve_proxy
+from _net import PROXY_HELP, cn_allowed, curl_args, resolve_proxy
 import regions
 
 SERVICES = {
-    "Baidu image search": "https://graph.baidu.com/pcpage/index?tpl_from=pc",
-    "Baidu panoramas": "https://mapsv0.bdimg.com/?qt=qsdata&x=0&y=0",
-    "Yandex Images": "https://yandex.com/images/",
     "Google satellite tiles": "https://mt1.google.com/vt/lyrs=s&x=0&y=0&z=0",
     "Overpass": "https://overpass-api.de/api/status",
     "Elevation tiles": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/0/0/0.png",
@@ -94,22 +89,6 @@ def street_view_check(proxy: str | None) -> dict:
                  "gsv.py near/sheet won't work. If the reply says the service changed or was turned down, gsv.py needs updating.")
 
 
-async def browser_check(proxy: str | None) -> dict:
-    try:
-        from playwright.async_api import async_playwright
-        async with async_playwright() as p:
-            browser, name = await launch_browser(p, proxy)
-            try:
-                page = await browser.new_page()
-                await page.goto("about:blank")
-                return check("Reverse-search browser", "PASS", f"{name} launched successfully.")
-            finally:
-                await browser.close()
-    except Exception as exc:
-        return check("Reverse-search browser", "WARN", str(exc),
-                     "Install Chrome or run `uvx playwright install chromium`. Until then, use intake.py --no-rev.")
-
-
 def diagnose(network: bool, proxy: str | None) -> dict:
     rows = [check("Python", "PASS" if sys.version_info >= (3, 10) else "FAIL",
                   platform.python_version(), "Use Python 3.10 or later." if sys.version_info < (3, 10) else "")]
@@ -149,13 +128,13 @@ def diagnose(network: bool, proxy: str | None) -> dict:
                           f"`regions.py lint {code.lower()}` lists every problem; reinstall regions/{code.lower()}/ or remove it." if errs else ""))
     route = "configured proxy" if resolve_proxy(proxy) else "direct"
     rows.append(check("Service connection", "PASS", f"Using {route}."))
-    rows.append(asyncio.run(browser_check(proxy)))
     rows.append(check("OCR", "INFO", "Apple Vision preferred; RapidOCR fallback." if sys.platform == "darwin" else "RapidOCR backend.",
                       "uv run ocr.py <photo> tests recognition; this check does not install or run OCR."))
     rows.append(check("ML models", "INFO", "Not loaded. match.py and sat_scan.py download model weights on first use; allow time and disk space."))
     if network and shutil.which("curl"):
         with ThreadPoolExecutor(max_workers=8) as pool:
-            rows.extend(pool.map(lambda item: probe(item, proxy), SERVICES.items()))
+            services = {**SERVICES, **({"Baidu panoramas": "https://mapsv0.bdimg.com/?qt=qsdata&x=0&y=0"} if cn_allowed() else {})}
+            rows.extend(pool.map(lambda item: probe(item, proxy), services.items()))
         rows.append(street_view_check(proxy))
     else:
         rows.append(check("Network probes", "SKIP", "Run with --network to check service reachability."))

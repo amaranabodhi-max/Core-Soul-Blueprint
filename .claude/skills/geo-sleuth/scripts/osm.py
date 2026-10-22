@@ -56,11 +56,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import regions  # noqa: E402
 
-# Independent services only: overpass.kumi.systems is the old name of private.coffee (same server), so it can't confirm or replace it
+# European instances only (Germany, Austria). Independent services only: overpass.kumi.systems is the old name of private.coffee (same server), so it can't confirm or replace it
 ENDPOINTS = [
     "https://overpass-api.de/api/interpreter",
     "https://overpass.private.coffee/api/interpreter",
-    "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
 ]
 # overpass-api.de rejects curl's default User-Agent with HTTP 406; public instances ask clients to identify themselves
 UA = "geo-sleuth (+https://github.com/Oldcircle/geo-sleuth)"
