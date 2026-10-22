@@ -13,10 +13,19 @@
 |---|---|---|
 | 02 | Dusklantern (*Lucerna vesperis*, вымышл.) | свет гаснет от удобной лжи себе, разгорается от честной фразы |
 
-## 1. Растение
-**Dusklantern.** Низкий куст у заброшенных порогов. На ветках висят стеклянные стручки-фонарики. По записям Забытой Ведьмы, стручки тускнеют, когда рядом кто-то говорит себе удобную версию правды, и разгораются от первой честной фразы, даже тихой. Ведьма написала на полях: «Он не лечит. Он показывает, где ты притворяешься».
+## 1. Растение (карточка по книжному листу, `refs/02-dusklantern-page.png`)
+- Number & name: II. Dusklantern — Lucerna vesperis
+- Planet: Mercury · Moon: Dark Moon
+- Pentacle: The Pentacle of the Honest Flame — "One flame. One truth. An open door."
+- Habitat: Grows beside abandoned thresholds, where someone promised to return.
+- Gift & Poison: Its lanterns dim at self-deception and kindle at the first honest words. Deny what it reveals, and a pod keeps your voice.
+- Gathering — Dark Moon: Seek it on a moonless night, when Mercury stands still before turning back. Wait for dew upon the silent doorstep. Do not pluck the lanterns. Sit beside them and speak one truth.
+- Takes: voice
+- Margin (brown): "I said I was not afraid. Every lantern went dark."
+- Margin (teal): "I don't remember this door. My feet still know the steps."
+- Footer: An imagined herbarium · All plants and rites are fictional
 
-Зеркало, не совет: растение ничего не велит, только показывает. Вопрос зрителю в конце.
+> Сценарий ролика ниже пока старый (до CANON); его перепишем по канону, когда дойдёт очередь.
 
 ## 2. Хук (≤10 слов)
 Основной: **"This plant dims when you lie to yourself."** (8)

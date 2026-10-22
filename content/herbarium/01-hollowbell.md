@@ -6,7 +6,8 @@ Vertical 9:16, 45 s. English final text. On-page text is added in CapCut (animat
 - PALETTE: warm candle gold against deep indigo shadows
 - FLOWER: a single hollow bell-shaped flower on a slender bent stem, silver rim deepening to teal and indigo inside, no stamens, faint glow at its empty heart; REFERENCE IMAGE (attach to every shot with the flower): content/herbarium/refs/hollowbell-ref.png
 - HEROINE (present): young woman, long wild wavy chestnut hair with copper highlights, hazel-green eyes, light freckles, soft knowing half-smile, oversized charcoal knit cardigan
-- HEROINE (past): the same young woman, hair in a single loose braid, plain linen dress, warm amber light
+- HEROINE (past): the same young woman, hair in a single loose braid, plain linen dress, cold blue misty light, the plant's teal glow on her face
+- NOTE (final cut): the past came out cold, blue and misty in the edited video, not amber; CANON.md now follows the video. The amber wording in scene 4 prompts below is the original draft.
 - REFERENCE IMAGES (attach to every shot with her): content/characters/refs/witch-portrait.jpg, content/characters/refs/witch-master.jpg
 - TOMAS: young man at a wooden gate, translucent, dissolving like mist
 
@@ -42,3 +43,15 @@ Prompt: She turns the herbarium page to a blank sheet; a new botanical drawing o
 
 ## Plant card (reference)
 HOLLOWBELL, Oblivaria cava; folk names: Widow's Lantern, the Nameless Bell, Užmarštė. Grows only on paths walked so often the ground remembers footsteps. Opens at moonrise for one night after someone has wept nearby. Gift: keeps a lost one's name and quiets grief. Poison: holds only one name; give it another's and it takes yours. Sign: a pressed Hollowbell holding a stolen name stays faintly warm and opens only for the one whose name it took.
+
+## Book sheet
+(Text of the drawn sheet `refs/01-hollowbell-page.png`.)
+- Number & name: I. Hollowbell — Oblivaria cava
+- Planet: Venus · Moon: Blue Moon
+- Pentacle: The Pentacle of the Lost Name — "Leave the circle open. A forgotten name must have a way home."
+- Habitat: Grows where the ground remembers footsteps.
+- Gift & Poison: Keeps a lost one's name and quiets grief. Give it another's name, and it takes yours.
+- Gathering — Blue Moon: Seek it at moonrise, when Venus rests above the western gate. Wait for dew on a path untouched by rain. Speak no name into the bell.
+- Takes: name
+- Margin (ink [CHECK]): "The pressed flower is still warm. I dare not ask whose name it keeps."
+- Footer: An imagined herbarium · All plants and rites are fictional
