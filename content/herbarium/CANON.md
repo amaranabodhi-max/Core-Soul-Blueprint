@@ -32,7 +32,7 @@ Fixed reference images, attached to every generation of her:
 - **Hollowbell:** `content/herbarium/refs/hollowbell-ref.png` — the main image of the flower for all prompts.
 - **Series cover:** `content/herbarium/refs/herbarium-cover.png` — the sheet with four plants, for carousels and previews.
 - **Book sheets:** `content/herbarium/refs/NN-name-page.png` (`01-hollowbell-page.png`, `02-dusklantern-page.png`) — the style model for every new book sheet.
-- **Bride's Shadow sheet:** `content/herbarium/refs/bride-shadow-page.png` (text in `NN-brides-shadow.md`). The image still shows the old Latin name *Rosa vesperis*; the canon name is *Rosa sponsalis*, Nayara fixes it in the next version.
+- **Bride's Shadow sheet:** `content/herbarium/refs/bride-shadow-page.png` (text in `NN-brides-shadow.md`).
 
 ## Look
 - **Palette:** gold–teal–indigo. Teal is the colour of the plants' magic.
