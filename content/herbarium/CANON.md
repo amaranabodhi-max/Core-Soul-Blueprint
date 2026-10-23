@@ -32,7 +32,7 @@ Fixed reference images, attached to every generation of her:
 - **Hollowbell:** `content/herbarium/refs/hollowbell-ref.png` — the main image of the flower for all prompts.
 - **Series cover:** `content/herbarium/refs/herbarium-cover.png` — the sheet with four plants, for carousels and previews.
 - **Book sheets:** `content/herbarium/refs/NN-name-page.png` (`01-hollowbell-page.png`, `02-dusklantern-page.png`) — the style model for every new book sheet.
-- **Bride's Shadow sheet:** `content/herbarium/refs/bride-shadow-page.png` (text in `NN-brides-shadow.md`).
+- **Bride's Shadow sheet:** `content/herbarium/refs/bride-shadow-page.png` (text in `NN-brides-shadow.md`). The image still shows the old Latin name *Rosa vesperis*; the canon name is *Rosa sponsalis*, Nayara fixes it in the next version.
 
 ## Look
 - **Palette:** gold–teal–indigo. Teal is the colour of the plants' magic.
@@ -69,7 +69,7 @@ The series becomes a printed book. Besides the video, every plant gets a book sh
 - **One planet per plant.** The pentacle and the gathering conditions follow its planet. The pair **planet + Moon phase** never repeats (check the Planet and Moon columns of `INDEX.md`).
 - **Heavenly conditions are real phenomena** (Moon phases, planetary stations, fixed stars), never specific dates.
 - **Every plant takes something from the witch.** This is the through-line of the book: Hollowbell takes her name, Dusklantern her voice. Each new plant takes something new (check the Takes column of `INDEX.md`).
-- **Landscapes on the sheet:** only the past world, Vilnius and its outskirts around 1550 — birches, wooden houses with steep roofs, wooden chapels, gates, thresholds.
+- **Landscapes on the sheet:** only the past world, Vilnius and its outskirts around 1550 — birches, wooden houses with steep roofs, wooden chapels, gates, thresholds. **One exception:** next to a teal margin note, a small sketch in teal ink from Yorkshire (a dry-stone wall, a path, fog) is allowed — a trace of the present on the pages of the past.
 - **Rites are poetic and impossible:** no real plants, no recipes, no doses, nothing taken by mouth.
 - **Margin notes:** at least one note on every sheet. The other inks appear only where the plant has its own story for them. Empty margin fields are allowed; never invent notes just to fill them.
 

@@ -1,10 +1,10 @@
 # Herbarium of the Forgotten Witch — Bride's Shadow (key plant)
 
 **Status:** key. No number yet: Ruta assigns it and decides when the plant appears. No video page yet; agents never use this plant on their own.
-**Sheet image:** `refs/bride-shadow-page.png`.
+**Sheet image:** `refs/bride-shadow-page.png`. The image still shows the old Latin name *Rosa vesperis*; the canon name is *Rosa sponsalis* (wedding, betrothal). Nayara fixes it in the next version of the sheet.
 
 ## Book sheet
-- Number & name: [number by Ruta]. Bride's Shadow — Rosa vesperis
+- Number & name: [number by Ruta]. Bride's Shadow — Rosa sponsalis
 - Planet: Saturn · Moon: Waning
 - Pentacle: The Pentacle of the Backward Hour — "Sleep, and the clock forgets you."
 - Habitat: Grows by chapels where a wedding was promised and never held.
