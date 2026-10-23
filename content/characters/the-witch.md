@@ -106,7 +106,7 @@ PAST: her hair in a single loose braid, wearing a plain linen dress, cold blue m
 1. **Спальня (cosy bedroom).** Лежит на белом одеяле, читает гримуар, рядом лампа.
 2. **Кабинет (study).** Тёмный деревянный стол, книжные полки, пучки трав над головой, свечи, фонарь, янтарные бутылочки, оловянные кубки, травы на столе.
 3. Новые сеты допускаются, только если в них есть: тёплый свечной свет + старая книга + сушёные травы (правило рубрики).
-4. Все сеты находятся в мире серии: литовская деревня, свеча и луна (CANON). Без современных предметов; лампа только масляная.
+4. Все сеты находятся в двух мирах серии (CANON). Настоящее: Йоркшир, 2026 (мокрые тропы, каменные стены, туман, вересковые пустоши), современные предметы допустимы. Прошлое: Вильнюс и окраины около 1550 года (деревянные дома, крутые крыши, берёзы, деревянная часовня), без современных предметов.
 
 ### Что может меняться и что никогда
 | Может меняться | Никогда не меняется |
@@ -129,7 +129,7 @@ PAST: her hair in a single loose braid, wearing a plain linen dress, cold blue m
 DNA: warm candlelit world, golden amber key light from low candles, soft gold rim light in her hair, shadows falling into deep indigo and night blue, aged parchment and pearl highlights, teal glow only for plant magic, dried herb bundles hanging, faint dust motes in the light, shallow depth of field with candle bokeh, painterly cinematic realism, Kodak Portra 400 skin tones, highly detailed, no text, no letters, no watermark, no logo.
 ```
 
-Для страниц Herbarium в конце всегда добавлять хвост стиля из CANON: `painterly cinematic, dark folk fairytale, Lithuanian village, soft film grain, 4K, highly detailed, vertical 9:16`.
+Для страниц Herbarium в конце всегда добавлять хвост стиля из CANON: для настоящего STYLE TAIL (present), для прошлого STYLE TAIL (past). Тексты хвостов только в `content/herbarium/CANON.md`.
 
 Сборка любого промпта: `[SHOT] + IDENTITY (+ PAST в прошлом) + [SCENE/ACTION] + [CAMERA] + DNA + STYLE TAIL + [ASPECT]`.
 

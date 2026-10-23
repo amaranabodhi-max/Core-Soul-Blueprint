@@ -26,6 +26,7 @@
 - Footer: An imagined herbarium · All plants and rites are fictional
 
 > Сценарий ролика ниже пока старый (до CANON); его перепишем по канону, когда дойдёт очередь.
+> **Переписать под два мира:** дверь из Вильнюса стоит в йоркширском поле.
 
 ## 2. Хук (≤10 слов)
 Основной: **"This plant dims when you lie to yourself."** (8)
