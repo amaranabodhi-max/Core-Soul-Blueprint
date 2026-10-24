@@ -3,7 +3,7 @@ Vertical 9:16, 45 s. English final text. On-page text is added in CapCut (animat
 
 ## Anchors (use in every prompt)
 - STYLE TAIL: painterly cinematic, dark folk fairytale, Lithuanian village, soft film grain, 4K, highly detailed, vertical 9:16
-- NOTE (two worlds): the tail above is the archive tail of the final cut. For any new shot use CANON.md: STYLE TAIL (present) for Yorkshire 2026, STYLE TAIL (past) for Vilnius around 1550.
+- NOTE (two worlds): the tail above is the archive tail of the final cut. For any new shot use CANON.md: STYLE TAIL (present) for Now, STYLE TAIL (past) for 1551.
 - PALETTE: warm candle gold against deep indigo shadows
 - FLOWER: a single hollow bell-shaped flower on a slender bent stem, silver rim deepening to teal and indigo inside, no stamens, faint glow at its empty heart; REFERENCE IMAGE (attach to every shot with the flower): content/herbarium/refs/hollowbell-ref.png
 - HEROINE (present): young woman, long wild wavy chestnut hair with copper highlights, hazel-green eyes, light freckles, soft knowing half-smile, oversized charcoal knit cardigan
