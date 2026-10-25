@@ -40,7 +40,7 @@ Fixed reference images, attached to every generation of her:
 
 - **HEROINE (present):** young woman, long wild wavy chestnut hair with copper highlights, hazel-green eyes, light freckles, soft knowing half-smile, oversized charcoal knit cardigan
 - **HEROINE (past):** the same young woman as Madame de Velmont, hair braided into a crown, dark teal velvet gown with gold embroidery, lace at the collar and cuffs, no white lead on her face, a silver pomander on a chain at her waist, a leather case of small corked glass vials
-- **Jewellery:** none in the present. In 1551: the pomander and its chain. The rings visible on the 1551 reference images are **[CHECK — Ruta decides]**.
+- **Jewellery:** none in the present. In 1551: the pomander and its chain, and her rings as on the 1551 reference images.
 - **Framing:** in present-day scenes the heroine is never shown full length. The shot is set in each scene.
 - Detailed generation sheet (identity block, light, sets, tool workflow): `content/characters/the-witch.md`.
 
@@ -65,7 +65,7 @@ Fixed reference images, attached to every generation of her:
 - **Text on herbarium pages** (Latin names, margin notes) is **never written in the prompt**, only `blank margin with faded handwriting`. Ruta adds the real text in CapCut.
 
 ## Page and video
-- **Length:** about 45 s; up to 55 s is allowed if nothing sags. Vertical 9:16.
+- **Length:** about 55 s. Vertical 9:16.
 - **Page structure:** anchors → scenes with timing, lines and prompts → plant card with **the order** (client by role, what they wanted, what she made, how it ended) → **book sheet** (all fields below, ready to hand to Nayara).
 - **Arc of every video:** `episode-arc.md`.
 - **Ending of every video:** a blank page, a new plant bleeds through, *"See you on Monday."*
