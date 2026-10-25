@@ -68,10 +68,10 @@ different face, changing facial features, heavy makeup, red lipstick, eyeliner w
 | Украшения | Нет. Ни кольца, ни других украшений, ни в настоящем, ни в прошлом (CANON). |
 
 ### Прошлое (HEROINE past, по CANON)
-Та же девушка, то же лицо и глаза; в 1551 году она знахарка. Волосы заплетены в одну свободную косу, простое льняное платье. Вид старой плёнки: сепия, зерно, мерцание (CANON); тёплого свечного света в прошлом нет. Кардигана и украшений нет. Добавлять к IDENTITY в сценах прошлого:
+Та же девушка, то же лицо и глаза; в 1551 году она Madame de Velmont. Референсы: `refs/velmont-portrait.jpg`, `refs/velmont-master.jpg`. Коса короной, бархат тёмной бирюзы с золотой вышивкой, кружево у ворота и манжет, без белил, помандер на цепочке, футляр со склянками. Вид старой плёнки: сепия, зерно, мерцание (CANON). Кардигана нет. Кольца на референсах — решает Рута. Добавлять к IDENTITY в сценах прошлого:
 
 ```
-PAST: her hair in a single loose braid, wearing a plain linen dress, old film look, sepia, film grain, gentle flicker; no warm candlelight, no cardigan, no jewellery.
+PAST: as Madame de Velmont, hair braided into a crown, dark teal velvet gown with gold embroidery, lace at collar and cuffs, no white lead on her face, a silver pomander on a chain at her waist, a leather case of small corked glass vials; old film look, sepia, film grain, gentle flicker; no cardigan.
 ```
 
 ### Волосы

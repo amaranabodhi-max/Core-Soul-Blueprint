@@ -5,51 +5,67 @@
 The Monday agent reads this file and `INDEX.md` before every new page.
 
 ## World and story
-- **Two times, no countries.** Never name a country or a city: not in videos, captions or book sheets. Only dates: ***1551*** and ***Now***.
-  - **Past:** "the old world, mid-16th century".
-  - **Present:** "our time".
+- **Two times, no countries.** Never name a country or a city, not in videos, captions or book sheets. On screen and in captions only dates.
+  - **Past:** "the old world, 1551".
+  - **Present:** "our time" (*Now*).
 - **Landscape:** northern and unmarked — fog, stone, wood, birches, moors, wooden houses and stone walls side by side. Nothing that identifies a place. Where she comes from is an open thread.
-- **Heroine, past:** a healer whom the rich visit in secret — draughts for sleeplessness and melancholy, salves for the skin, remedies nobody names aloud. Common people fear her, the rich pay her, nobody knows her name.
-- **Heroine, present:** a modern young woman in a cardigan (the fixed photos) who remembers nothing.
 - **No real name, in either time.** Her real name is lost (open thread). Veyra never names her.
-- **Madame de Velmont.** In the past the rich call her *Madame de Velmont*: a name she invented for herself so she could enter by the front door. It is not her real name. **Dusklantern dims when she calls herself by this name.**
 - **Voice:** Veyra off-screen, as guide and decoder, not the heroine.
-- **Plants are orders.** Every herbarium page is an order from the past: who asked, what they wanted, what she made, how it ended. The client has no name and no title, only a role: "a widow", "a merchant", "a young wife". The warnings in the margins were written after someone paid the price, sometimes she herself.
-- **Truth of the period.** Facts about the 16th century (the life of the rich and the poor: beauty, skin, hygiene, healing, mourning) are only real, verified and common across old Europe in general, never tied to one country, never recipes or compositions. No real historical figures. Everything about the witch and the plants is fiction.
-- **How an episode opens:** alternate between a real 16th-century fact and a line of her own.
-- **Now, a quiet parallel.** People still chase youth and smooth skin; instead of lead there are filters and injections. She has already seen how it ends. A possible direction (not canon, Ruta decides): in the present, people start coming to her again.
-- **Only fiction:** invented plants, invented properties, invented "poisons". No real plants passed off as invented ones, no recipes, no doses, no preparation, no use. What she "made" for a client is named, never described as a recipe.
+
+### 1551 — Madame de Velmont
+- An expensive healer whom the rich **invite to their homes**; she enters by the front door. Draughts for sleeplessness and melancholy, salves and care for the skin, remedies nobody names aloud. Common people fear her, the rich pay her.
+- *Madame de Velmont* is a name she invented for herself. It is not her real name. **Dusklantern dims when she calls herself by this name.**
+- **Her look:** dressed richly but not as nobility — dark teal velvet with gold, hair braided into a crown, **no white lead on her face** (every one of her clients wears white lead), a pomander on a chain, a case of small glass vials.
+- **Her work:** pods and flowers set into mounts. Dusklantern is a glass flask on a worn bronze stand, holding ash and one live ember.
+
+### Now — the clinic
+- A modern young woman in a cardigan (the fixed photos) who remembers nothing.
+- She works in a **cosmetic clinic**: masks, creams, skin care. Injections are done by the doctor; she stands beside.
+- **The rhyme:** in 1551 the rich painted their faces with lead; now they inject a measured poison. **No judgement of the procedures.**
+- **Places:** the clinic (bright, sterile) and her flat (rain, the herbarium, the flask). **The clinic enters from Page III.**
+
+### Plants are orders
+- Every plant is an order from a **rich client without a name or title**, only a role: "a merchant", "a widow", "a young wife". The page tells who asked, what they wanted, what she made, how it ended.
+- The warnings in the margins were written after someone paid the price, sometimes she herself.
+
+### Truth of the period
+- **How a video opens:** alternate between a truth of the period (real, verified, common across old Europe in general, never tied to one country) and a line of her own.
+- Facts about the 16th century (beauty, skin, hygiene, healing, mourning; the life of the rich and the poor) are never recipes or compositions. No real historical figures.
+- **Only fiction:** everything about the witch and the plants is invented. No real plants passed off as invented ones, no recipes, no doses, no preparation, no use. What she made is named, never described as a recipe.
 
 ## Heroine (anchors for every prompt)
 Fixed reference images, attached to every generation of her:
-- `content/characters/refs/witch-portrait.jpg` (face)
-- `content/characters/refs/witch-master.jpg` (full figure, front, profile, back)
+- **Now:** `content/characters/refs/witch-portrait.jpg` (face), `content/characters/refs/witch-master.jpg` (full figure, front, profile, back)
+- **1551:** `content/characters/refs/velmont-portrait.jpg` (face and costume), `content/characters/refs/velmont-master.jpg` (full figure, front, profile, back, with cloak)
 
 - **HEROINE (present):** young woman, long wild wavy chestnut hair with copper highlights, hazel-green eyes, light freckles, soft knowing half-smile, oversized charcoal knit cardigan
-- **HEROINE (past):** the same young woman, a healer, hair in a single loose braid, plain linen dress; old-film look (see Look)
-- No ring, no jewellery, in the present or the past.
+- **HEROINE (past):** the same young woman as Madame de Velmont, hair braided into a crown, dark teal velvet gown with gold embroidery, lace at the collar and cuffs, no white lead on her face, a silver pomander on a chain at her waist, a leather case of small corked glass vials
+- **Jewellery:** none in the present. In 1551: the pomander and its chain. The rings visible on the 1551 reference images are **[CHECK — Ruta decides]**.
 - **Framing:** in present-day scenes the heroine is never shown full length. The shot is set in each scene.
 - Detailed generation sheet (identity block, light, sets, tool workflow): `content/characters/the-witch.md`.
 
 ## Plant and series references
 - Every plant that has a reference image is drawn from it in every prompt, like the heroine's photos: the image is attached and the page's FLOWER anchor points to it.
 - **Hollowbell:** `content/herbarium/refs/hollowbell-ref.png` — the main image of the flower for all prompts.
+- **Dusklantern in 1551:** `content/herbarium/refs/dusklantern-flask-1551.jpg` — the flask on its bronze stand, with a client in white lead.
+- **A 1551 client (the merchant):** `content/herbarium/refs/client-merchant-1551.jpg`.
 - **Series cover:** `content/herbarium/refs/herbarium-cover.png` — the sheet with four plants, for carousels and previews.
 - **Book sheets:** `content/herbarium/refs/NN-name-page.png` (`01-hollowbell-page.png`, `02-dusklantern-page.png`) — the style model for every new book sheet.
 - **Bride's Shadow sheet:** `content/herbarium/refs/bride-shadow-page.png` (text in `NN-brides-shadow.md`).
 
 ## Look
-- **Palette:** gold–teal–indigo. Teal is the colour of the plants' magic.
+- **Photorealism.** No glow, no fairytale.
 - **Past (1551):** old film — sepia, grain, flicker.
-- **Present (Now):** live documentary footage, handheld camera. Warm candlelight appears only in the present.
-- **Magic is barely visible:** one impossible detail in a realistic shot.
-- **Style tail (present):** `live documentary footage, handheld camera, present day, northern landscape without landmarks, fog, stone walls, moors, natural light and candlelight, realistic, one barely visible impossible detail, vertical 9:16`
-- **Style tail (past):** `old film footage, sepia, film grain, gentle flicker, mid-16th century, northern landscape without landmarks, fog, stone, wood, birches, moors, wooden houses and stone walls, realistic, one barely visible impossible detail, vertical 9:16`
+- **Present (Now):** live handheld camera.
+- **One impossible detail** in an otherwise real shot. That is all the magic.
+- **Palette:** gold–teal–indigo: her teal velvet and gold in 1551, candle gold and night indigo.
+- **Style tail (present):** `photorealistic, live handheld camera, present day, natural light, realistic skin texture, one barely noticeable impossible detail, no glow, vertical 9:16`
+- **Style tail (past):** `photorealistic, old film footage, sepia, film grain, gentle flicker, 1551, candlelight, realistic skin texture, one barely noticeable impossible detail, no glow, vertical 9:16`
 - **Dates on screen:** only *1551* and *Now*.
 - **Text on herbarium pages** (Latin names, margin notes) is **never written in the prompt**, only `blank margin with faded handwriting`. Ruta adds the real text in CapCut.
 
 ## Page and video
-- **Length:** 45 s for every page. Vertical 9:16.
+- **Length:** about 45 s; up to 55 s is allowed if nothing sags. Vertical 9:16.
 - **Page structure:** anchors → scenes with timing, lines and prompts → plant card with **the order** (client by role, what they wanted, what she made, how it ended) → **book sheet** (all fields below, ready to hand to Nayara).
 - **Arc of every video:** `episode-arc.md`.
 - **Ending of every video:** a blank page, a new plant bleeds through, *"See you on Monday."*
@@ -98,7 +114,7 @@ The series becomes a printed book. Besides the video, every plant gets a book sh
 ## Secret canon (backstory)
 **Revealed in videos only gradually and only by Ruta's decision.** Agents never reveal it on their own.
 
-A noble client demands a remedy against old age. The healer refuses and warns her of the price, but the lady gets her way: Bride's Shadow. The lady falls asleep and never wakes. The healer is accused of witchcraft. On the night they come for her, she breathes in the same rose: *"If they come for me, I will sleep."* She did not know its whole price. She wakes five hundred years later, with the herbarium.
+A noble client demands a remedy against old age: Bride's Shadow. The lady falls asleep and never wakes. The healer is accused. She breathes in the rose herself, not knowing its whole price, and wakes five hundred years later, with the herbarium.
 
 Tomas was her betrothed; the wedding never took place. Hollowbell: she gave the flower his name to hold on to him, and lost her own.
 
@@ -106,10 +122,10 @@ Tomas was her betrothed; the wedding never took place. Hollowbell: she gave the 
 Agents never close these:
 - her name;
 - where she comes from;
-- what each plant took, and whether it can be returned;
+- what each plant took;
 - what became of the lady;
 - who knocks from the inside of the door;
-- who left her the cardigan and brought the herbarium.
+- who left her the cardigan and gave her the job without papers.
 
 ## New plants (Monday agent)
-Every new plant is an order from the past: a client without name or title ("a widow", "a merchant", "a young wife"), what they wanted, what she made, how it ended. It takes something from her. It never reveals the backstory and never closes an open thread.
+Every new plant is an order from a rich client in 1551, without name or title ("a merchant", "a widow", "a young wife"): what they wanted, what she made (set into a mount, named, never a recipe), how it ended. It takes something from her. It never reveals the backstory and never closes an open thread. The clinic appears from Page III on.
