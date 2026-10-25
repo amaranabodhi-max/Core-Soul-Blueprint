@@ -11,7 +11,8 @@ The Monday agent reads this file and `INDEX.md` before every new page.
 - **Landscape:** northern and unmarked — fog, stone, wood, birches, moors, wooden houses and stone walls side by side. Nothing that identifies a place. Where she comes from is an open thread.
 - **Heroine, past:** a healer whom the rich visit in secret — draughts for sleeplessness and melancholy, salves for the skin, remedies nobody names aloud. Common people fear her, the rich pay her, nobody knows her name.
 - **Heroine, present:** a modern young woman in a cardigan (the fixed photos) who remembers nothing.
-- **No name, in either time.** Nobody names her, not even Veyra.
+- **No real name, in either time.** Her real name is lost (open thread). Veyra never names her.
+- **Madame de Velmont.** In the past the rich call her *Madame de Velmont*: a name she invented for herself so she could enter by the front door. It is not her real name. **Dusklantern dims when she calls herself by this name.**
 - **Voice:** Veyra off-screen, as guide and decoder, not the heroine.
 - **Plants are orders.** Every herbarium page is an order from the past: who asked, what they wanted, what she made, how it ended. The client has no name and no title, only a role: "a widow", "a merchant", "a young wife". The warnings in the margins were written after someone paid the price, sometimes she herself.
 - **Truth of the period.** Facts about the 16th century (the life of the rich and the poor: beauty, skin, hygiene, healing, mourning) are only real, verified and common across old Europe in general, never tied to one country, never recipes or compositions. No real historical figures. Everything about the witch and the plants is fiction.
