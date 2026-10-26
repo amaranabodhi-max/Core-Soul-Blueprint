@@ -68,6 +68,7 @@ Fixed reference images, attached to every generation of her:
 - **Length:** about 55 s. Vertical 9:16.
 - **Page structure:** anchors → scenes with timing, lines and prompts → plant card with **the order** (client by role, what they wanted, what she made, how it ended) → **book sheet** (all fields below, ready to hand to Nayara).
 - **Arc of every video:** `episode-arc.md`.
+- **Ideas:** `ideas.md` is a store of ideas, not canon. Agents take from it only by Ruta's decision.
 - **Ending of every video:** a blank page, a new plant bleeds through, *"See you on Monday."*
 - **Numbering:** `NN-name.md`, one row per page in `INDEX.md`.
 - **All channel text is in English.**
