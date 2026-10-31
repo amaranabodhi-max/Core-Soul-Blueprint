@@ -5,7 +5,7 @@
 ---
 
 ## 1. The rival physician and antimony
-**Status:** idea · added 2026-10-26
+**Status:** used in Page III (Rustveil), 2026-10-31. The physician is now canon (`CANON.md`, "The physician"); his role as accuser stays an open thread. Added 2026-10-26.
 
 **The story.** A learned physician comes to town, one of the new doctors who healed with metals: antimony and mercury. He thinks Madame de Velmont is a witch; she thinks he is a poisoner.
 

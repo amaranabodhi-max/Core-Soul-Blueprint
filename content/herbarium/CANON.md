@@ -28,9 +28,16 @@ The Monday agent reads this file and `INDEX.md` before every new page.
 - Every plant is an order from a **rich client without a name or title**, only a role: "a merchant", "a widow", "a young wife". The page tells who asked, what they wanted, what she made, how it ended.
 - The warnings in the margins were written after someone paid the price, sometimes she herself.
 
+### The physician (1551)
+- A learned physician who heals with metals. Clean-shaven, thin, a black cap, a black gown, spectacles on a cord, a grey metal cup at his belt. **No name.**
+- In episodes he is one of "the new doctors who healed with metals". The historical teacher behind them is never named in videos (reference only: `ideas.md`).
+- References: `content/herbarium/refs/physician-portrait.png` (not received yet), `content/herbarium/refs/physician-sheet.png`, `content/herbarium/refs/physician-sheet-flask.png` (same sheet, glass flask in hand).
+- His role as accuser and his link with the clinic's owner are open threads: never reveal them.
+
 ### Truth of the period
 - **How a video opens:** alternate between a truth of the period (real, verified, common across old Europe in general, never tied to one country) and a line of her own.
 - Facts about the 16th century (beauty, skin, hygiene, healing, mourning; the life of the rich and the poor) are never recipes or compositions. No real historical figures.
+- **Accused women:** scenes with accused women show no fire, no execution and no violence on screen. Veyra's voice never states historical facts about executions unless they are verified.
 - **Only fiction:** everything about the witch and the plants is invented. No real plants passed off as invented ones, no recipes, no doses, no preparation, no use. What she made is named, never described as a recipe.
 
 ## Heroine (anchors for every prompt)
@@ -49,6 +56,7 @@ Fixed reference images, attached to every generation of her:
 - **Hollowbell:** `content/herbarium/refs/hollowbell-ref.png` — the main image of the flower for all prompts.
 - **Dusklantern in 1551:** `content/herbarium/refs/dusklantern-flask-1551.jpg` — the flask on its bronze stand, with a client in white lead.
 - **A 1551 client (the merchant):** `content/herbarium/refs/client-merchant-1551.jpg`.
+- **Rustveil sheet:** `content/herbarium/refs/03-rustveil-page.png` (text in `03-rustveil.md`).
 - **Series cover:** `content/herbarium/refs/herbarium-cover.png` — the sheet with four plants, for carousels and previews.
 - **Book sheets:** `content/herbarium/refs/NN-name-page.png` (`01-hollowbell-page.png`, `02-dusklantern-page.png`) — the style model for every new book sheet.
 - **Bride's Shadow sheet:** `content/herbarium/refs/bride-shadow-page.png` (text in `NN-brides-shadow.md`).
@@ -126,7 +134,9 @@ Agents never close these:
 - what each plant took;
 - what became of the lady;
 - who knocks from the inside of the door;
-- who left her the cardigan and gave her the job without papers.
+- who left her the cardigan and gave her the job without papers;
+- the physician's role as her accuser;
+- the physician's link with the clinic's owner.
 
 ## New plants (Monday agent)
 Every new plant is an order from a rich client in 1551, without name or title ("a merchant", "a widow", "a young wife"): what they wanted, what she made (set into a mount, named, never a recipe), how it ended. It takes something from her. It never reveals the backstory and never closes an open thread. The clinic appears from Page III on.

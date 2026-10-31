@@ -1,6 +1,6 @@
-# Herbarium of the Forgotten Witch — Page III: STILLFACE
+# Herbarium of the Forgotten Witch — STILLFACE (reserved, number later)
 Vertical 9:16, 45 s. English final text. On-page text is added in CapCut (animated handwriting), never in the prompt.
-Status: draft. Nothing generated, nothing published. The clinic enters the series here (CANON: from Page III).
+Status: reserved (2026-10-31). Moved out of Page III; Page III is Rustveil. The idea is kept; Ruta assigns the number later. Nothing generated, nothing published. The clinic now enters the series with Rustveil.
 
 ## Anchors (use in every prompt)
 - STYLE TAIL (present): photorealistic, live handheld camera, present day, natural light, realistic skin texture, one barely noticeable impossible detail, no glow, vertical 9:16
@@ -53,7 +53,7 @@ Grows on north faces of old stone walls that no sun has ever looked at. Gift: ho
 Takes: her laugh.
 
 ## Book sheet
-- Number & name: III. Stillface — Persona pallida
+- Number & name: [number later]. Stillface — Persona pallida
 - Planet: Jupiter · Moon: Full Moon
 - Pentacle: The Pentacle of the Calm Face — "A still face is a closed door. Keep the key."
 - Habitat: Grows on the north face of old stone walls, where no sun has ever looked.
