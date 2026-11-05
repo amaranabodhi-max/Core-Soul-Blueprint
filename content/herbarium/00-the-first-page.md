@@ -10,6 +10,7 @@ How the heroine became a herbalist.
 From `ideas.md`, entry 2, "Real lives behind Madame de Velmont" (not canon until Ruta decides otherwise):
 - As a girl she is taught by a neighbour, a herbalist.
 - The teacher is taken away in a cart. She is the grey-haired woman from the Page III hook.
+  - **Reference:** `refs/teacher-cart-1551.jpg` — the grey-haired woman in the middle of the cart, long loose grey hair, grey shift, looking back over her shoulder; other women in the cart, a driver, townspeople along a wet cobbled street. Attach it to every shot with her.
 - The first pages of the herbarium are in the teacher's hand: the book came to the heroine as an inheritance.
 - The heroine's real name is never spoken on screen.
 

@@ -59,7 +59,7 @@ A source for her story. **Real names are never said in videos.** Veyra may speak
 
 ### Episode idea: how she became a herbalist
 - As a girl she is taught by a neighbour, a herbalist.
-- The teacher is taken away in a cart. She is the grey-haired woman from the Page III hook.
+- The teacher is taken away in a cart. She is the grey-haired woman from the Page III hook. Reference image: `refs/teacher-cart-1551.jpg`.
 - Perhaps the first pages of the herbarium are in the teacher's hand: the book came to the heroine as an inheritance.
 - The heroine's real name is never spoken on screen.
 
