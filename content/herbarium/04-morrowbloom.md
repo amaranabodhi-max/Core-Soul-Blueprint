@@ -5,7 +5,7 @@ Status: draft (2026-11-02). Nothing generated, nothing published; waits for Ruta
 - STYLE TAIL (present): photorealistic, live handheld camera, present day, natural light, realistic skin texture, one barely noticeable impossible detail, no glow, vertical 9:16
 - STYLE TAIL (past): photorealistic, old film footage, sepia, film grain, gentle flicker, 1551, candlelight, realistic skin texture, one barely noticeable impossible detail, no glow, vertical 9:16
 - PALETTE: candle gold against night indigo, teal in the shadows
-- FLOWER: a single trumpet-shaped flower on a thin pale stem, petals translucent as amber paper with a faint gold vein, closed at the tip like a held breath; it is open only in the last hour before dawn; impossible detail: the dew on its petals runs upward; no glow. No reference image yet (draw from this description; once Ruta approves a flower image it is saved as `refs/morrowbloom-ref.png` and attached to every shot)
+- FLOWER: a single trumpet-shaped flower on a thin pale stem, petals translucent as amber paper with a faint gold vein, closed at the tip like a held breath; it is open only in the last hour before dawn; impossible detail: the dew on its petals runs upward; no glow. REFERENCE IMAGE (attach to every shot with the flower): content/herbarium/refs/morrowbloom-ref.png
 - HEROINE (present): young woman, long wild wavy chestnut hair with copper highlights, hazel-green eyes, light freckles, soft knowing half-smile, oversized charcoal knit cardigan. Never full length. REFERENCE IMAGES: content/characters/refs/witch-portrait.jpg, content/characters/refs/witch-master.jpg
 - HEROINE (past): the same young woman as Madame de Velmont, hair braided into a crown, dark teal velvet gown with gold embroidery, lace at collar and cuffs, no white lead on her face, silver pomander on a chain, leather case of small corked glass vials, her rings as on the reference. REFERENCE IMAGES: content/characters/refs/velmont-portrait.jpg, content/characters/refs/velmont-master.jpg
 - CLIENT (an old man): very old, thin, deeply lined face, no white lead, a heavy dark robe, a nightcap, a bedside candle; no name, no title. Sits up in a great bed in a stone room.
@@ -55,7 +55,7 @@ MORROWBLOOM, Somnium aurorae; folk names: the Dream-Keeper, Sleeper's Dawn, the 
 - Takes: her dreams.
 
 ## Book sheet
-(Text for the sheet to be drawn by Nayara in the style of `refs/01-hollowbell-page.png`; image `refs/04-morrowbloom-page.png` does not exist yet.)
+(Text of the drawn sheet `refs/04-morrowbloom-page.png`.)
 - Number & name: IV. Morrowbloom — Somnium aurorae
 - Planet: Sun · Moon: Waning Crescent
 - Pentacle: The Pentacle of the First Light — "Keep the door of the night ajar. The morning must not shut it."

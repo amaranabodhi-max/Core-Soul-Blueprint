@@ -57,6 +57,7 @@ Fixed reference images, attached to every generation of her:
 - **Dusklantern in 1551:** `content/herbarium/refs/dusklantern-flask-1551.jpg` — the flask on its bronze stand, with a client in white lead.
 - **A 1551 client (the merchant):** `content/herbarium/refs/client-merchant-1551.jpg`.
 - **Rustveil sheet:** `content/herbarium/refs/03-rustveil-page.png` (text in `03-rustveil.md`).
+- **Morrowbloom:** `content/herbarium/refs/morrowbloom-ref.png` — the main image of the flower, attached to every shot with it; sheet `content/herbarium/refs/04-morrowbloom-page.png` (text in `04-morrowbloom.md`).
 - **Series cover:** `content/herbarium/refs/herbarium-cover.png` — the sheet with four plants, for carousels and previews.
 - **Book sheets:** `content/herbarium/refs/NN-name-page.png` (`01-hollowbell-page.png`, `02-dusklantern-page.png`) — the style model for every new book sheet.
 - **Bride's Shadow sheet:** `content/herbarium/refs/bride-shadow-page.png` (text in `NN-brides-shadow.md`).
