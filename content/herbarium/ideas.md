@@ -67,3 +67,21 @@ A source for her story. **Real names are never said in videos.** Veyra may speak
 - **Veyra's line "Most of them ended in the fire"** goes further than the verified facts above: historians do not know the share of healers among the accused, the "millions burned" myth is not supported, and in many places the accused were hanged, not burned. It also falls under the CANON rule that Veyra never states facts about executions unless verified. The honest hook above is safer. Ruta decides.
 - **Dates:** all three women lie outside 1551 (1322, 1591, 1670s). They are a source for the story, never presented as events of her time.
 - **The Page III hook:** `03-rustveil.md` has no scenes yet. If the grey-haired woman in the cart is in Page III, that hook must follow the CANON rule for accused women: no fire, no execution, no violence on screen.
+
+---
+
+## 3. Madame's alchemy
+**Status:** idea · added 2026-11-07 · not canon, only by Ruta's decision
+
+**Truth of the period.** In the 16th century the line between herbalism and alchemy was thin. Herbalists and noble ladies distilled herbs in stills and made distillates and essences. Plant alchemy was called **spagyrics**: split a plant into its "soul", "spirit" and "body", then join them again, stronger.
+
+- **Her works are alchemical vessels**, not just mounts: the lamp on bronze (Dusklantern), the petal in amber glass (Morrowbloom).
+- **Her workshop has a still:** glass, copper, drops running down the tube.
+- **Two alchemies.** The physician who heals with metals practises the alchemy of metals, cold. Madame practises the alchemy of plants, living. Their feud is not science against superstition: it is a quarrel between two alchemies.
+- **Bride's Shadow may be her highest alchemical work:** a distillate of the rose, an "elixir of sleep" she worked on for years. That is why the rich lady demanded exactly this.
+- **The line:** no turning lead into gold, no philosopher's stone. Alchemy here is a craft: distilling, distillates, vessels, notes.
+
+**Check before use:**
+- The word "spagyrics" and the "soul, spirit, body" split go back to the same metal-healing teacher who is never named in videos (`ideas.md`, entry 1). Say "the old plant alchemists", never his name.
+- The still and the distillates are real and safe as images. Never show or describe what goes into the still or in what amounts: CANON allows no recipes and no compositions.
+- "Bride's Shadow as her life's work" touches the secret canon (why the lady demanded the rose). Decide before any episode hints at it.

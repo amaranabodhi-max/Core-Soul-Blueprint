@@ -1,5 +1,5 @@
 # Herbarium of the Forgotten Witch — The First Page (special)
-**Status:** planned (2026-11-05). No number and no new plant. The script comes from Ruta later. Nothing generated, nothing published. `CANON.md` wins over this file.
+**Status:** final (2026-11-07): the video is edited, about 86 s. It is a special episode, so it runs longer than the usual ~55 s. No number and no new plant. The final script lives with Ruta; this file keeps the brief. `CANON.md` wins over this file.
 
 **Release order:** after Page III (Rustveil), before Page IV (Morrowbloom).
 
