@@ -252,7 +252,7 @@ def pick_folder(cli_value: str | None) -> Path | None:
         root = tk.Tk()
         root.withdraw()
         root.attributes("-topmost", True)
-        chosen = filedialog.askdirectory(title="Выберите папку с вебинарами")
+        chosen = filedialog.askdirectory(title="Выберите папку с вебинарами (например, Qimen academy)")
         root.destroy()
         if chosen:
             return Path(chosen)
@@ -260,6 +260,29 @@ def pick_folder(cli_value: str | None) -> Path | None:
         pass
     typed = ask("Путь к папке с вебинарами: ").strip('"')
     return Path(typed) if typed else None
+
+
+def library_folder(cfg: dict, cli_value: str | None, ask_new: bool) -> Path | None:
+    """Remembered library folder; fixes a pick of the results folder (or anything inside it)."""
+    saved = cfg.get("library_folder")
+    if cli_value:
+        folder = Path(cli_value)
+    elif saved and Path(saved).is_dir() and not ask_new:
+        folder = Path(saved)
+    else:
+        folder = pick_folder(None)
+    if not folder or not folder.is_dir():
+        return None
+    folder = folder.resolve()
+    name = cfg["results_folder_name"].lower()
+    for parent in [folder, *folder.parents]:
+        if parent.name.lower() == name:
+            say(f"  (это папка результатов — беру папку с видео: {parent.parent})")
+            folder = parent.parent
+            break
+    if not cli_value:
+        save_json(CONFIG_PATH, {**load_json(CONFIG_PATH, {}), "library_folder": str(folder)})
+    return folder
 
 
 def probe_duration(path: Path) -> float:
@@ -749,15 +772,33 @@ def main(argv=None) -> int:
     cfg = load_config()
     if not ensure_ffmpeg():
         return 1
-    folder = pick_folder(args.folder)
-    if not folder or not folder.is_dir():
-        say("Папка не выбрана.")
-        return 1
-    results = folder / cfg["results_folder_name"]
-    videos = find_videos(folder, results)
-    if not videos:
-        say(f"В папке {folder} нет видео.")
-        return 1
+    menu = not (args.one or args.dry_run or args.folder)
+    folder = library_folder(cfg, args.folder, ask_new=False)
+    while True:
+        if not folder:
+            say("Папка не выбрана.")
+            return 1
+        results = folder / cfg["results_folder_name"]
+        videos = find_videos(folder, results)
+        if videos:
+            break
+        say(f"В папке {folder} нет видео. Выберите папку с вебинарами.")
+        folder = library_folder(cfg, None, ask_new=True)
+    say(f"\nБиблиотека: {folder}  ({len(videos)} видео)")
+    if menu:
+        say("  1 — тест: один короткий вебинар по Ци Мэнь   (Enter)")
+        say("  2 — обработать всю библиотеку")
+        say("  3 — только посчитать время и стоимость")
+        say("  4 — выбрать другую папку")
+        choice = ask("Ваш выбор: ") or "1"
+        if choice == "4":
+            CONFIG_PATH.exists() and save_json(CONFIG_PATH, {k: v for k, v in load_json(CONFIG_PATH, {}).items() if k != "library_folder"})
+            return main(argv)
+        args.one = choice == "1"
+        args.dry_run = choice == "3"
+        if choice not in ("1", "2", "3"):
+            say("Не понял выбор — выход.")
+            return 0
 
     if cfg.get("free_tier") is None:
         ans = ask("Ваш ключ Gemini на бесплатном тарифе? [да/нет]: ").lower()
@@ -766,7 +807,6 @@ def main(argv=None) -> int:
     if cfg["free_tier"]:
         apply_free_tier(cfg)
 
-    say(f"\nПапка: {folder}")
     durs = {}
     if args.one:
         say("Ищу короткий вебинар по Ци Мэнь для теста...")

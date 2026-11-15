@@ -29,7 +29,7 @@ echo Устанавливаю библиотеки, это займёт 1-3 ми
 echo Библиотеки установлены.
 
 :run
-"%VPY%" qimen_lab.py %*
+"%VPY%" start.py %*
 echo.
 pause
 exit /b
