@@ -37,6 +37,14 @@ DEFAULT_CONFIG = {
         "report_in": 2.50, "report_out": 15.00,
     },
     "results_folder_name": "QiMen_Results",
+    # Free tier (Google AI Studio): Pro is unavailable, Flash has 5 RPM / 250K TPM.
+    "free": {
+        "model": "gemini-2.5-flash",
+        "window_minutes": 10,        # 10 min ≈ 180K tokens < 250K TPM per request
+        "rpm": 5,
+        "tpm": 250000,
+        "safety": 0.9,
+    },
 }
 
 GLOSSARY = """Qi Men Dun Jia (QMDJ), Joey Yap, Destiny Chart, Palace Strength, Palace Energy Level (0 to 7),
@@ -239,7 +247,8 @@ def resolve_models(client, cfg: dict) -> None:
         names = [m.name.split("/")[-1] for m in client.models.list()]
     except Exception as e:  # listing is free; failure means bad key / network
         raise SystemExit(f"Не удалось связаться с Gemini API: {e}")
-    for k, word in (("transcribe_model", "flash"), ("report_model", "pro")):
+    for k in ("transcribe_model", "report_model"):
+        word = "pro" if "pro" in cfg[k] else "flash"
         if cfg[k] in names:
             continue
         cands = sorted(n for n in names if n.startswith("gemini-") and word in n
@@ -249,6 +258,42 @@ def resolve_models(client, cfg: dict) -> None:
             raise SystemExit(f"Не найдена подходящая модель '{word}'. Доступны: {names}")
         say(f"  Модель {cfg[k]} недоступна, беру {stable[-1]}")
         cfg[k] = stable[-1]
+
+
+class RateLimiter:
+    """Keeps requests under the free-tier RPM/TPM by waiting before each call."""
+
+    def __init__(self, rpm: int = 0, tpm: int = 0, safety: float = 0.9):
+        self.rpm, self.tpm, self.safety = rpm, int(tpm * safety), safety
+        self.log: list[tuple[float, int]] = []
+
+    def wait(self, tokens: int) -> None:
+        if not self.rpm:
+            return
+        if tokens > self.tpm:
+            raise RuntimeError(f"Запрос на {tokens} токенов больше лимита {self.tpm} в минуту — уменьшите window_minutes")
+        while True:
+            now = time.monotonic()
+            self.log = [(t, n) for t, n in self.log if now - t < 61]
+            used = sum(n for _, n in self.log)
+            if len(self.log) < self.rpm and used + tokens <= self.tpm:
+                self.log.append((now, tokens))
+                return
+            pause = max(1.0, 61 - (now - self.log[0][0]))
+            say(f"    пауза {int(pause)} с (бесплатный лимит в минуту)...")
+            time.sleep(pause)
+
+
+LIMITER = RateLimiter()
+
+
+def apply_free_tier(cfg: dict) -> None:
+    fr = cfg["free"]
+    cfg["transcribe_model"] = cfg["report_model"] = fr["model"]
+    cfg["window_minutes"] = min(cfg["window_minutes"], fr["window_minutes"])
+    cfg["prices"] = {k: 0.0 for k in cfg["prices"]}
+    global LIMITER
+    LIMITER = RateLimiter(fr["rpm"], fr["tpm"], fr["safety"])
 
 
 class QuotaExhausted(Exception):
@@ -326,6 +371,7 @@ def transcribe_window(client, cfg, f, start: int, end: int, usage: dict) -> Wind
                       video_metadata=types.VideoMetadata(start_offset=f"{start}s", end_offset=f"{end}s"))
     prompt = (f"Transcribe this part of the webinar: from {hms(start)} to {hms(end)}. "
               f"Timestamps must be absolute (between {hms(start)} and {hms(end)}).")
+    LIMITER.wait(int((end - start) * cfg["tokens_per_video_second"]) + 2000)
     resp = call_with_retry(
         client.models.generate_content, model=cfg["transcribe_model"],
         contents=[types.Content(role="user", parts=[part, types.Part(text=prompt)])],
@@ -422,6 +468,7 @@ def write_outputs(out: Path, title: str, windows: list[dict], frames) -> tuple[s
 
 def make_report(client, cfg, transcript: str, visuals: str, usage: dict) -> str:
     from google.genai import types
+    LIMITER.wait((len(transcript) + len(visuals)) // 3 + 2000)
     resp = call_with_retry(
         client.models.generate_content, model=cfg["report_model"],
         contents=f"=== TRANSCRIPT ===\n{transcript}\n\n=== SLIDES AND TABLES ===\n{visuals}",
@@ -508,6 +555,13 @@ def main(argv=None) -> int:
         say(f"В папке {folder} нет видео.")
         return 1
 
+    if cfg.get("free_tier") is None:
+        ans = ask("Ваш ключ Gemini на бесплатном тарифе? [да/нет]: ").lower()
+        cfg["free_tier"] = ans in ("да", "д", "y", "yes")
+        save_json(CONFIG_PATH, {**load_json(CONFIG_PATH, {}), "free_tier": cfg["free_tier"]})
+    if cfg["free_tier"]:
+        apply_free_tier(cfg)
+
     say(f"\nПапка: {folder}")
     total = 0.0
     durs = {}
@@ -521,7 +575,12 @@ def main(argv=None) -> int:
     est = estimate(cfg, total) if total else {"in_tokens": 0, "usd": 0.0}
     say(f"\nК обработке: {hms(total)} видео, ≈{est['in_tokens'] / 1e6:.1f} млн токенов")
     say(f"Модели: {cfg['transcribe_model']} (транскрипт), {cfg['report_model']} (отчёт)")
-    say(f"Ориентировочная стоимость на платном тарифе: ≈ ${est['usd']:.2f}  (точность ±50%)")
+    if cfg["free_tier"]:
+        n_req = sum(-(-int(durs[v]) // (cfg["window_minutes"] * 60)) + 1 for v in videos
+                    if load_json(results / v.stem / "state.json", {}).get("status") != "COMPLETED")
+        say(f"Бесплатный тариф: $0. Запросов ≈ {n_req}, время ≈ {max(1, round(n_req * 1.2))} мин (из-за лимита в минуту)")
+    else:
+        say(f"Ориентировочная стоимость на платном тарифе: ≈ ${est['usd']:.2f}  (точность ±50%)")
 
     if args.dry_run:
         say("\nРежим проверки: запросов к Gemini не было, деньги не потрачены.")
@@ -534,10 +593,6 @@ def main(argv=None) -> int:
     if not key:
         say("Без ключа продолжить нельзя.")
         return 1
-    if cfg.get("free_tier") is None:
-        ans = ask("Ваш ключ на бесплатном тарифе? [да/нет]: ").lower()
-        cfg["free_tier"] = ans in ("да", "д", "y", "yes")
-        save_json(CONFIG_PATH, {**load_json(CONFIG_PATH, {}), "free_tier": cfg["free_tier"]})
     if cfg["free_tier"]:
         say("ℹ Бесплатный тариф: денег не спишут, но есть дневные лимиты, а Google может использовать данные для улучшения моделей.")
         say("  Если лимит закончится — программа сохранит прогресс; запустите её завтра, она продолжит с того же места.")
