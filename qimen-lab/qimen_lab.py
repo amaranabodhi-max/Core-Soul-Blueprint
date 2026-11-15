@@ -16,7 +16,15 @@ import tempfile
 import time
 from pathlib import Path
 
-from pydantic import BaseModel
+try:
+    from pydantic import BaseModel
+    import google.genai  # noqa: F401
+    import tenacity  # noqa: F401
+except ImportError:  # safety net: install missing libraries automatically
+    print("Устанавливаю недостающие библиотеки (один раз)...", flush=True)
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "-r",
+                           str(Path(__file__).resolve().parent / "requirements.txt")])
+    from pydantic import BaseModel
 
 APP_DIR = Path(__file__).resolve().parent
 CONFIG_PATH = APP_DIR / "config.json"
