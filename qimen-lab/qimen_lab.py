@@ -30,6 +30,7 @@ DEFAULT_CONFIG = {
     "report_model": "gemini-2.5-pro",
     "window_minutes": 20,
     "max_output_tokens": 32768,
+    "doc_max_output_tokens": 65536,
     "tokens_per_video_second": 300,  # default media resolution, video + audio
     # USD per 1M tokens; approximate, check ai.google.dev/pricing before big runs
     "prices": {
@@ -71,21 +72,73 @@ Rules:
   Markdown table copying every number and label exactly as shown, including any 0-7 values
   in palace corners. Write 'unreadable' rather than guessing a digit."""
 
-REPORT_SYSTEM = """Ты — строгий исследователь системы Qi Men Dun Jia. Тебе дан полный транскрипт вебинара
-Джоуи Япа и расшифровка всех слайдов. Напиши отчёт НА РУССКОМ, с точными английскими цитатами и таймкодами [HH:MM:SS].
-Ровно 4 раздела:
-## 1. Прямые объяснения Джоуи Япа (факты)
-Что лектор прямо говорит или показывает про Palace Strength / Palace Energy Level (0–7), Destiny Chart,
-сезонность (месяц рождения), Небесные Стволы, Звёзды, Врата, Духов, Пустоту (DE). Каждое утверждение —
-дословная цитата + таймкод.
-## 2. Визуальные улики
-Все карты и таблицы, где видны значения 0–7 или правила начисления баллов, с таймкодами.
-## 3. Независимые гипотезы
-Закономерности, видимые в ЭТОМ вебинаре. Каждую явно помечай как гипотезу и указывай, на чём она основана.
-## 4. Неизвестные переменные (слепые пятна)
+MARKING_RULES = """ПРАВИЛА РАЗМЕТКИ (обязательны):
+- Содержание лекции пиши обычным текстом и ВСЕГДА ставь таймкод источника [HH:MM:SS].
+  Важные формулировки — с короткой английской цитатой Джоуи Япа в кавычках.
+- Любое дополнение от себя (пояснение, контекст, пример, вывод, которого не было в лекции)
+  оформляй ТОЛЬКО отдельным блоком:
+  > 🤖 **Пояснение ИИ:** ...
+- Никогда не выдавай пояснение ИИ за слова лектора. Не выдумывай правил, которых нет в материале.
+- Не превращать догадки в золото без проверки!"""
+
+STUDY_SYSTEM = f"""Ты — редактор русского учебника по Ци Мэнь Дунь Цзя (Qi Men Dun Jia). Тебе дан полный
+английский транскрипт вебинара Джоуи Япа и расшифровка слайдов. Напиши подробный КОНСПЕКТ НА РУССКОМ.
+{MARKING_RULES}
+Структура:
+# Краткое содержание
+3–6 предложений: о чём вебинар.
+# Конспект по темам
+Разбей лекцию на темы в порядке изложения. Для каждой: `## Тема (с [HH:MM:SS] по [HH:MM:SS])`,
+подробное изложение, термины в форме «русское название (English / pinyin 漢字)».
+Таблицы, схемы и примеры карт со слайдов — переноси в тему полностью, как Markdown-таблицы, с таймкодом слайда.
+# Разобранные примеры
+Каждый пример карты или кейс из лекции: исходные данные, ход рассуждения лектора, вывод — с таймкодами.
+# Практика
+## Упражнения из лекции
+Задания и вопросы, которые давал сам лектор (с таймкодом). Если их не было — так и напиши.
+## Упражнения для самопроверки
+Составь 5–10 упражнений и примеров применения по материалу лекции. Весь этот подраздел — 🤖 (составлен ИИ),
+каждое упражнение опирается на конкретный фрагмент лекции [HH:MM:SS]; дай короткие ответы в конце.
+# Вопросы, оставшиеся открытыми
+Что упомянуто, но не объяснено."""
+
+PALACE_SYSTEM = f"""Ты — строгий исследователь системы Qi Men Dun Jia. Тебе дан полный транскрипт вебинара
+Джоуи Япа и расшифровка всех слайдов. Напиши НА РУССКОМ раздел учебника о СИЛЕ ДВОРЦОВ
+(Palace Strength / Palace Energy Level, шкала 0–7).
+{MARKING_RULES}
+Разделы:
+## 1. Что прямо говорит и показывает лектор
+Palace Strength / Energy Level 0–7, Destiny Chart, сезонность (месяц рождения), Небесные Стволы, Звёзды, Врата,
+Духи, Пустота (DE) — всё, что относится к силе дворца. Каждое утверждение — дословная цитата + таймкод.
+## 2. Таблицы, карты и примеры расчёта
+Все карты и таблицы, где видны значения 0–7 или правила начисления, с таймкодами.
+## 3. Гипотезы (🤖)
+Закономерности, видимые в ЭТОМ вебинаре — каждая в блоке «Пояснение ИИ» с указанием, на чём основана.
+## 4. Слепые пятна
 Что не объяснено или осталось за кадром.
-Главное правило: не подгонять формулу под известные ответы, не выдумывать правил, которых нет в материале.
-Не превращать догадки в золото без проверки! Если данных о шкале 0–7 нет — так и напиши."""
+Не подгонять формулу под известные ответы. Если данных о шкале 0–7 в вебинаре нет — так и напиши одной фразой."""
+
+GLOSSARY_SYSTEM = """Ты составляешь глоссарий для русского учебника по Qi Men Dun Jia. По транскрипту вебинара Джоуи Япа
+и слайдам выпиши ВСЕ китайские метафизические термины, которые встречаются в лекции (дворцы, стволы, ветви,
+звёзды, врата, духи, структуры, сезонность, специальные понятия).
+Для каждого: pinyin, иероглифы (традиционные), английское название так, как его использует Джоуи Яп, русский перевод,
+короткое определение по смыслу лекции, таймкод первого упоминания.
+hanzi_shown_in_lecture = true только если иероглифы реально видны на слайде; иначе иероглифы подставлены тобой.
+Если не уверен в иероглифах — оставь поле hanzi пустым. Не добавляй терминов, которых нет в лекции."""
+
+
+class Term(BaseModel):
+    pinyin: str
+    hanzi: str = ""
+    english: str
+    russian: str
+    definition: str
+    t: str
+    hanzi_shown_in_lecture: bool = False
+
+
+class Glossary(BaseModel):
+    terms: list[Term]
 
 
 class Line(BaseModel):
@@ -228,8 +281,8 @@ def estimate(cfg: dict, seconds: float) -> dict:
     in_tok = seconds * tps
     words = seconds / 60 * 150
     out_tok = words * 1.6 + seconds / 60 * 200  # transcript + JSON + visuals
-    report_in = out_tok * 1.1
-    report_out = 8000 * max(1, seconds / 7200)
+    report_in = out_tok * 1.1 * 3  # glossary + konspekt + palace
+    report_out = 30000 * max(0.3, seconds / 7200)
     usd = (in_tok * pr["transcribe_in"] + out_tok * pr["transcribe_out"]
            + report_in * pr["report_in"] + report_out * pr["report_out"]) / 1e6
     return {"in_tokens": int(in_tok), "usd": usd}
@@ -466,26 +519,89 @@ def write_outputs(out: Path, title: str, windows: list[dict], frames) -> tuple[s
     return t1, t2
 
 
-def make_report(client, cfg, transcript: str, visuals: str, usage: dict) -> str:
+def ask_text(client, cfg, system: str, transcript: str, visuals: str, usage: dict, schema=None):
     from google.genai import types
     LIMITER.wait((len(transcript) + len(visuals)) // 3 + 2000)
+    extra = {"response_mime_type": "application/json", "response_schema": schema} if schema else {}
     resp = call_with_retry(
         client.models.generate_content, model=cfg["report_model"],
         contents=f"=== TRANSCRIPT ===\n{transcript}\n\n=== SLIDES AND TABLES ===\n{visuals}",
-        config=types.GenerateContentConfig(system_instruction=REPORT_SYSTEM, temperature=0.2,
-                                           max_output_tokens=cfg["max_output_tokens"]))
+        config=types.GenerateContentConfig(system_instruction=system, temperature=0.2,
+                                           max_output_tokens=cfg["doc_max_output_tokens"], **extra))
     add_usage(usage, "report", resp)
-    return resp.text or ""
+    cand = resp.candidates[0] if getattr(resp, "candidates", None) else None
+    cut = bool(cand and cand.finish_reason and cand.finish_reason.name == "MAX_TOKENS")
+    if schema:
+        if resp.parsed is None:
+            raise RuntimeError("модель не вернула глоссарий")
+        return resp.parsed
+    return (resp.text or "") + ("\n\n> ⚠ Текст оборван лимитом длины ответа." if cut else "")
+
+
+TC_RE = re.compile(r"\[(\d{1,2}:\d{2}:\d{2})\]")
+
+
+def link_timecodes(text: str, video: Path, out: Path) -> str:
+    """[HH:MM:SS] -> clickable link that opens the original video at that second (in a browser / VLC)."""
+    uri = video.resolve().as_uri()
+    return TC_RE.sub(lambda m: f"[[{m.group(1)}]]({uri}#t={parse_hms(m.group(1))})", text)
+
+
+def glossary_md(terms: list[dict], title: str, with_source: bool = False) -> str:
+    rows = ["| Pinyin | 漢字 | English (Joey Yap) | Русский | Значение | Где |",
+            "|---|---|---|---|---|---|"]
+    for t in sorted(terms, key=lambda x: x["pinyin"].lower()):
+        hz = t["hanzi"] + ("" if t.get("hanzi_shown_in_lecture") or not t["hanzi"] else " 🤖")
+        where = (f"{t.get('webinar', '')} " if with_source else "") + f"[{t['t']}]"
+        cells = [t["pinyin"], hz, t["english"], t["russian"], t["definition"], where]
+        rows.append("| " + " | ".join(c.replace("|", "/").replace("\n", " ") for c in cells) + " |")
+    note = ("\n\n🤖 — иероглифы подставлены ИИ (на слайдах их не было); проверяйте по словарю.\n")
+    return f"# {title}\n\n" + "\n".join(rows) + note
+
+
+def build_textbook(results: Path) -> None:
+    """Free, local: merge all webinars into a textbook folder (contents + common glossary)."""
+    book = results / "00_Учебник"
+    book.mkdir(exist_ok=True)
+    toc, merged = ["# Учебник Ци Мэнь — оглавление по вебинарам\n"], {}
+    for d in sorted(p for p in results.iterdir() if p.is_dir() and p != book):
+        if not is_complete(d):
+            continue
+        toc.append(f"\n## {d.name}\n")
+        for f in sorted(d.glob("0*.md")):
+            toc.append(f"- [{f.stem}](../{d.name}/{f.name})")
+        for t in load_json(d / "glossary.json", []):
+            key = t["pinyin"].lower().replace(" ", "")
+            if key not in merged:
+                merged[key] = {**t, "webinar": d.name}
+    (book / "Оглавление.md").write_text("\n".join(toc) + "\n", encoding="utf-8")
+    (book / "Общий_глоссарий.md").write_text(
+        glossary_md(list(merged.values()), "Общий глоссарий терминов Ци Мэнь", with_source=True), encoding="utf-8")
 
 
 # ---------- pipeline ----------
+
+FINALS = ["01_Full_Transcript_EN.md", "02_Visual_Slides_and_Tables.md", "03_Конспект_RU.md",
+          "04_Глоссарий.md", "05_Сила_дворцов_0-7.md"]
+
+
+def is_complete(out: Path) -> bool:
+    return load_json(out / "state.json", {}).get("status") == "COMPLETED" and all((out / n).exists() for n in FINALS)
+
+
+def has_transcript(out: Path) -> bool:
+    return load_json(out / "state.json", {}).get("status") == "COMPLETED"
+
+DOCS = [  # (file, title, prompt, progress message)
+    ("03_Конспект_RU.md", "конспект", STUDY_SYSTEM, "Пишу русский конспект с упражнениями"),
+    ("05_Сила_дворцов_0-7.md", "сила дворцов 0–7", PALACE_SYSTEM, "Собираю материалы по силе дворцов 0–7"),
+]
 
 def process_video(client, cfg, video: Path, out: Path, duration: float) -> None:
     out.mkdir(parents=True, exist_ok=True)
     state_path = out / "state.json"
     state = load_json(state_path, {})
-    finals = ["01_Full_Transcript_EN.md", "02_Visual_Slides_and_Tables.md", "03_Palace_Strength_Research_Report.md"]
-    if state.get("status") == "COMPLETED" and all((out / n).exists() for n in finals):
+    if is_complete(out):
         say("  уже готово — пропускаю")
         return
     state.setdefault("usage", {})
@@ -517,11 +633,21 @@ def process_video(client, cfg, video: Path, out: Path, duration: float) -> None:
     windows = [load_json(parts_dir / f"part_{i:02d}.json", {"lines": [], "visuals": []}) for i in range(1, len(bounds) + 1)]
     t1, t2 = write_outputs(out, video.stem, windows, frames)
 
-    rep = out / "03_Palace_Strength_Research_Report.md"
-    if not rep.exists():
-        say("  Пишу исследовательский отчёт 0–7...")
-        rep.write_text(f"# {video.stem} — Palace Strength: исследовательский отчёт\n\n"
-                       + make_report(client, cfg, t1, t2, state["usage"]), encoding="utf-8")
+    gl_json = out / "glossary.json"
+    if not gl_json.exists():
+        say("  Составляю глоссарий терминов...")
+        g = ask_text(client, cfg, GLOSSARY_SYSTEM, t1, t2, state["usage"], schema=Glossary)
+        save_json(gl_json, [t.model_dump() for t in g.terms])
+    (out / "04_Глоссарий.md").write_text(
+        link_timecodes(glossary_md(load_json(gl_json, []), f"{video.stem} — глоссарий"), video, out), encoding="utf-8")
+    for name, title, system, msg in DOCS:
+        path = out / name
+        if path.exists():
+            continue
+        say(f"  {msg}...")
+        body = ask_text(client, cfg, system, t1, t2, state["usage"])
+        legend = "_Обычный текст — содержание лекции с таймкодами (клик открывает видео). Блоки 🤖 — пояснения ИИ._\n\n"
+        path.write_text(f"# {video.stem} — {title}\n\n{legend}" + link_timecodes(body, video, out), encoding="utf-8")
     if state.get("file_name"):
         try:
             client.files.delete(name=state["file_name"])  # temporary copy on Google servers only
@@ -568,16 +694,17 @@ def main(argv=None) -> int:
     for v in videos:
         d = probe_duration(v)
         durs[v] = d
-        done = load_json(results / v.stem / "state.json", {}).get("status") == "COMPLETED"
-        if not done:
+        done, upd = is_complete(results / v.stem), has_transcript(results / v.stem)
+        if not upd:
             total += d
-        say(f"  {'✓' if done else '•'} {v.name}  ({hms(d)}){'  — уже готово' if done else ''}")
+        note = "  — уже готово" if done else ("  — транскрипт есть, допишу учебные файлы" if upd else "")
+        say(f"  {'✓' if done else '•'} {v.name}  ({hms(d)}){note}")
     est = estimate(cfg, total) if total else {"in_tokens": 0, "usd": 0.0}
     say(f"\nК обработке: {hms(total)} видео, ≈{est['in_tokens'] / 1e6:.1f} млн токенов")
     say(f"Модели: {cfg['transcribe_model']} (транскрипт), {cfg['report_model']} (отчёт)")
     if cfg["free_tier"]:
-        n_req = sum(-(-int(durs[v]) // (cfg["window_minutes"] * 60)) + 1 for v in videos
-                    if load_json(results / v.stem / "state.json", {}).get("status") != "COMPLETED")
+        n_req = sum((0 if has_transcript(results / v.stem) else -(-int(durs[v]) // (cfg["window_minutes"] * 60))) + 3
+                    for v in videos if not is_complete(results / v.stem))
         say(f"Бесплатный тариф: $0. Запросов ≈ {n_req}, время ≈ {max(1, round(n_req * 1.2))} мин (из-за лимита в минуту)")
     else:
         say(f"Ориентировочная стоимость на платном тарифе: ≈ ${est['usd']:.2f}  (точность ±50%)")
@@ -585,7 +712,8 @@ def main(argv=None) -> int:
     if args.dry_run:
         say("\nРежим проверки: запросов к Gemini не было, деньги не потрачены.")
         return 0
-    if total == 0:
+    if all(is_complete(results / v.stem) for v in videos):
+        build_textbook(results)
         say("\nВсё уже обработано.")
         return 0
 
@@ -612,7 +740,8 @@ def main(argv=None) -> int:
             return 2
         except Exception as e:
             say(f"  ✗ ошибка: {e}\n  Прогресс сохранён; перейду к следующему видео.")
-    say(f"\nГотово! Результаты в папке: {results}")
+    build_textbook(results)
+    say(f"\nГотово! Результаты в папке: {results}  (оглавление учебника — в 00_Учебник)")
     if os.name == "nt":
         os.startfile(results)  # type: ignore[attr-defined]
     return 0
