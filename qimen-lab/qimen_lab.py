@@ -668,10 +668,32 @@ def process_video(client, cfg, video: Path, out: Path, duration: float) -> None:
     say(f"  ✓ готово. Фактическая стоимость ≈ ${state['cost_usd']}")
 
 
+QM_RE = re.compile(r"qi[\s_.-]*men|qmdj|dun[\s_.-]*jia|奇門|奇门", re.I)
+
+
+def pick_test_video(videos: list[Path], durs: dict, folder: Path) -> Path | None:
+    """Prefer Qi Men webinars (by file or folder name), shortest first, at least 5 minutes long."""
+    usable = [v for v in videos if durs.get(v, 0) >= 300]
+    qm = [v for v in usable if QM_RE.search(str(v.relative_to(folder)))]
+    pool = sorted(qm or usable, key=lambda v: durs[v])[:10]
+    if not pool:
+        return None
+    say("Ци Мэнь-вебинары, самые короткие:" if qm else "Вебинаров с 'Qi Men' в названии не нашлось. Самые короткие видео:")
+    for i, v in enumerate(pool, 1):
+        say(f"  {i}. {v.relative_to(folder)}  ({hms(durs[v])})")
+    ans = ask("Номер для теста (Enter = 1, 0 = отмена): ") or "1"
+    if not ans.isdigit() or not (1 <= int(ans) <= len(pool)):
+        return None
+    v = pool[int(ans) - 1]
+    say(f"Выбрано: {v.name}. Видео остаётся на своём месте, ничего не переносится.")
+    return v
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="QiMen Lab")
     ap.add_argument("folder", nargs="?", help="папка с вебинарами")
     ap.add_argument("--dry-run", action="store_true", help="только оценка, без запросов к API")
+    ap.add_argument("--one", action="store_true", help="тест: выбрать один короткий вебинар по Ци Мэнь")
     ap.add_argument("--yes", action="store_true", help="не спрашивать подтверждение (для тестов)")
     args = ap.parse_args(argv)
 
@@ -697,10 +719,19 @@ def main(argv=None) -> int:
         apply_free_tier(cfg)
 
     say(f"\nПапка: {folder}")
-    total = 0.0
     durs = {}
+    if args.one:
+        say("Ищу короткий вебинар по Ци Мэнь для теста...")
+        for v in videos:
+            durs[v] = probe_duration(v)
+        chosen = pick_test_video(videos, durs, folder)
+        if not chosen:
+            say("Тест отменён.")
+            return 0
+        videos = [chosen]
+    total = 0.0
     for v in videos:
-        d = probe_duration(v)
+        d = durs[v] if v in durs else probe_duration(v)
         durs[v] = d
         done, upd = is_complete(results / v.stem), has_transcript(results / v.stem)
         if not upd:
@@ -734,7 +765,9 @@ def main(argv=None) -> int:
         say("  Если лимит закончится — программа сохранит прогресс; запустите её завтра, она продолжит с того же места.")
 
     client = make_client(key)
+    say("\nПроверяю связь с Gemini (бесплатный запрос списка моделей)...")
     resolve_models(client, cfg)
+    say(f"  ✓ ключ работает, модель {cfg['transcribe_model']} доступна")
     if not args.yes and ask('\nНапишите СТАРТ, чтобы начать (любое другое — выход): ').lower() not in ("старт", "start"):
         say("Отменено. Ничего не потрачено.")
         return 0
