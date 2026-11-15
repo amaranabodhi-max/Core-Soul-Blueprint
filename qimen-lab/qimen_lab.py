@@ -34,8 +34,8 @@ MAX_UPLOAD_BYTES = int(1.9 * 1024**3)  # Files API limit is 2 GB per file
 
 DEFAULT_CONFIG = {
     "free_tier": None,              # asked once
-    "transcribe_model": "gemini-2.5-flash",
-    "report_model": "gemini-2.5-pro",
+    "transcribe_model": "auto-flash",   # auto = newest model that actually answers
+    "report_model": "auto-pro",
     "window_minutes": 20,
     "max_output_tokens": 32768,
     "doc_max_output_tokens": 65536,
@@ -48,7 +48,7 @@ DEFAULT_CONFIG = {
     "results_folder_name": "QiMen_Results",
     # Free tier (Google AI Studio): Pro is unavailable, Flash has 5 RPM / 250K TPM.
     "free": {
-        "model": "gemini-2.5-flash",
+        "model": "auto-flash",
         "window_minutes": 10,        # 10 min ≈ 180K tokens < 250K TPM per request
         "rpm": 5,
         "tpm": 250000,
@@ -303,22 +303,70 @@ def make_client(key: str):
     return genai.Client(api_key=key)
 
 
+BAD_MODEL_WORDS = ("lite", "tts", "image", "audio", "live", "embedding", "exp", "thinking", "robotics", "computer", "native")
+
+
+def _version(name: str) -> float:
+    m = re.match(r"gemini-(\d+(?:\.\d+)?)", name)
+    return float(m.group(1)) if m else 0.0
+
+
+def model_candidates(models, word: str) -> list[str]:
+    """Newest first; stable before preview; only models that can generate content."""
+    out = []
+    for m in models:
+        n = m.name.split("/")[-1]
+        acts = getattr(m, "supported_actions", None) or ["generateContent"]
+        if (n.startswith("gemini-") and word in n and "generateContent" in acts
+                and not any(b in n for b in BAD_MODEL_WORDS)):
+            out.append(n)
+    return sorted(set(out), key=lambda n: ("preview" not in n, _version(n), "latest" not in n), reverse=True)
+
+
 def resolve_models(client, cfg: dict) -> None:
+    """Free: list models and build a ranked list of candidates for each role."""
     try:
-        names = [m.name.split("/")[-1] for m in client.models.list()]
+        models = list(client.models.list())
     except Exception as e:  # listing is free; failure means bad key / network
         raise SystemExit(f"Не удалось связаться с Gemini API: {e}")
+    cfg["_candidates"] = {}
     for k in ("transcribe_model", "report_model"):
         word = "pro" if "pro" in cfg[k] else "flash"
-        if cfg[k] in names:
-            continue
-        cands = sorted(n for n in names if n.startswith("gemini-") and word in n
-                       and not any(b in n for b in ("lite", "tts", "image", "audio", "live", "embedding", "exp")))
-        stable = [n for n in cands if "preview" not in n] or cands
-        if not stable:
-            raise SystemExit(f"Не найдена подходящая модель '{word}'. Доступны: {names}")
-        say(f"  Модель {cfg[k]} недоступна, беру {stable[-1]}")
-        cfg[k] = stable[-1]
+        cands = model_candidates(models, word)
+        if not cfg[k].startswith("auto"):
+            cands = [cfg[k]] + [c for c in cands if c != cfg[k]]
+        if not cands:
+            raise SystemExit(f"Не найдено ни одной модели '{word}'.")
+        cfg["_candidates"][k] = cands
+        cfg[k] = cands[0]
+
+
+def _model_gone(exc: BaseException) -> bool:
+    code = getattr(exc, "code", None)
+    msg = str(exc).lower()
+    return code == 404 or "not_found" in msg or "no longer available" in msg or (
+        code == 400 and "model" in msg and ("not supported" in msg or "not found" in msg))
+
+
+def confirm_models(client, cfg: dict) -> None:
+    """Tiny 'ping' to each role's model; skip models that answer 404 / 'no longer available'."""
+    from google.genai import types
+    for k in ("transcribe_model", "report_model"):
+        for name in cfg["_candidates"][k]:
+            try:
+                call_with_retry(client.models.generate_content, model=name, contents="Reply with: ok",
+                                config=types.GenerateContentConfig(max_output_tokens=16))
+                cfg[k] = name
+                break
+            except QuotaExhausted:
+                raise
+            except Exception as e:
+                if not _model_gone(e):
+                    raise
+                say(f"  модель {name} недоступна для вашего ключа — пробую следующую")
+        else:
+            raise SystemExit("Ни одна подходящая модель Gemini не ответила. Пришлите этот текст Клодовичу.")
+        say(f"  ✓ {'транскрипт' if k == 'transcribe_model' else 'учебные тексты'}: {cfg[k]}")
 
 
 class RateLimiter:
@@ -740,7 +788,8 @@ def main(argv=None) -> int:
         say(f"  {'✓' if done else '•'} {v.name}  ({hms(d)}){note}")
     est = estimate(cfg, total) if total else {"in_tokens": 0, "usd": 0.0}
     say(f"\nК обработке: {hms(total)} видео, ≈{est['in_tokens'] / 1e6:.1f} млн токенов")
-    say(f"Модели: {cfg['transcribe_model']} (транскрипт), {cfg['report_model']} (отчёт)")
+    say("Модель: новейшая доступная Gemini " + ("Flash" if cfg["free_tier"] else "Flash + Pro")
+        + " (выберется автоматически)")
     if cfg["free_tier"]:
         n_req = sum((0 if has_transcript(results / v.stem) else -(-int(durs[v]) // (cfg["window_minutes"] * 60))) + 3
                     for v in videos if not is_complete(results / v.stem))
@@ -767,10 +816,17 @@ def main(argv=None) -> int:
     client = make_client(key)
     say("\nПроверяю связь с Gemini (бесплатный запрос списка моделей)...")
     resolve_models(client, cfg)
-    say(f"  ✓ ключ работает, модель {cfg['transcribe_model']} доступна")
+    say(f"  ✓ ключ работает. Новейшие модели: {cfg['transcribe_model']}"
+        + ("" if cfg["report_model"] == cfg["transcribe_model"] else f", {cfg['report_model']}"))
     if not args.yes and ask('\nНапишите СТАРТ, чтобы начать (любое другое — выход): ').lower() not in ("старт", "start"):
         say("Отменено. Ничего не потрачено.")
         return 0
+    say("Проверяю, что модели отвечают (крошечный запрос «ok»)...")
+    try:
+        confirm_models(client, cfg)
+    except QuotaExhausted:
+        say("\n⏸ Лимит Gemini исчерпан. Запустите программу позже.")
+        return 2
 
     for v in videos:
         say(f"\n▶ {v.name}")
@@ -782,7 +838,11 @@ def main(argv=None) -> int:
         except Exception as e:
             say(f"  ✗ ошибка: {e}\n  Прогресс сохранён; перейду к следующему видео.")
     build_textbook(results)
-    say(f"\nГотово! Результаты в папке: {results}  (оглавление учебника — в 00_Учебник)")
+    unfinished = [v.name for v in videos if not is_complete(results / v.stem)]
+    if unfinished:
+        say(f"\n⚠ Не завершено: {', '.join(unfinished)}. Запустите программу ещё раз — она продолжит с места остановки.")
+    else:
+        say(f"\nГотово! Результаты в папке: {results}  (оглавление учебника — в 00_Учебник)")
     if os.name == "nt":
         os.startfile(results)  # type: ignore[attr-defined]
     return 0
