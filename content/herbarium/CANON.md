@@ -58,6 +58,8 @@ Fixed reference images, attached to every generation of her:
 - **A 1551 client (the merchant):** `content/herbarium/refs/client-merchant-1551.jpg`.
 - **Rustveil sheet:** `content/herbarium/refs/03-rustveil-page.png` (text in `03-rustveil.md`).
 - **Morrowbloom:** `content/herbarium/refs/morrowbloom-ref.png` — the main image of the flower, attached to every shot with it; sheet `content/herbarium/refs/04-morrowbloom-page.png` (text in `04-morrowbloom.md`).
+- **Moonglass:** `content/herbarium/refs/moonglass-ref.png` (flower), `content/herbarium/refs/widow-moonglass.png` (the widow), sheet `content/herbarium/refs/05-moonglass-page.png` — none received yet.
+- **Lingerlace:** `content/herbarium/refs/lingerlace-ref.png` (flower, attached to every shot with it), sheet `content/herbarium/refs/06-lingerlace-page.png`; people: `lingerlace-mother-young.png`, `lingerlace-mother-old.png` (not received yet), `lingerlace-boy.png`, `lingerlace-son.png`.
 - **Series cover:** `content/herbarium/refs/herbarium-cover.png` — the sheet with four plants, for carousels and previews.
 - **Book sheets:** `content/herbarium/refs/NN-name-page.png` (`01-hollowbell-page.png`, `02-dusklantern-page.png`) — the style model for every new book sheet.
 - **Bride's Shadow sheet:** `content/herbarium/refs/bride-shadow-page.png` (text in `NN-brides-shadow.md`).
@@ -74,13 +76,19 @@ Fixed reference images, attached to every generation of her:
 - **Text on herbarium pages** (Latin names, margin notes) is **never written in the prompt**, only `blank margin with faded handwriting`. Ruta adds the real text in CapCut.
 
 ## Page and video
-- **Length:** about 55 s. Vertical 9:16.
+- **Length:** 60–80 s as a guide, if the story holds. Vertical 9:16.
 - **Page structure:** anchors → scenes with timing, lines and prompts → plant card with **the order** (client by role, what they wanted, what she made, how it ended) → **book sheet** (all fields below, ready to hand to Nayara).
 - **Arc of every video:** `episode-arc.md`.
 - **Ideas:** `ideas.md` is a store of ideas, not canon. Agents take from it only by Ruta's decision.
 - **Ending of every video:** a blank page, a new plant bleeds through, *"See you on Monday."*
 - **Numbering:** `NN-name.md`, one row per page in `INDEX.md`.
 - **All channel text is in English.**
+
+## Lessons from the finished episodes (Monday agent)
+- **The first 3 seconds** carry the strongest or most impossible event of the episode, with large on-screen text. The truth of the period does not go in the hook; it comes right after it.
+- **Every episode shows Madame's work:** how she finds the plant and what she makes of it.
+- **Every episode shows the price,** not only tells it.
+- **Length:** 60–80 s as a guide, if the story holds.
 
 ## Book sheet
 The series becomes a printed book. Besides the video, every plant gets a book sheet in the style of the Hollowbell and Dusklantern sheets (`refs/01-hollowbell-page.png`, `refs/02-dusklantern-page.png`). Nayara draws it. Every page file ends with a `## Book sheet` section that holds all its text.
@@ -137,7 +145,8 @@ Agents never close these:
 - who knocks from the inside of the door;
 - who left her the cardigan and gave her the job without papers;
 - the physician's role as her accuser;
-- the physician's link with the clinic's owner.
+- the physician's link with the clinic's owner;
+- whose child's hand appears on her fogged window (Lingerlace).
 
 ## New plants (Monday agent)
 Every new plant is an order from a rich client in 1551, without name or title ("a merchant", "a widow", "a young wife"): what they wanted, what she made (set into a mount, named, never a recipe), how it ended. It takes something from her. It never reveals the backstory and never closes an open thread. The clinic appears from Page III on.
